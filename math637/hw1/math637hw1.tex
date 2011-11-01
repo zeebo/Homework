@@ -1,0 +1,120 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsmath}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\title{Homework 1}
+\author{Jeff Wendling}
+\date{September 19, 2011}
+\begin{document}
+\maketitle
+\section*{Problem 1}
+\subsection*{(a) $e_{ijk}\delta^{kn} = e_{ijn}$}
+\subsection*{(b) $e_{ijk}\delta^{km}\delta^{jn} = e_{ijm}\delta^{jn} = e_{inm}$}
+\subsection*{(c) $\delta_{ij}\delta^{jn} = \delta_{in}$}
+\subsection*{(d) $\delta_i^i = 3$}
+\subsection*{(e) $\delta_{ij}\delta^{ji} = \delta_{ii} = 3$}
+\subsection*{(f) $e_{ijk}A^iA^jA^k = 3A^1A^2A^3 - 3A^3A^2A^1 = 0$}
+\subsection*{(g) $\delta_{ij}a^{mj} = a^{mi}$}
+\subsection*{(h) $\delta_{ij}A^iB^j - B^mA^n\delta_{mn} = \delta_{ij}A^iB^j - B^jA^i\delta{ij} = 0$}
+\subsection*{(i)
+\eq{
+	\left(\delta_j^iA_k + \delta_k^i A_j\right)e^{jkl} &= e^{jkl}\delta_j^iA_k + e^{jkl}\delta_k^iA_j\\
+	&= e^{ikl}A_k + e^{jil}A_j\\
+	&= e^{ikl}A_k + e^{kil}A_k\\
+	&= 0
+}}
+\section*{Problem 2}
+\subsection*{(a) $A\cdot(B\times C) = A_i e_{ijk}B_jC_k$}
+\subsection*{(b) $B(A\cdot C) = B_jA_iC_i$}
+\subsection*{(c) $A\times (B\times C) = e_{mni}A_n e_{ijk}B_jC_k$}
+\subsection*{(d) $(A\times D) \cdot (B \times C) = e_{ijk}A_jD_ke_{imn}B_mC_n$}
+\section*{Problem 3}
+\subsection*{(a)}
+\eq{
+	(A\times B)\cdot(C \times D) &= e_{ijk}A_jB_k e_{imn}C_mD_n\\
+	&= e_{ijk}e_{imn}A_jB_kC_mD_n\\
+	&= \left(\delta_{jm}\delta_{kn} - \delta_{jn}\delta_{km}\right)A_jB_kC_mD_n\\
+	&= A_jC_jB_kD_k - A_nD_nB_mC_m\\
+	&= (A\cdot C)(B\cdot D) - (A\cdot D)(B\cdot C)
+}
+\subsection*{(b)}
+\eq{
+	A\cdot(B \times C) &= A_ie_{ijk}B_jC_k\\
+	&= B_je_{ijk}C_kA_i\\
+	&= B_je_{jki}C_kA_i = B\cdot(C \times A)\\
+	&= C_ke_{jki}A_iB_j\\
+	&= C_ke_{kij}A_iB_j = C\cdot(A \times B)
+}
+\subsection*{(c)}
+\eq{
+	\nabla\cdot(\phi A) &= \frac{\partial}{\partial x_i}(\phi A_i)\\
+	&= \frac{\partial \phi}{\partial x_i} A_i + (\frac{\partial}{\partial x_i}A_i)\phi\\
+	&= \nabla\phi \cdot A + \phi\nabla\cdot A
+}
+\subsection*{(d)}
+\eq{
+	\nabla \cdot (A\times B) &= \frac{\partial}{\partial x_i}e_ijkA_jB_k\\
+	&= e_{ijk}(\frac{\partial}{\partial x_i}A_j)B_k + e_{ijk}(\frac{\partial}{\partial x_i}B_k)A_j\\
+	&= e_{kij}(\frac{\partial}{\partial x_i}A_j)B_k - e_{jik}(\frac{\partial}{\partial x_i}B_k)A_j\\
+	&= B\cdot(\nabla \times A) - A\cdot(\nabla \times B)
+}
+\section*{Problem 4}
+\subsection*{(a)}
+\eq{
+	e_{klm}e_{kqr} &= \delta_{kk}\delta_{lq}\delta_{mr} + \delta_{kq}\delta_{lr}\delta_{mk} + \delta_{kr}\delta_{lk}\delta_{mq} - \delta_{kk}\delta_{lr}\delta_{mq} - \delta_{kr}\delta_{lq}\delta_{mk} - \delta_{kq}\delta_{lk}\delta_{mr}\\
+	&= 3\delta_{lq}\delta_{mr} + \delta_{mq}\delta_{lr} + \delta_{lr}\delta_{mq} - 3\delta_{lr}\delta_{mq} - \delta_{mr}\delta_{lq} - \delta_{lq}\delta_{mr}\\
+	&= 3\delta_{lq}\delta_{mr} - 2\delta_{lq}\delta_{mr} - 3\delta_{lr}\delta_{mq} + 2\delta_{lr}\delta_{mq}\\
+	&= \delta_{lq}\delta_{mr} - \delta_{lr}\delta_{mq}
+}
+\subsection*{(b)}
+\eq{
+	e_{klm}e_{klr} &= \delta_{ll}\delta_{mr} - \delta_{lr}\delta_{ml}\\
+	&= 3\delta_{mr} - \delta_{mr}\\
+	&= 2\delta_{mr}
+}
+\subsection*{(c)}
+\eq{
+	e_{klm}e_{klm} = 2\delta_{mm} = 2(3) = 6
+}
+\section*{Problem 5}
+\eq{
+	\frac{dy^i}{dt} = a_{ij}y^j
+}
+\section*{Problem 6} If we let $x_i = \delta_i^{i_0}$, $y_j = \delta_j^{j_0}$ then
+\eq{
+	0 = A_{ij}x^iy^j = A_{ij}\delta_i^{i_0}\delta_j^{j_0} = A_{i_0j_0}
+}
+for arbitrary $i_0, j_0$, so $A$ must be 0 everywhere.
+\section*{Problem 7}
+\eq{
+	(A_{ijkl} + A_{jkli} + A_{klij} + A_{lijk})x_ix_jx_kx_l = 4A_{ijkl}x_ix_jx_kx_l
+}
+\section*{Problem 8}
+\eq{
+	a_j^ia_i^j &= \sum_{n=1}^3\sum_{m=1}^3 A_{nm}A_{mn}\\
+	&= A_{11}^2 + A_{22}^2 + A_{33}^2 + 2A_{21}A_{12} + 2A_{31}A_{13} + 2A_{23}A_{32}\\
+	&= 3^2 + (-4)^2 + 1^2 + 2(2)(1) + 2(1)(0) + 2(5)(6)\\
+	&= 9 + 16 + 1 + 4 + 60 = 90
+}
+\section*{Problem 9}
+\subsection*{(a) $A_{ijkl} = A_{jikl} \implies 6*3*3 = 54$}
+\subsection*{(b) $A_{ijkl} = A_{jikl} = A_{jilk} \implies 6*6 = 36$}
+\subsection*{(c) $A_{ijkl} = A_{jikl} = -A_{jilk} \implies 6*3 = 18$}
+\section*{Problem 10}
+\eq{
+	e_{ijk}\hat{e}_j \times \hat{e}_k &= \sum_j\sum_k e_{ijk}\hat{e}_j\times\hat{e}_k \\
+	&= e_{i12}\hat{e}_1\times\hat{e}_2 + e_{i21}\hat{e}_2 \times \hat{e}_1 + e_{i23}\hat{e}_2\times\hat{e}_3 + e_{i32}\hat{e}_3 \times \hat{e}_2 + e_{i13}\hat{e}_1 \times \hat{e}_3 + e_{i31}\hat{e}_3\times\hat{e}_1\\
+	&= 2\left(e_{i12}\hat{e}_1 \times \hat{e}_2 + e_{i23}\hat{e}_2 \times \hat{e}_3 + e_{i31}\hat{e}_3 \times \hat{e}_1\right)\\
+	&= \pm2\left(e_{i12}\hat{e}_3 + e_{i23}\hat{e}_1 + e_{i13}\hat{e}_2\right)\\
+}
+Now,
+\eq{
+	i = 1 &\implies e_{1jk}\hat{e}_j\times\hat{e}_k = \pm2\hat{e}_1\\
+	i = 2 &\implies e_{2jk}\hat{e}_j\times\hat{e}_k = \pm2\hat{e}_2\\
+	i = 3 &\implies e_{3jk}\hat{e}_j\times\hat{e}_k = \pm2\hat{e}_3\\
+}
+So
+\eq{
+	e_{ijk}\hat{e}_j\times\hat{e}_k = \pm2\hat{e}_i
+}
+Where the plus or minus depends on if the cross product follows the right hand rule or left hand rule respectively.
+\end{document}

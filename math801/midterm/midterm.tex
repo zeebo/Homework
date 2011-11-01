@@ -1,0 +1,191 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsmath}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\on}[1]{\operatorname{#1}}
+\newcommand{\p}[1]{\partial_{#1}}
+\newcommand{\pp}[1]{\partial^2_{#1}}
+\title{Midterm}
+\author{Jeff Wendling}
+\date{October 28, 2011}
+\begin{document}
+\maketitle
+\section*{Problem 1}
+\eq{
+	\int_0^1e^t t^x(1+t^2)^{-x} dt &= \int_0^1 e^t e^{x(\ln t - \ln(1 + t^2))} dt
+}
+So
+\eq{
+	\phi(t) &= \ln t - \ln(1+t^2)\\
+	f(t) &= e^t\\
+	\\
+	\phi'(t) &= \frac{1}{t} - \frac{2t}{1+t^2}
+}
+So we have a critical point at $t = \pm1$. At $t = 1$, $\phi''(t) = -1$, so it is a maximum. Thus by (6.4.19c) in the book,
+\eq{
+	\int_0^1e^t t^x(1+t^2)^{-x} dt &\approx \frac{1}{2} \frac{\sqrt{2\pi} e e^{-x \ln 2}}{\sqrt{x}}\\
+	&\approx \sqrt{\frac{\pi}{2x}}e 2^{-x}
+}
+\section*{Problem 2}
+For this problem we have $p(t) = i\left[\frac{t^3}{3} - t\right]$, so to find the saddle points
+\eq{
+	p'(t) = 0 &= it^2 - i\\
+	t^2 &= 1\\
+	t &= \pm 1
+}
+\subsection*{t = -1}
+We have $p''(-1) = -2i$, so the steepest contours are
+\eq{
+	\frac{1}{2}(n\pi + \frac{\pi}{2}) &= \frac{\pi}{4}, \frac{3\pi}{4}, \frac{5\pi}{4}, \frac{7\pi}{4}
+}
+Thus the steepest descent is through $\frac{3\pi}{4}$. Thus we paramaterize the contour as $t = -1 + (-1 + i)s$, giving
+\eq{
+	p &\approx \frac{2}{3}(s-3)s^2 + \frac{2}{3}i\\
+	\\
+	\int_C \frac{1}{t-2} e^{x(it^3/3 - it)} dt &\approx \frac{(1 - i)}{3}e^{i\frac{2}{3}x} \int_{-\epsilon}^\epsilon e^{x(\frac{2}{3}(s-3)s^2)} ds\\
+	&\approx \frac{(1 - i)}{3}e^{i\frac{2}{3}x} \frac{\sqrt{2\pi}}{\sqrt{4x}}\\
+	&\approx \frac{(1 - i)}{3}e^{i\frac{2}{3}x} \sqrt{\frac{\pi}{2x}}\\
+	&\approx \frac{\sqrt{2}}{3}e^{-i\frac{\pi}{4}} e^{i\frac{2}{3}x} \sqrt{\frac{\pi}{2x}}\\
+	&\approx \frac{1}{3}e^{-i\frac{\pi}{4}} e^{i\frac{2}{3}x} \sqrt{\frac{\pi}{x}}
+}
+\subsection*{t = 1}
+We have $p''(1) = 2i$ so the steepest contours are
+\eq{
+	\frac{1}{2}(n\pi - \frac{\pi}{2}) = -\frac{\pi}{4}, \frac{\pi}{4}, \frac{3\pi}{4}, \frac{5\pi}{4}
+}
+Thus the steepest descent is through $\frac{\pi}{4}$. Thus we paramaterize the contour as $t = 1 + (1 + i)s$, giving
+\eq{
+	p &\approx -\frac{2}{3}s^2(s+3) - \frac{2}{3}i\\
+	\\
+	\int_C \frac{1}{t-2} e^{x(it^3/3 - it)} dt &\approx -(1 + i)e^{-i\frac{2}{3}x}\int_{-\epsilon}^\epsilon e^{x(-\frac{2}{3}s^2(s+3))} ds\\
+	&\approx -(1+i)e^{-i\frac{2}{3}x} \frac{\sqrt{2\pi}}{\sqrt{4x}}\\
+	&\approx -(1+i)e^{-i\frac{2}{3}x} \sqrt{\frac{\pi}{2x}}\\
+	&\approx -\sqrt{2} e^{i\frac{\pi}{4}} e^{-i\frac{2}{3}x} \sqrt{\frac{\pi}{2x}}\\
+	&\approx -e^{i\frac{\pi}{4}} e^{-i\frac{2}{3}x} \sqrt{\frac{\pi}{x}}
+}
+Thus because the sum is zero, we have
+\eq{
+	I(x) &\approx -(-e^{i\frac{\pi}{4}} e^{-i\frac{2}{3}x} \sqrt{\frac{\pi}{x}} + \frac{1}{3}e^{-i\frac{\pi}{4}} e^{i\frac{2}{3}x} \sqrt{\frac{\pi}{x}})\\
+	&\approx \sqrt{\frac{\pi}{x}}(e^{i\frac{\pi}{4}} e^{-i\frac{2}{3}x} - \frac{1}{3}e^{-i\frac{\pi}{4}} e^{i\frac{2}{3}x})
+}
+\section*{Problem 3}
+\subsection*{Outer solution}
+\eq{
+	\sqrt{x}y' &= y\\
+	\frac{dy}{y} &= x^{-1/2}dx\\
+	\ln y &= 2x^{1/2} + C\\
+	y &= Ce^{2\sqrt{x}}\\
+	y &= e^{2\sqrt{x}}
+}
+After applying the boundary condition $y(1) = e^2$.
+\subsection*{Inner solution}
+Let $\bar{x} = \frac{x}{\epsilon^\alpha}$. Then
+\eq{
+	\epsilon^{1-2\alpha} Y'' + \epsilon^{\alpha / 2 - \alpha}\sqrt{\bar{x}} Y' - Y = 0
+}
+Thus we require
+\eq{
+	1 - 2\alpha &= -\alpha / 2\\
+	2 - 4\alpha &= -\alpha\\
+	\alpha &= \frac{2}{3}
+}
+so $\bar{x} = \epsilon^{-2/3}x$ and
+\eq{
+	Y'' + \sqrt{\bar{x}}Y' &= 0\\
+	\left[e^{\frac{2}{3}\bar{x}^{\frac{3}{2}}} Y'\right]' &= 0\\
+	Y' &= Ce^{-\frac{2}{3}\bar{x}^{\frac{3}{2}}}\\
+	Y &= C\int_0^{\bar{x}} e^{-\frac{2}{3}s^{\frac{3}{2}}} ds
+}
+Let $u = \frac{2}{3}s^{\frac{3}{2}}$. Then
+\eq{
+	Y &= C\int_0^{\frac{2}{3}\bar{x}^{\frac{3}{2}}} u^{2/3 - 1} e^{-u} du\\
+	&= C\left[\Gamma(\frac{2}{3}) - \Gamma(\frac{2}{3}, \frac{2}{3}\bar{x}^{\frac{3}{2}})\right]
+}
+\subsection*{Match}
+\eq{
+	y_{\on{outer}} &= 1\;\on{as}\;x \rightarrow 0\\
+	y_{\on{inner}} &= C\Gamma(\frac{2}{3})\;\on{as}\;\bar{x} \rightarrow \infty
+}
+Thus
+\eq{
+	C &= \frac{1}{\Gamma(\frac{2}{3})}
+}
+\subsection*{Uniform solution}
+\eq{
+	y_{\on{unif}} &= e^{2\sqrt{x}} - \frac{\Gamma(\frac{2}{3}, \frac{2}{3\epsilon}x^{\frac{3}{2}})}{\Gamma(\frac{2}{3})}
+}
+\section*{Problem 4}
+To use the multiscale method we let $\tau = \epsilon t$, and assume $y = y_0 + \epsilon y_1 + ...$. Then,
+\eq{
+	y' &= \p{t}y_0 + \epsilon(\p{\tau}t_0 + \p{t}y_1)\\
+	y'' &= \pp{tt}y_0 + \epsilon(2\pp{t\tau}y_0 + \pp{tt}y_1)
+}
+\subsection*{O(1)}
+\eq{
+	\pp{tt}y_0 + y_0 &= 0\\
+	y_0(0) &= 0\\
+	y_0'(0) &= 1
+}
+The general solution is
+\eq{
+	y_0 &= A(\tau)e^{it} + \bar{A}(\tau)e^{-it}
+}
+We will apply boundary conditions later.
+\subsection*{O($\epsilon$)}
+\eq{
+	2(\pp{t\tau}y_0 + \pp{tt}y_1) + (\p{t}y_0)^3 + y_1 &= 0\\
+	\pp{tt}y_1 + y_1 &= -2\pp{t\tau}y_0 - \p{t}y_0^3\\
+	\\
+	y_1(0) = 0\\
+	y_1'(0) = 0
+}
+Now,
+\eq{
+	\p{t}y_0 &= i\left[Ae^{it} - \bar{A}e^{-it}\right]\\
+	\pp{t\tau}y_0 &= i\left[A'e^{it} - \bar{A}'e^{-it}\right]
+}
+Thus
+\eq{
+	-2\pp{t\tau}y_0 - \p{t}y_0^3 &= -2iA'e^{it} + 2i\bar{A}'e^{-it} - (i\left[Ae^{it} - \bar{A}e^{-it}\right])^3\\
+	&= -2iA'e^{it} + 2i\bar{A}'e^{-it} - iA^3e^{3it} + 3iA^2\bar{A}e^{it} - 3iA\bar{A}^2e^{it} - i\bar{A}^3e^{-3it}\\
+}
+Collecting the secular terms we find
+\eq{
+	\left[-2iA' - 3iA^2\bar{A}\right]e^{it}\\
+	\left[2i\bar{A}' + 3iA\bar{A}^2\right]e^{-it}
+}
+So we let $A = R(\tau)e^{i\Theta(\tau)}$, and find that (upon equating real and imaginary parts)
+\eq{
+	2R'e^{i\Theta} + 2iRe^{i\Theta}\Theta' + 3R^3e^{i\Theta} = 0\\
+	\\
+	2R\Theta' = 0\\
+	2R' + 3R^3 = 0
+}
+Solving these yields
+\eq{
+	R &= \frac{1}{\sqrt{3\tau + C_r}}\\
+	\Theta &= C_\theta
+}
+Substituting back into the $O(1)$ equation yields
+\eq{
+	y_0 &= \frac{1}{\sqrt{3\tau + C_r}}\left( e^{i(t + C_\theta)} + e^{-i(t + C_\theta)} \right)\\
+	&= \frac{2}{\sqrt{3\tau + C_r}}\cos(t+C_\theta)
+}
+To which we apply $y_0(0) = 0$, giving
+\eq{
+	y_0(0) &= \frac{2}{\sqrt{C_r}}\cos(C_\theta)\\
+	&\implies C_\theta = \frac{\pi}{2}
+}
+We then apply $y_0'(0) = 1$, so
+\eq{
+	y_0 &= \frac{2}{\sqrt{3\tau + C_r}}\sin(t)\\
+	y_0' &= \frac{2\cos(t)(3\epsilon t + C_r) - 3\epsilon\sin(t)}{(3\epsilon t + C_r)^{3/2}}\\
+	y_0'(0) = 1 &= \frac{2C_r}{C_r^{3/2}}\\
+	C_r^{3/2} &= 2C_r\\
+	C_r^{1/2} &= 2\\
+	C_r &= 4
+}
+Thus the first order solution is given by
+\eq{
+	y_0 &= \frac{2}{\sqrt{3\epsilon t + 4}}\sin(t)
+}
+\end{document}

@@ -1,0 +1,189 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsmath}
+\usepackage{bm}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\p}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\de}[2]{\frac{d#1}{d#2}}
+\newcommand{\n}{\bm{\nabla}}
+\newcommand{\cross}{\times}
+\newcommand{\tc}[3]{#1\times(#2\times#3)}
+\newcommand{\mat}[2]{\left[\begin{tabular}{#1}#2\end{tabular}\right]}
+\newcommand{\dete}[2]{\left|\begin{tabular}{#1}#2\end{tabular}\right|}
+\newcommand{\co}[2]{\p{x^#1}{\bar{x}^#2}}
+\newcommand{\con}[2]{\p{\bar{x}^#1}{x^#2}}
+\newcommand{\coy}[2]{\p{y^#1}{\bar{x}^#2}}
+\newcommand{\cony}[2]{\p{y^#1}{x^#2}}
+\title{Homework 2}
+\author{Jeff Wendling}
+\date{October 20, 2011}
+\begin{document}
+\maketitle
+\section*{Problem 1}
+\eq{
+	g^{ij} &= \p{x^i}{y^n}{x^j}{y^n}\\
+	g_{ij} &= \p{y^m}{x_i}{y^m}{x_j}\\
+}
+Thus
+\eq{
+	g^{ij}g_{jk} &= \p{x^i}{y^n}{x^j}{y^n}\p{y^m}{x_j}{y^m}{x_k}\\
+	&= \p{x^i}{y^n}\delta_n^m\p{y^m}{x_k}\\
+	&= \p{x^i}{y_m}\p{y^m}{x_k}\\
+	&= \delta_k^i
+}
+\section*{Problem 2}
+\subsection*{Part (a)}
+\eq{
+	B^j &= \p{\bar{x}^j}{x^i}A^i + C^j\\
+	\p{\bar{x}^j}{x^i}A^i &= B^j - C^j\\
+	\p{x^k}{\bar{x}^j}\p{\bar{x}^j}{x^i}A^i &= \p{x^k}{\bar{x}^j}(B^j - C^j)\\
+	\delta_i^k A^i &= \p{x^k}{\bar{x}^j}(B^j - C^j)\\
+	A^k &= \p{x^k}{\bar{x}^j}(B^j - C^j)
+}
+\subsection*{Part (b)}
+\eq{
+	A^{ij}_k \con{m}{j}\con{n}{i}\co{k}{p} &= B^{ij}_{st}C^{mn}_p \con{s}{j}\con{t}{i}\\
+	A^{ij}_k \con{m}{j}\con{n}{i}\co{k}{p}(\co{a}{m}\co{b}{n}\con{p}{c}) &= B^{ij}_{st}C^{mn}_p \con{s}{j}\con{t}{i}(\co{a}{m}\co{b}{n}\con{p}{c})\\
+	A^{ij}_k \delta^a_j\delta^b_i\delta^k_c &= B^{ij}_{st}C^{mn}_p \con{s}{j}\con{t}{i}(\co{a}{m}\co{b}{n}\con{p}{c})\\
+	A^{ba}_c &= B^{ij}_{st}C^{mn}_p \con{s}{j}\con{t}{i}(\co{a}{m}\co{b}{n}\con{p}{c})
+}
+\section*{Problem 3}
+\subsection*{(a)} Given that $\bm{A}_{ij} = a_{ij}$ and $\bm{B}_{ij} = b^i_j$ then $a_{jk}b_i^j$ is the $(k, i)$th component of $\bm{A}^\top\bm{B}$.
+\subsection*{(b)} Given that $\bm{A}_{ij} = a^{ij}$ and $\bm{B}_{ij} = b_{ij}$ and $\bm{C}_{ij} = c_ij$ then $a^{jk}b_{ij}c_{km} = b_{ij}a^{jk}c_{km}$ is the $(i, k)$th component of $\bm{BAC}$.
+\subsection*{(c)} Given that $\bm{A}_{ij} = a_{ij}$ and $\bm{B}_{ij} = a^i_j$ then $a_{ij}a_k^j$ is the $(i, k)$th component of $\bm{AB}$.
+\subsection*{(d)} Given that $\bm{A}_{ij} - a_j^i$ and $\bm{B}_ij = b_{ij}$ then $a_m^na_p^qb_{nq} = a_m^nb_{nq}a_p^q$ is the $(m, p)$th component of $\bm{A}^\top\bm{BA}$.
+\section*{Problem 4}
+\subsection*{(a)} Define $\bm{C}_{ij} = \p{y^i}{x^j}$ and $\bm{C}^\top_{ij} = \p{y^j}{x^i}$. Then
+\eq{
+	\bm{C}_{ij}^\top\bm{C}_{jk} &= \p{y^j}{x^i}\p{y^j}{x_k}
+}
+Therefore, noting that $|\bm{C}| = J$ and $|\bm{C}^\top| = |\bm{C}|$,
+\eq{
+	\bm{G} &= \bm{C}^\top\bm{C}\\
+	|\bm{G}| &= |\bm{C}^\top\bm{C}|\\
+	&= |\bm{C}^\top||\bm{C}|\\
+	&= |\bm{C}|^2\\
+	&= J^2
+}
+\subsection*{(b)} For this we define $\bm{C}_{ij} = \co{i}{j}$. Then $J = |\co{i}{j}|$ so $|C| = J$ and,
+\eq{
+	\bar{g}_{ij} &= \coy{m}{i}\coy{m}{j}\\
+	&= \cony{m}{n}\co{n}{i}\cony{m}{k}\co{k}{j}\\
+	&= \co{n}{i}\co{k}{j} g_{nk}\\
+	&= \bm{C}_{ni}\bm{C}_{kj}g_{nk}\\
+	&= \bm{C}_{in}^\top g_{nk} \bm{C}_{kj}
+}
+Therefore,
+\eq{
+	\bar{\bm{G}} &= \bm{C}^\top \bm{G} \bm{C}\\
+	|\bar{\bm{G}}| &= |\bm{C}^\top \bm{G} \bm{C}|\\
+	\bar{g} &= |\bm{C}^\top| |\bm{C}| g\\
+	&= J^2 g
+}
+Thus the weight is 2.
+\section*{Problem 5}
+\eq{
+	\bar{A}^{ij}\bar{B}_{jk} &= \con{i}{m}\con{j}{n}\co{r}{j}\co{q}{k} A^{mn}B_{rq}\\
+	&= \con{i}{m}\delta_n^r \co{q}{k}A^{mn}B_{rq}\\
+	&= \con{i}{m}\co{q}{k} A^{mr}B_{rq}\\
+}
+Thus it transforms according to the rule for a mixed second order tensor.
+\section*{Problem 6}
+\subsection*{(a)}
+$\mat{ccc}{
+	-1 & 0 & 0\\
+	0 & -1 & 0\\
+	0 & 0 & 1\\
+}$
+\subsection*{(b)}
+$\mat{ccc}{
+	1 & 0 & 0\\
+	0 & $\frac{\sqrt{2}}{2}$ & $\frac{\sqrt{2}}{2}$\\
+	0 & $-\frac{\sqrt{2}}{2}$ & $\frac{\sqrt{2}}{2}$\\
+}$
+\subsection*{(c)}
+$\mat{ccc}{
+	0 & 0 & -1\\
+	1 & 0 & 0\\
+	0 & -1 & 0\\
+}$
+\section*{Problem 7}
+For this problem we label
+\eq{
+	x_1 = r && y_1 &= r\cos\phi\\
+	x_2 = \phi && y_2 &= r\sin\phi + \eta\cos\alpha\\
+	x_3 = \eta && y_3 &= \eta\sin\alpha\\
+}
+and calculate
+\eq{
+	E_1 &= \left<\cos\phi, \sin\phi, 0 \right>\\
+	E_2 &= \left<-r\sin\phi, r\cos\phi, 0\right>\\
+	E_3 &= \left<0, \cos\alpha, \sin\alpha\right>
+}
+So
+\eq{
+	g_{ij} &= \mat{ccc}{
+		1 & 0 & $\cos\phi\cos\alpha$\\
+		0 & $r^2$ & $r\cos\phi\cos\alpha$\\
+		$\cos\phi\cos\alpha$ & $r\cos\phi\cos\alpha$ & 1\\
+	}
+}
+Similarly,
+\eq{
+	E^1 &= \left<\cos\phi, \sin\phi, -\cot\alpha\sin\phi \right> \\
+	E^2 &= \left<-\frac{1}{r}\sin\phi, \frac{1}{r}\cos\phi, -\frac{1}{r}\cot\alpha\cos\phi \right>\\
+	E^3 &= \left<0, 0, \csc\alpha \right> \\
+}
+So
+\eq{
+	g^{ij} &= \mat{ccc}{
+		$1 + \cot^2\alpha\sin^2\phi$ & $\frac{1}{r}\cot^2\alpha\cos\phi\sin\phi$ & $-\csc\alpha\cot\alpha\sin\phi$ \\
+		$\frac{1}{r}\cot^2\alpha\cos\phi\sin\phi$ & $\frac{1}{r^2}\left(1 + \cot^2\alpha\cos^2\phi\right)$ & $-\frac{1}{r}\csc\alpha\cot\alpha\cos\phi$ \\
+		$-\csc\alpha\cot\alpha\sin\phi$ & $-\frac{1}{r}\csc\alpha\cot\alpha\cos\phi$ & $\csc^2\alpha$\\
+	}
+}
+\section*{Problem 8}
+For this problem we label
+\eq{
+	x_1 = \xi && y_1 &= (a + b\cos\xi)\cos\eta\\
+	x_2 = \eta && y_2 &= (a + b\cos\xi)\sin\eta\\
+	x_3 = u && y_3 &= b\sin\xi\\
+}
+Then we calculate
+\eq{
+	E_1 &= \left< -b\sin\xi\cos\eta, -b\sin\xi\sin\eta, b\cos\xi \right >\\
+	E_2 &= \left< -(a+b\cos\xi)\sin\eta, (a+b\cos\xi)\cos\eta, 0 \right>\\
+	E_3 &= \left< 0, 0, 0\right >\\
+}
+So
+\eq{
+	g_{ij} &= \mat{ccc}{
+		$b^2$ & 0 & 0 \\
+		0 & $(a + b\cos\xi)^2$ & 0 \\
+		0 & 0 & 0\\
+	}
+}
+Which is easy to invert so
+\eq{
+	g^{ij} &= \mat{ccc}{
+		$\frac{1}{b^2}$ & 0 & 0 \\
+		0 & $\frac{1}{(a + b\cos\xi)^2}$ & 0\\
+		0 & 0 & 0\\
+	}
+}
+\section*{Problem 9} The unit normal to the surface is defined to be $\n\Phi / |\n\Phi|$, and so we calculate
+\eq{
+	[\n\Phi / |\n\Phi|]_j = n_j &= \p{\Phi}{x_j} / |\n\Phi|\\
+	n^i &= g^{ij} \p{\Phi}{x^j} / |\n\Phi|
+}
+And
+\eq{
+	|\n\Phi|^2 &= \p{\Phi}{x_j}\p{\Phi}{x_j}\\
+	&= \p{\Phi}{x^m}\p{x^m}{x_j}\p{\Phi}{x^n}\p{x^n}{x_j}\\
+	&= \p{x^m}{x_j}\p{x^n}{x_j}\p{\Phi}{x^m}\p{\Phi}{x^n}\\
+	&= g^{mn}\p{\Phi}{x^m}\p{\Phi}{x^n}
+}
+Thus
+\eq{
+	n^i &= \frac{g^{ij}\p{\Phi}{x^j}}{\left( g^{mn}\p{\Phi}{x^m}\p{\Phi}{x^n} \right)^\frac{1}{2}}
+}
+\end{document}

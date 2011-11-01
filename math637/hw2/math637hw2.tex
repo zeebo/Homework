@@ -1,0 +1,155 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsmath}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\mat}[2]{\ensuremath{\left[\begin{tabular}{#1}#2\end{tabular}\right]}}
+\title{Homework 2}
+\author{Jeff Wendling}
+\date{September 28, 2011}
+\begin{document}
+\maketitle
+\section*{Problem 1}
+\subsection*{(a)} For any scalar function $\phi$
+\eq{
+	\int_S (n\cdot F)\phi d\sigma &= \int_V \nabla \cdot(F \phi) d\tau\\
+	&= \int_V (\nabla \cdot F)\phi + F\cdot\nabla\phi d\tau\\
+	&= \int_V (\nabla\cdot F)\phi + (F\cdot\nabla)\phi d\tau\\
+}
+So if we let $F_i = \phi$ in the above we find the result.
+\subsection*{(b)} Based on the vector identity,
+\eq{
+	F \times (\nabla \times F) = \frac{1}{2} \nabla (F \cdot F) - (F \cdot \nabla)F\\
+}
+we can write (using a result from part (a))
+\eq{
+	2 \int_V (F \times (\nabla \times F) - F(\nabla \cdot F))d\tau &= \int_V \nabla (F \cdot F) d\tau - 2\int_V (F \cdot \nabla)F + F(\nabla \cdot F) d\tau\\
+	&= \int_S (F\cdot F)n d\sigma - 2\int_S (n\cdot F)F d\sigma\\
+	&= \int_S ((F\cdot F)n d\sigma - 2(n\cdot F)F)d\sigma
+}
+\section*{Problem 2}
+\subsection*{(a) $\hat{e_i}' = \cos(Ox_j, Ox_i')\hat{e_j} = q_{ji}\hat{e_i}$}
+\subsection*{(b) $\hat{e_i} = \cos(Ox_i, Ox_j')\hat{e_j'} = q_{ij}\hat{e_j}'$}
+\subsection*{(c)}
+\eq{
+	A_i\hat{e_i} &= A_i q_{ij}\hat{e_j'} = A_j'\hat{e_j}'\\
+	A_j' &= A_iq_{ij}
+}
+\subsection*{(d)}
+\eq{
+	\delta_{ik} &= \hat{e_i} \cdot \hat{e_k}\\
+	&= q_{ij}\hat{e_j}' \cdot q_{km} \hat{e_m}'\\
+	&= q_{ij}q_{km} \hat{e_j}' \cdot \hat{e_m}'\\
+	&= q_{ij}q_{km} \delta_{jm}\\
+	&= q_{ij}q_{kj}
+}
+\section*{Problem 3}
+\subsection*{(a)} With the convention that $E_i$ is the $i$th row of the matrix,
+\eq{
+	E_i = \mat{ccc}{
+		1 & 1 & 0\\
+		1 & 2 & 1\\
+		0 & 0 & -1\\
+	}
+}
+\subsection*{(b)} With the convention that $E^i$ is the $i$th row of the matrix,
+\eq{
+	E^i = \mat{ccc}{
+		2 & -1 & 0\\
+		-1 & 1 & 0\\
+		-1 & 1 & -1\\
+	}
+}
+\subsection*{(c)}
+\eq{
+	g_{ij} = \mat{ccc}{
+		2 & 3 & 0 \\
+		3 & 6 & -1 \\
+		0 & -1 & 1 \\
+	}
+}
+\subsection*{(d)}
+\eq{
+	g^{ij} = \mat{ccc}{
+		5 & -3 & -3 \\
+		-3 & 2 & 2 \\
+		-3 & 2 & 3 \\
+	}
+}
+\subsection*{(e)} $g^{ij}g_{jk} = \delta^i_k$ which can be seen by computing
+\eq{
+\mat{ccc}{
+		5 & -3 & -3 \\
+		-3 & 2 & 2 \\
+		-3 & 2 & 3 \\
+	} \times
+\mat{ccc}{
+		2 & 3 & 0 \\
+		3 & 6 & -1 \\
+		0 & -1 & 1 \\
+	} = 
+\mat{ccc}{
+	1 & 0 & 0 \\
+	0 & 1 & 0 \\
+	0 & 0 & 1 \\
+}
+}
+\section*{Problem 4}
+\subsection*{(a)} With the convention that $E_i$ is the $i$th row of the matrix,
+\eq{
+	E_i = \mat{ccc}{
+		$\sin\phi$ & 0 & $\cos\phi$\\
+		$\rho\cos\phi$ & 0 & $-\rho\sin\phi$\\
+		0 & 1 & 0
+	}
+}
+\subsection*{(b)}With the convention that $E^i$ is the $i$th row of the matrix,
+\eq{
+	E^i = \mat{ccc}{
+		$\sin\phi$ & 0 & $\cos\phi$\\
+		$\frac{1}{\rho}\cos\phi$ & 0 & $-\frac{1}{\rho}\sin\phi$\\
+		0 & 1 & 0
+	}
+}
+\subsection*{(c)}
+\eq{
+	g_{ij} = \mat{ccc}{
+		1 & 0 & 0\\
+		0 & $\rho^2$ & 0\\
+		0 & 0 & 1\\
+	}
+}
+\subsection*{(d)}\eq{
+	g^{ij} = \mat{ccc}{
+		1 & 0 & 0\\
+		0 & $\frac{1}{\rho^2}$ & 0\\
+		0 & 0 & 1\\
+	}
+}
+
+\subsection*{(e)} Clearly $g^{ij}g_{jk} = \delta_k^i$ by
+\eq{
+\mat{ccc}{
+		1 & 0 & 0\\
+		0 & $\frac{1}{\rho^2}$ & 0\\
+		0 & 0 & 1\\
+	} \times
+\mat{ccc}{
+		1 & 0 & 0\\
+		0 & $\rho^2$ & 0\\
+		0 & 0 & 1\\
+	} = 
+\mat{ccc}{
+	1 & 0 & 0 \\
+	0 & 1 & 0 \\
+	0 & 0 & 1 \\
+}
+}
+\section*{Problem 5}With the convention that $E^i$ is the $i$th row of the matrix and by simple inspection,
+\eq{
+	\mat{cccc}{
+		1 & -1 & 0 & -1 \\
+		0 & 1 & -1 & 0\\
+		0 & 0 & 1 & -1 \\
+		0 & 0 & 0 & 1 \\
+	}
+}
+\end{document}

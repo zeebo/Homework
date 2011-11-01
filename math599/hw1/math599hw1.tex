@@ -1,0 +1,180 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsmath}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\p}[2]{\frac{\partial#1}{\partial#2}}
+\title{Homework 1}
+\author{Jeff Wendling}
+\date{September 20, 2011}
+\begin{document}
+\maketitle
+\section*{Problem 1.1}
+For any arbitrary volume $V$, conservation of mass implies
+\eq{
+	\int_V \frac{d\rho}{dt} d\tau &= -\int_S \rho u \cdot n d\sigma\\
+	&= -\int_V \nabla\cdot(\rho u)d\tau
+}
+\eq{
+	0 &= \int_V \frac{d\rho}{dt} + \nabla\cdot(\rho u) d\tau
+}
+And so because $V$ is arbitrary we have that
+\eq{
+	0 &= \frac{d\rho}{dt} + \nabla\cdot(\rho u)\\
+	&= \frac{d\rho}{dt} + \rho\nabla\cdot u + (u\cdot\nabla)\rho\\
+	&= \frac{D\rho}{Dt} + \rho\nabla\cdot u
+}
+If $\nabla\cdot u = 0$ then the fluid is incompressible so the density is constant along streamlines, meaing mass and volume are constant for any element along the streamline.
+\section*{Problem 1.2} The problem is the flow is not irrotational which is a required assumption for the Bernoulli theorem. We can seee
+\eq{
+	\nabla \times u &= 2\Omega\hat{k}
+}
+The expanded version of Euler's equation is given by
+\eq{
+	\p{u}{t} + u\p{u}{x} + v\p{u}{y} + w\p{u}{z} &= -\frac{1}{\rho}\p{p}{x}\\
+	\p{v}{t} + u\p{v}{x} + v\p{v}{y} + w\p{v}{z} &= -\frac{1}{\rho}\p{p}{y}\\
+	\p{w}{t} + u\p{w}{x} + v\p{w}{y} + w\p{w}{z} &= -\frac{1}{\rho}\p{p}{z} - g\\
+	\p{u}{x} + \p{v}{y} + \p{w}{z} &= 0
+}
+And for the specific case of $u = (-\Omega y, \Omega x, 0)$ we have
+\eq{
+	\p{p}{x} &= \rho\Omega^2 x\\
+	\p{p}{y} &= \rho\Omega^2 y\\
+	\p{p}{z} &= -\rho g
+}
+Doing the integrations we have
+\eq{
+	p &= \frac{1}{2}\rho\Omega^2 x^2 + F_1(y,z)\\
+	p &= \frac{1}{2}\rho\Omega^2 y^2 + F_2(x,z)\\
+	p &= -\rho gz + F_3(x,y)
+}
+Which gives
+\eq{
+	\frac{p}{\rho} &= \frac{1}{2}\Omega^2(x^2 + y^2) - gz + c
+}
+So for a constant pressure, we have
+\eq{
+	z = \frac{\Omega^2}{2g}(x^2 + y^2) + c
+}
+\section*{Problem 1.3}
+For $r < a$ we have that $u = (0, \Omega r, 0)$ or in Cartesian coordinates, $u = (-\Omega y, \Omega x, 0)$ which is equivilant to the previous problem, giving
+\eq{
+	\frac{p}{\rho} &= \frac{1}{2}\Omega^2(x^2 + y^2) - gz + c_1
+}
+For $r > a$ the flow is irrotational and $u = (0, \frac{\Omega a^2}{r}, 0)$ or in Cartesian coordinates $u = (-\frac{\Omega a^2 y}{x^2 + y^2}, \frac{\Omega a^2 x}{x^2 + y^2}, 0)$, and so Bernoulli's theorem applies.
+\eq{
+	H &= c_2\\
+	\frac{p}{\rho} + \frac{1}{2}u^2 + gz &= c_2\\
+	\frac{p}{\rho} &= -\frac{1}{2}u^2 - gz + c_2\\
+	\frac{p}{\rho} &= -\frac{1}{2}\frac{\Omega^2 a^4}{x^2 + y^2} - gz + c_2\\
+}
+Because the pressure is continuous, we have at $r = a$, these equations must equal, yielding
+\eq{
+	\frac{1}{2}\Omega^2a^2 - gz + c_1 &= -\frac{1}{2}\Omega^2 a^2 - gz + c_2\\
+	c_2 - c_1 &= \Omega^2 a^2
+}
+To find the pressure difference between $r=0$ and $r=\infty$, 
+\eq{
+	\frac{p(0)}{\rho} &= -gz + c_1\\
+	\frac{p(\infty)}{\rho} &= -gz + c_2\\
+	p(\infty) - p(0) &= \rho(c_2 - c_1) = \rho\Omega^2 a^2
+}
+To find the height difference between $r=0$ and $r=\infty$ we notice that becuase it is a free surface the pressure is constant (atmospheric pressure), so let $\frac{p}{\rho} = c$
+\eq{
+	c = -gz(0) + c_1 &\implies z(0) = \frac{-c}{g} + \frac{c_1}{g}\\
+	c = -gz(\infty) + c_2 &\implies z(\infty) = \frac{-c}{g} + \frac{c_2}{g}\\
+	z(\infty) - z(0) &= \frac{1}{g}(c_2 - c_1) = \frac{\Omega^2 a^2}{g}
+}
+\section*{Problem 1.4} From Euler's equation we have
+\eq{
+	\frac{Du}{Dt} = \frac{-1}{\rho}\nabla p + g
+}
+Because $g$ is conservative, we let $-\nabla \chi = g$, so we have
+\eq{
+	\p{u}{t} + (u\cdot\nabla)u &= -\nabla(\frac{p}{\rho} + \chi)
+}
+Using the identity $(u\cdot \nabla)u = (\nabla\times u)\times u + \nabla(\frac{1}{2}u^2)$ we have
+\eq{
+	\p{u}{t} + (\nabla \times u)\times u &= -\nabla(\frac{p}{\rho} + \frac{1}{2}u^2 + \chi)\\
+	\rho\p{u}{t} + \rho(\nabla \times u)\times u &= -\nabla(p + \frac{\rho}{2}u^2 + \rho\chi)
+}
+On taking the dot product with $u$ and letting $p' = p + \rho\chi$, we obtain
+\eq{
+	\rho u \cdot\p{u}{t} &= -u\cdot\nabla(p + \frac{\rho}{2}u^2 + \rho\chi)\\
+	\p{}{t}(\frac{1}{2}\rho u^2) &= -u\cdot\nabla(p' + \frac{\rho}{2}u^2)
+}
+Using the vector identity $(F\cdot \nabla)\phi = \nabla(F\phi) - \phi(\nabla \cdot F)$, and $\nabla \cdot u = 0$,
+\eq{
+	\p{}{t}(\frac{1}{2}\rho u^2) &= -\nabla\cdot((p' + \frac{1}{2}\rho u^2)u) + (p' + \frac{1}{2}\rho u^2)(\nabla \cdot u)\\
+	&= -\nabla\cdot((p' + \frac{1}{2}\rho u^2)u)
+}
+Integrating over an arbitrary volume $V$, and using the divergence theorem, we obtain
+\eq{
+	\p{}{t}\int_V \frac{1}{2}\rho u^2d\tau = -\int_V \nabla\cdot((p' + \frac{1}{2}\rho u^2)u)d\tau = -\int_S (p' + \frac{1}{2}\rho u^2)u \cdot nd\sigma
+}
+\section*{Problem 1.5}
+We start with Euler's equation and take the curl
+\eq{
+	\p{u}{t} + \omega\times u + \nabla(\frac{1}{2}u^2) &= -\frac{1}{\rho}\nabla p - \nabla \chi\\
+	\p{u}{t} + \omega\times u &= -\frac{1}{\rho}\nabla p - \nabla(\frac{1}{2}u^2 - \chi)\\
+	\nabla\times\left(\p{u}{t} + \omega\times u\right) &= \nabla\times\left(-\frac{1}{\rho}\nabla p - \nabla(\frac{1}{2}u^2 - \chi)\right)
+}
+Applying the fact that the gradient is curless and the identity $$\nabla \times (F \times G) = (G\cdot\nabla)F - (F\cdot\nabla)G + F(\nabla \cdot G) - G(\nabla\cdot F)$$ we obtain
+\eq{
+	\p{\omega}{t} + \nabla\times(\omega\times u) &= \nabla\times\left(-\frac{1}{\rho}\nabla p\right)\\
+	\p{\omega}{t} + (u\cdot\nabla)\omega - (\omega\cdot\nabla)u + \omega(\nabla\cdot u) - u(\nabla\cdot\omega) &= \nabla\times\left(-\frac{1}{\rho}\nabla p\right)
+}
+From $\frac{D\rho}{Dt} + \rho\nabla\cdot u = 0$ and the fact that the divergence of the curl is zero, we get
+\eq{
+	\nabla\cdot\omega &= 0\\
+	\nabla\cdot u &= -\frac{1}{\rho}\frac{D\rho}{Dt}
+}
+so
+\eq{
+	\p{\omega}{t} + (u\cdot\nabla)\omega - (\omega\cdot\nabla)u - \frac{\omega}{\rho}\frac{D\rho}{Dt} &= \nabla\times\left(-\frac{1}{\rho}\nabla p\right)
+}
+Now by using $\nabla\times(\phi\nabla u) = \nabla\phi \times \nabla u$ we get
+\eq{
+	\p{\omega}{t} + (u\cdot\nabla)\omega - (\omega\cdot\nabla)u - \frac{\omega}{\rho}\frac{D\rho}{Dt} &= -\nabla(\frac{1}{\rho})\times \nabla p
+}
+Dividing by $\rho$ we obtain
+\eq{
+	\frac{1}{\rho}\p{\omega}{t} + \frac{1}{\rho}(u\cdot\nabla)\omega - (\frac{\omega}{\rho}\cdot\nabla)u - \frac{\omega}{\rho^2}\frac{Dp}{Dt} &= -\frac{1}{\rho}\nabla(\frac{1}{\rho})\times\nabla p\\
+	\frac{1}{\rho}\p{\omega}{t} + \frac{1}{\rho}(u\cdot\nabla)\omega - \frac{\omega}{\rho^2}\frac{Dp}{Dt} &= (\frac{\omega}{\rho}\cdot\nabla)u -\frac{1}{\rho}\nabla(\frac{1}{\rho})\times\nabla p
+}
+Leaving this for a moment, we compute
+\eq{
+	\frac{D}{Dt}(\frac{\omega}{\rho}) &= \p{}{t}(\frac{\omega}{\rho}) + (u\cdot\nabla)(\frac{\omega}{\rho})\\
+	&= (\frac{1}{\rho}\p{\omega}{t} - \frac{\omega}{\rho^2}\p{\rho}{t}) + (\frac{1}{\rho^2}\left[\rho(u\cdot\nabla)\omega - \omega(u\cdot\nabla)\rho\right])\\
+	&= (\frac{1}{\rho}\p{\omega}{t} + \frac{1}{\rho}(u\cdot\nabla)\omega) - \frac{\omega}{\rho^2}(\p{\rho}{t} + (u\cdot\nabla)\rho)\\
+	&= (\frac{1}{\rho}\p{\omega}{t} + \frac{1}{\rho}(u\cdot\nabla)\omega) - \frac{\omega}{\rho^2}\frac{D\rho}{Dt}
+}
+Thus
+\eq{
+	\frac{D}{Dt}(\frac{\omega}{\rho}) &= (\frac{\omega}{\rho}\cdot\nabla)u -\frac{1}{\rho}\nabla(\frac{1}{\rho})\times\nabla p
+}
+Now if $p$ is only a function of $\rho$ then we have from the chain rule
+\eq{
+	\nabla p &= p'(\rho)\nabla\rho
+}
+which means $p$ is in the same line as $\rho$, thus
+\eq{
+	\nabla p \times \nabla \rho = 0
+}
+So the final term in the equation is zero, meaning
+\eq{
+	\frac{D}{Dt}(\frac{\omega}{\rho}) &= (\frac{\omega}{\rho}\cdot\nabla)u
+}
+which by inspection we can see is the vorticity equation with $\omega \rightarrow \frac{\omega}{\rho}$
+\section*{Problem 1.8}
+From the streamline equations we have that
+\eq{
+	\frac{\frac{dx}{dx}}{u_0} &= \frac{\frac{dy}{dx}}{kt}\\
+	\frac{dy}{ds} &= \frac{kt}{u_0}\frac{dx}{ds}\\
+	y &= \frac{kt}{u_0}x + c
+}
+And so the streamlines are lines. To find the paths they take we use the Lagrangian coordinates and the equations,
+\eq{
+	\p{x}{t}_x &= u_0 \implies x_t = u_0 \implies x = u_0 t + c\\
+	\p{y}{t}_x &= kt \implies y_t = kt \implies y = \frac{1}{2}kt^2 + c
+}
+which are clearly parabolas.
+\end{document}

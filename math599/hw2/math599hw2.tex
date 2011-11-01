@@ -1,0 +1,198 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsmath}
+\usepackage{bm}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\p}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\de}[2]{\frac{d#1}{d#2}}
+\newcommand{\n}{\bm{\nabla}}
+\newcommand{\cross}{\times}
+\newcommand{\tc}[3]{#1\times(#2\times#3)}
+\newcommand{\mat}[2]{\left[\begin{tabular}{#1}#2\end{tabular}\right]}
+\newcommand{\dete}[2]{\left|\begin{tabular}{#1}#2\end{tabular}\right|}
+\title{Homework 2}
+\author{Jeff Wendling}
+\date{October 20, 2011}
+\begin{document}
+\maketitle
+\section*{Problem 6.1} With the convention that $[\bm{x}]_i$ is the $i$th
+component of the vector $\bm{x}$, we notice
+\eq{
+	[2(\bm{n} \cdot \n)\bm{u}]_i &= 2n_j\p{u_i}{x_j}
+}
+and
+\eq{
+	[\tc{\bm{n}}{\n}{\bm{u}}]_i &= e_{ijk}e_{klm}n_j\p{}{x_l}u_m\\
+	&= e_{kij}e_{klm}n_j\p{}{x_l}u_m\\
+	&= [\delta_{il}\delta_{jm} - \delta_{im}\delta_{jl}]n_j\p{}{x_l}u_m\\
+	&= n_j\p{u_j}{x_i} - n_j\p{u_i}{x_j}
+}
+Thus
+\eq{
+	[2(\bm{n} \cdot \n)\bm{u} + \bm{n} \cross (\n \cross \bm{u})]_i &= 2n_j\p{u_i}{x_j} + n_j\p{u_j}{x_i} - n_j\p{u_j}{x_j}\\
+	&= n_j\p{u_i}{x_j} + n_j\p{u_j}{x_i}\\
+	&= n_j(\p{u_i}{x_j} + \p{u_j}{x_i})
+}
+Which means
+\eq{
+	t_i &= -pn_i + n_j(\p{u_i}{x_j} + \p{u_j}{x_i})
+}
+\section*{Problem 6.2} Starting with equation (6.13) and integrating over the suface of some arbitrary volume,
+\eq{
+	\bm{t} &= -p\bm{n} + \mu[2(\bm{n}\cdot\n)\bm{u} + \tc{\bm{n}}{\n}{\bm{u}}]\\
+	\int_S \bm{t} \;dS &= \int_S -p\bm{n} + \mu[2(\bm{n}\cdot\n)\bm{u} + \tc{\bm{n}}{\n}{\bm{u}}] \;dS\\
+	&= \int_V -\n p \;dV + \mu \int_S 2(\bm{n}\cdot\n)\bm{u} + \tc{\bm{n}}{\n}{\bm{u}} \;dS\\
+	&= \int_V -\n p + 2\mu\n^2 \bm{u} \;dV + \mu\int_S \tc{\bm{n}}{\n}{\bm{u}} \;dS
+}
+Now consider (because of incompressability)
+\eq{
+	\int_V \n^2 \bm u \;dV &= \int_V \n(\n\cdot\bm{u}) - \tc{\n}{\n}{\bm{u}} \;dV\\
+	&= -\int_V \tc{\n}{\n}{\bm{u}} \;dV\\
+	&= \int_S (\n \times \bm{u}) \times \bm{n} \;dV\\
+	&= -\int_S \tc{\bm{n}}{\n}{\bm{u}} \;dV
+}
+Thus
+\eq{
+	\int_S \bm{t} \;dS &= \int_V -\n p + 2\mu\n^2 \bm{u} \;dV + \mu\int_S \tc{\bm{n}}{\n}{\bm{u}} \;dS\\
+	&= \int_V -\n p + 2\mu\n^2 \bm{u} \;dV - \mu\int_V \n^2 \bm u \;dV\\
+	&= \int_V -\n p + \mu\n^2 \bm{u} \;dV
+}
+\section*{Problem 6.3}
+For the case of simple shear flow, $\bm{u} = [u(y), 0, 0]$ and when $\bm{n} = [0, 1, 0]$ we have
+\eq{
+	-p\bm{n} &= [0, -p, 0]\\
+	\\
+	2(\bm{n}\cdot\n)\bm{u} &= 2(\p{}{y})[u(y), 0, 0]\\
+	&= [2\de{u}{y}, 0, 0]\\
+	\\
+	\n\cross\bm{u} &= \dete{ccc}{
+		x & y & z \\
+		$\p{}{x}$ & $\p{}{y}$ & $\p{}{z}$ \\
+		u(y) & 0 & 0 \\
+	}\\
+	&= [0, 0, -\de{u}{y}]\\
+	\tc{\bm{n}}{\n}{\bm{U}} &= \dete{ccc}{
+		x & y & z \\
+		0 & 1 & 0 \\
+		0 & 0 & $-\de{u}{y}$ \\
+	}\\
+	&= [-\de{u}{y}, 0, 0]
+}
+Thus by equation 6.13 we have
+\eq{
+	\bm{t} &= -p\bm{n} + \mu[2(\bm{n}\cdot\n)\bm{u} + \tc{\bm{n}}{\n}{\bm{u}}]\\
+	&= [0, -p, 0] + \mu\left([2\de{u}{y}, 0, 0] + [-\de{u}{y}, 0, 0]\right)\\
+	&= [2\mu\de{u}{y}, -p, 0]
+}
+\section*{Problem 6.9}
+For the first method we use direct substitution into 6.13 for $\bm{u} = u_r(r, \theta)\bm{e_r}$. Note that in this case $\bm{n} = \bm{e_\theta}$ because it is the outward normal to the lower part of the channel. Also $\n = [\p{}{r} ,\frac{1}{r}\p{}{\theta}]$ and $\bm{n}\cdot\n = \frac{1}{r}\p{}{\theta}$.\\
+First we cast 6.13 into an appropriate form using
+\eq{
+	\tc{\bm{n}}{\n}{\bm{u}} &= \n(\bm{u}\cdot\bm{n}) - \tc{\bm{u}}{\n}{\bm{n}} - (\bm{u}\cdot\n)\bm{n} - (\bm{n}\cdot\n)\bm{u}\\
+	&= \n(\bm{u}\cdot\bm{n}) - (\bm{n}\cdot\n)\bm{u}
+}
+But in this case $\bm{u}\perp\bm{n}$, so
+\eq{
+	\tc{\bm{n}}{\n}{\bm{u}} &= - (\bm{n}\cdot\n)\bm{u}
+}
+Then
+\eq{
+	2(\bm{n}\cdot\n)\bm{u} + \tc{\bm{n}}{\n}{\bm{u}} &= (\bm{n}\cdot\n)\bm{u}
+}
+Then 6.13 becomes
+\eq{
+	\bm{t} &= -p\bm{n} + \mu(\bm{n}\cdot\n)\bm{u}\\
+	&= -p\bm{e_\theta} + \frac{\mu}{r}\p{}{\theta} u_r\bm{e_r}\\
+	&= -p\bm{e_\theta} + \frac{\mu}{r}\p{u_r}{\theta}\bm{e_r} + \frac{\mu u_r}{r}\bm{e_\theta}\\
+	&= \frac{\mu}{r}\p{u_r}{\theta}\bm{e_r} + \left(-p + \frac{\mu u_r}{r}\right)\bm{e_\theta}
+}
+For the second method we calculate using the definition of the tensor vector in terms of the stress tensor,
+\eq{
+	t_i &= T_{ij} n_j
+}
+Thus because $\bm{n} = n_r\bm{e_r} + n_\theta\bm{e_\theta} = 0\bm{e_r} + 1\bm{e_\theta}$, our vector satisfies
+\eq{
+	t_i &= T_{i\theta}
+}
+Then we can find
+\eq{
+	t_r &= T_{r\theta}\\
+	&= -p\delta_{r\theta} + 2\mu e_{r\theta}\\
+	&= \mu\left( r\p{}{r}(\frac{u_\theta}{r}) + \frac{1}{r}\p{u_r}{\theta} \right)\\
+	&= \frac{\mu}{r}\p{u_r}{\theta}
+}
+and
+\eq{
+	t_\theta &= T_{\theta\theta}\\
+	&= -p\delta_{\theta\theta} + 2\mu e_{\theta\theta}\\
+	&= -p + 2\mu\left( \frac{1}{r}\p{u_\theta}{\theta} + \frac{u_r}{r} \right)\\
+	&= -p + \frac{2\mu u_r}{r}
+}
+\section*{Problem 6.13}
+We write the Jacobian of
+\eq{
+	\mat{ccc}{
+		$\p{x_1}{X_1}$ & $\p{x_1}{X_2}$ & $\p{x_1}{X_3}$ \\
+		\\
+		$\p{x_2}{X_1}$ & $\p{x_2}{X_2}$ & $\p{x_2}{X_3}$ \\
+		\\
+		$\p{x_3}{X_1}$ & $\p{x_3}{X_2}$ & $\p{x_3}{X_3}$ \\
+	}
+}
+in tensor notation as
+\eq{
+	J = e_{ijk}\p{x_1}{X_i}\p{x_2}{X_j}\p{x_3}{X_k}
+}
+Notice that for Lagrangian coordinates, $\frac{D}{Dt} = \p{}{t}$, so
+\eq{
+	\frac{DJ}{Dt} &= \p{J}{t}\\
+	&= \p{}{t}e_{ijk}\p{x_1}{X_i}\p{x_2}{X_j}\p{x_3}{X_k}\\
+	&= e_{ijk} \p{u_1}{x_m} \p{x_m}{X_i}\p{x_2}{X_j}\p{x_3}{X_k} + \\
+	& \;\;\;\;e_{ijk} \p{u_2}{x_m} \p{x_m}{X_i}\p{x_3}{X_j}\p{x_1}{X_k}\\
+	& \;\;\;\;e_{ijk} \p{u_3}{x_m} \p{x_m}{X_i}\p{x_1}{X_j}\p{x_2}{X_k}\\
+	&\equiv h^1_{ijk} + h^2_{ijk} + h^3_{ijk}
+}
+Now consider
+\eq{
+	h^1_{ijk} &= e_{ijk} \p{u_1}{x_m} \p{x_m}{X_i}\p{x_2}{X_j}\p{x_3}{X_k}\\
+	&= \p{u_1}{x_1} e_{ijk}\p{x_1}{X_i}\p{x_2}{X_j}\p{x_3}{X_k} + \p{u_1}{x_2} e_{ijk}\p{x_2}{X_i}\p{x_2}{X_j}\p{x_3}{X_k} + \p{u_1}{x_3} e_{ijk}\p{x_3}{X_i}\p{x_2}{X_j}\p{x_3}{X_k}
+}
+but the last two terms in the sum are clearly zero because
+\eq{
+	e_{ijk} = -e_{jik}\\
+	e_{ijk} = -e_{kji}
+}
+So
+\eq{
+	h^1_{ijk} &= \p{u_1}{x_1} e_{ijk}\p{x_1}{X_i}\p{x_2}{X_j}\p{x_3}{X_k}\\
+	h^1 &= \p{u_1}{x_1} J
+}
+Similarly
+\eq{
+	h^2 &= \p{u_2}{x_3} J\\
+	h^3 &= \p{u_2}{x_3} J
+}
+Thus
+\eq{
+	\frac{DJ}{Dt} &= h^1 + h^2 + h^3\\
+	&= J(\p{u_1}{x_1} + \p{u_2}{x_2} + \p{u_3}{x_3})\\
+	&= J(\n \cdot \bm{u})
+}
+
+To prove Reynold's transport theorem, we consider the change of some quantity of some volume as it is transported or deformed through time,
+\eq{
+	\de{}{t}\int_{V(t)} G dV &= \de{}{t} \int_{V(t)} G dx_1dx_2dx_3\\
+	&= \de{}{t} \int_{V(0)} GJ dX_1 dX_2 dX_3
+}
+which we can now interchange integration and differentiation because the limits no longer depend on time, giving
+\eq{
+	\de{}{t} \int_{V(0)} GJ dX_1 dX_2 dX_3 &= \int_{V(0)} \p{}{t} (GJ) dX_1 dX_2 dX_3\\
+	&= \int_{V(0)} \left[\p{G}{t}J + G\p{J}{t}\right] dX_1 dX_2 dX_3
+}
+But we have that $\p{J}{t} = \frac{DJ}{Dt} = J(\n \cdot \bm{u})$ and inside of these transformed coordinates $\p{G}{t} = \frac{DG}{Dt}$, so
+\eq{
+	\int_{V(0)} \left[\p{G}{t}J + G\p{J}{t}\right] dX_1 dX_2 dX_3 &= \int_{V(0)} \left[J\frac{DG}{Dt} + GJ(\n \cdot \bm{u})\right] dX_1 dX_2 dX_3\\
+	&=\int_{V(0)} \left[\frac{DG}{Dt} + G(\n \cdot \bm{u})\right]J dX_1 dX_2 dX_3\\
+	&= \int_{V(t)} \frac{DG}{Dt} + G(\n \cdot \bm{u}) dx_1 dx_2 dx_3
+}
+Proving the theorem.
+\end{document}

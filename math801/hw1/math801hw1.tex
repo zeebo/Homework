@@ -1,0 +1,115 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsmath}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\title{Homework 1}
+\author{Jeff Wendling}
+\date{September 20, 2011}
+\begin{document}
+\maketitle
+\section*{Problem 1}
+To use Watson's lemma on $\int_0^1 e^{-xt}\sin t dt$, we write $\sin t$ in the special form,
+\eq{
+	\sin t &= t^\alpha \sum_{n=1}^\infty a_n t^\beta_n\\
+	\beta_n &= 2n-1\\
+	\alpha &= 0\\
+	a_n &= \frac{(-1)^{n+1}}{(2n-1)!} = \frac{(-1)^{n+1}}{\Gamma(2n)}
+}
+Then we obtain the expansion,
+\eq{
+	\int_0^1 e^{-xt}\sin t dt &\approx \int_0^\infty t^\alpha\sum_{n=1}^\infty a_n t^{\beta_n}dt\\
+	&\approx \sum_{n=1}^\infty a_n \frac{\Gamma(\alpha+\beta_n+1)}{x^{\alpha+\beta_n+1}}\\
+	&\approx \sum_{n=1}^\infty \frac{(-1)^{n+1}}{\Gamma(2n)} \frac{\Gamma(2n)}{x^{2n}}\\
+	&\approx \sum_{n=1}^\infty \frac{(-1)^{n+1}}{x^{2n}} \approx \frac{1}{x^2} - \frac{1}{x^4} + ...
+}
+\section*{Problem 2}
+First we recognize that
+$$\gamma(a,x) = \int_0^\infty e^{-t}t^{a-1}dt - \int_x^\infty e^{-t}t^{a-1}dt = \Gamma(a) - \int_x^\infty e^{-t}t^{a-1}dt$$
+We proceed by defining
+\begin{equation}
+	I_n(a,x) = \prod_{i=1}^{n-1}(a - i)\int_x^\infty e^{-t}t^{a - n}dt
+\end{equation}
+and observing that
+\eq{
+	I_n(a,x) &= \prod_{i=1}^{n-1}(a - i)\int_x^\infty e^{-t}t^{a - n}dt\\
+	&= \prod_{i=1}^{n-1}(a - i)\left[-e^{-t}t^{a - n}|_x^\infty + \int_x^\infty(a - n)e^{-t}t^{a - (n+1)}dt\right]\\
+	&= \prod_{i=1}^{n-1}(a - i)e^{-x}x^{a - n} + \prod_{i=1}^{n}(a - i)\int_x^\infty e^{-t}t^{a - (n+1)}dt\\
+	&= \prod_{i=1}^{n-1}(a - i)e^{-x}x^{a - n} + I_{n+1}(a,x)
+}
+Then noting that
+$$\gamma(a,x) = \Gamma(a) - I_1(a,x)$$
+we find by applying the recurrance multiple times,
+\eq{
+	\gamma(a,x) &= \Gamma(a) - e^{-x}x^a(\frac{1}{x}) - I_2(a,x)\\
+	&= \Gamma(a) - e^{-x}x^a(\frac{1}{x}) - e^{-x}x^a(\frac{a-1}{x^2}) - I_3(a,x)\\
+	&= \Gamma(a) - e^{-x}x^a(\frac{1}{x} + \frac{a-1}{x^2} + \frac{(a-1)(a-2)}{x^3} + ...)\\
+}
+To prove this is an asymptotic expansion, we consider for some $N$
+\eq{
+	|\gamma(a,x) - \Gamma(a) - e^{-x}x^a(\frac{1}{x} + ... + \frac{\prod_{n=1}^{N-1} (a-n)}{x^N})| = |I_{N+1}(a,x)|\\
+}
+and notice
+\eq{
+	\lim_{x\rightarrow\infty} \dfrac{|\prod_{i=1}^N(a-i)\int_x^\infty e^{-t}t^{a-(N+1)} dt|}{-\prod_{i=1}^{N-1}(a-i)e^{-x}x^a} &= C\lim_{x\rightarrow\infty}\dfrac{\int_x^\infty e^{-t}t^{a-(N+1)}dt}{e^{-x}x^a}\\
+	&= C\lim_{x\rightarrow\infty} \frac{e^{-x}x^{a-(N+1)}}{e^{-x}(a-N)x^{a-(N+1)} - e^{-x}x^{a-N}}\\
+	&= C\lim_{x\rightarrow\infty} \frac{\frac{1}{x}x^{a-N}}{\frac{1}{x}x^{a-N} - x^{a-N}}\\
+	&= C\lim_{x\rightarrow\infty} \frac{\frac{1}{x}}{\frac{1}{x} - 1} = 0
+}
+and so it is an asymptotic expansion.
+\section*{Problem 3}
+\subsection*{As $x\rightarrow0$} We first note that any taylor expansion centered around a point serves as an asymptotic expansion for that point. Then using uniform convergence on compact intervals to exchange integration and summation, we note that
+\eq{
+	\frac{2}{\sqrt{\pi}}\int_0^x e^{-t^2} dt &= \frac{2}{\sqrt{\pi}}\int_0^x\sum_{n=0}^\infty \frac{(-1)^nt^{2n}}{n!} dt\\
+	&= \frac{2}{\sqrt{\pi}} \sum_{n=0}^\infty \frac{(-1)^n}{n!}\int_0^x t^{2n}dt\\
+	&= \frac{2}{\sqrt{\pi}} \sum_{n=0}^\infty \frac{(-1)^n x^{2n+1}}{n!(2n+1)}
+}
+\subsection*{As $x\rightarrow\infty$} We write,
+\eq{
+	\frac{2}{\sqrt{\pi}}\int_0^x e^{-t^2}dt &= \frac{2}{\sqrt{\pi}}\left(\int_0^\infty e^{-t^2}dt - \int_x^\infty e^{-t^2}dt\right)\\
+	&= 1 - \frac{2}{\sqrt{\pi}}\int_x^\infty e^{-t^2}dt\\
+	&= 1 - \frac{1}{\sqrt{\pi}}\left(-\int_x^\infty\frac{1}{t} \frac{d}{dt}\left(e^{-t^2}\right)\right)\\
+	&= 1 - \frac{1}{\sqrt{\pi}}\left(\left. \frac{e^{-t^2}}{t}\right|_\infty^x - \int_x^\infty \frac{e^{-t^2}}{t^2} dt\right)\\
+	&= 1 - \frac{1}{\sqrt{\pi}}\left(\frac{e^{-x^2}}{x} - \frac{1}{2}\int_x^\infty \frac{1}{t^3} \frac{d}{dt}\left(e^{-t^2}\right)\right)\\
+	&= 1 - \frac{1}{\sqrt{\pi}}\left(\frac{e^{-x^2}}{x} + \left.\frac{e^{-t^2}}{2t^3}\right|_\infty^x - \frac{3}{2}\int_x^\infty \frac{e^{-t^2}}{t^4} dt\right)\\
+	&= 1 - \frac{1}{\sqrt{\pi}}\left(\frac{e^{-x^2}}{x} + \frac{e^{-x^2}}{2x^3} - \frac{3}{2}\int_x^\infty \frac{e^{-t^2}}{t^4} dt\right)\\
+	&= 1 - \frac{1}{\sqrt{\pi}}\left(\frac{e^{-x^2}}{x} + \frac{e^{-x^2}}{2x^3} + \frac{3e^{-x^2}}{4x^5} - \frac{15}{4}\int_x^\infty \frac{e^{-t^2}}{t^6} dt\right)
+}
+Continuing with integration by parts gives the asymptotic expansion
+\eq{
+	\frac{2}{\sqrt{\pi}}\int_0^x e^{-t^2}dt &= 1 - \frac{e^{-x^2}}{x\sqrt{\pi}}\left(1 + \frac{1}{2x^2} + \frac{3}{4x^4} + \frac{15}{8x^6} + ... + \frac{\prod_{i=0}^n(2i-1)}{2^n x^{2n}} + ...\right)
+}
+which we can prove by checking that for any fixed $N$
+\eq{
+	\lim_{x\rightarrow\infty} \frac{\frac{\prod_{i=0}^{N+1}(2i-1)}{2^{N+1}}\int_x^\infty e^{-t^2}{t^{-2(N+1)} dt}}{\frac{e^{-x^2}}{x\sqrt{\pi}}\frac{\prod_{i=0}^N(2i-1)}{2^N x^{2N}}} &= \lim_{x\rightarrow\infty} C\frac{\int_x^\infty e^{-t^2} t^{-2(N+1)}dt} {e^{-x^2}x^{-2N-1}}\\
+	&= \lim_{x\rightarrow\infty} C\frac{e^{-x^2}x^{-2(N+1)}}{ e^{-x^2}(-2N-1)x^{-2N-2} + 2x^{-2N}e^{-x^2} }\\
+	&= \lim_{x\rightarrow\infty} C\frac{x^{-2N-2}}{x^{-2N-2} + 2x^{-2N}}\\
+	&= \lim_{x\rightarrow\infty} C\frac{1}{1+2x^2} = 0
+}
+\section*{Problem 4}
+\subsection*{(a) $\int_{-\pi/4}^{\pi/4} e^{x\cos t}\cosh(t)dt$} To use Laplace's method, we find the maximum values of $\cos t$ inside the region of integration, getting $t = 0$. Doing Taylor expansions on both functions around this point we find
+\eq{
+	\int_{-\pi/4}^{\pi/4} e^{x\cos t}\cosh(t)dt &\approx \int_{0-\epsilon}^{0+\epsilon} e^{x\left(1-\frac{t^2}{2}\right)} \cosh(0) dt\\
+	&\approx 2e^x\int_{0}^\infty e^{-(\frac{tx}{\sqrt{2}})^2} dt\\
+	&\approx 2\sqrt{\frac{2}{x}}e^x\int_{0}^\infty e^{-t^2} dt\\
+	&\approx 2\sqrt{\frac{2}{x}}e^x\frac{\sqrt{\pi}}{2}\\
+	&\approx e^x\sqrt{\frac{2\pi}{x}}
+}
+\subsection*{(b) $\int_{-\infty}^{\infty} e^{xt - e^t} dt$}
+We start with the substitution $e^t = ux$ and find
+\eq{
+	\int_{-\infty}^\infty e^{xt - e^t} dt &= \int_0^\infty e^{x\ln(ux) - ux}\frac{du}{u}\\
+	&= \int_0^\infty e^{x\left(\ln u - u + \ln x\right)\frac{du}{u}}\\
+	&= x^x \int_0^\infty \frac{1}{u}e^{x\left(\ln u - u\right)} du\\
+	&= x^x \int_0^\infty e^{-xu} u^{x-1}du
+}
+to which we make the substitution $s = ux$ and find
+\eq{
+	x^x \int_0^\infty e^{-xu} u^{x-1}du &= x^x \int_0^\infty e^{-s}\left(\frac{s}{x}\right)^{x-1} \frac{ds}{x}\\
+	&= x^{x-1}\int_0^\infty x^{-(x-1)}e^{-s}s^{x-1}ds\\
+	&= \int_0^\infty e^{-s}s^{x-1}ds\\
+	&= \Gamma(x)
+}
+to which we apply the well known asymptotic expansion of the Gamma function (Stirling's formula or 6.4.40 in the textbook) to obtain
+\eq{
+	\int_{-\infty}^\infty e^{xt - e^t} dt \approx \sqrt{\frac{2\pi}{x}}x^xe^{-x}
+}
+\end{document}
