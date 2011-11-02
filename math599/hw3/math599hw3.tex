@@ -144,5 +144,91 @@ Thus
 	a_0e^{ik_0 x}e^{-\frac{x^2}{4\sigma}}\int_{-\infty - \frac{ix}{2\sigma}}^{\infty - \frac{ix}{2\sigma}} e^{-\sigma z^2}dz &= a_0e^{ik_0 x}e^{-\frac{x^2}{4\sigma}}\sqrt{\frac{\pi}{\sigma}}
 }
 as required. Notice that if there are a very large number of crests then $k_0$ is big. If $k_0$ is big then $e^{-\sigma(k - k_0)^2}$ is small unless $k$ is close to $k_0$.
-\section*{Problem 3.12}
+\section*{Problem 3.12} Starting with the equations,
+\eq{
+	E &= \frac{1}{2}\rho\int_{x_0}^{x_0 + \lambda}\int_{-\infty}^\eta u^2 + v^2 \;dydx + \int_{x_0}^{x_0+\lambda}\int_0^\eta \rho gy \;dydx\\
+	\eta &= A\cos(kx - \omega t)\\
+	\phi &= \frac{A\omega}{x} e^{ky}\sin(kx -\omega t)\\
+	\omega^2 &= gk
+}
+We have
+\eq{
+	u &= A\omega e^{ky}\cos(kx - \omega t)\\
+	v &= A\omega e^{ky}\sin(kx - \omega t)\\
+	\\
+	u^2 + v^2 &= A^2\omega^2 e^{2ky}
+}
+To approximate the kinetic energy term we drop the upper limit of $\eta$ and make it $0$ because this removes only higer order terms, and so
+\eq{
+	\frac{1}{2}\rho\int_{x_0}^{x_0 + \lambda}\int_{-\infty}^\eta u^2 + v^2 \;dydx &= \frac{\rho A^2\omega^2}{2}\int_{x_0}^{x_0 + \lambda} \int_{-\infty}^0 e^{2ky} \;dydx\\
+	&= \frac{\rho A^2\omega^2}{4k}\int_{x_0}^{x_0 + \lambda} 1 \;dx\\
+	&= \frac{\rho \lambda A^2 \omega^2}{4k} = \frac{\rho\lambda A^2 g}{4}
+}
+To find the potential energy term, we evaluate
+\eq{
+	\int_{x_0}^{x_0+\lambda}\int_0^\eta \rho gy \;dydx &= \rho g \int_{x_0}^{x_0+\lambda}\int_0^\eta y^2 dy\\
+	&= \rho g \int_{x_0}^{x_0+\lambda} \frac{1}{2} A^2\cos^2(kx - \omega t) \;dx\\
+	&= \frac{A^2 \rho g}{2}\int_{x_0}^{x_0+\lambda}\cos^2(kx - \omega t) \; dx\\
+	&= \frac{A^2 \rho g}{2}\int_{x_0}^{x_0+\lambda}(1 + 2\cos(2(kx - \omega t))) \; dx\\
+	&= \frac{A^2 \rho g \lambda}{4} + \frac{A^2 \rho g}{4k}\sin(2(kx - \omega t)) \left|_{x_0}^{x_0+\lambda}\right.
+}
+Now because $k = \frac{2\pi}{\lambda}$,
+\eq{
+	\sin(2(kx - \omega t)) \left|_{x_0}^{x_0+\lambda}\right. &= \sin(2kx_0 - 2\omega t + 2k\lambda) - \sin(2kx_0 - 2\omega t)\\
+	&= \sin(2kx_0 - 2\omega t + 4\pi) - \sin(2kx_0 - 2\omega t)\\
+	&= 0
+}
+Thus,
+\eq{
+	\int_{x_0}^{x_0+\lambda}\int_0^\eta \rho gy \;dydx &= \frac{A^2 \rho g \lambda}{4}\\
+	\\
+	\bar{E} = \frac{E}{\lambda} &= \frac{A^2\rho g}{2}
+}
+From equation (3.19)
+\eq{
+	\p{\phi}{t} + \frac{p}{\rho} + \frac{1}{2}\bm{u}^2 + \chi = G(t)
+}
+If we fix an $\bm{x}$, neglect higher order terms, and choose $G(t) = \chi + \frac{p_0}{\rho}$,
+\eq{
+	\p{\phi}{t} + \frac{p_0 + p_1}{\rho} + \chi &= \chi + \frac{p_0}{\rho}\\
+	\p{\phi}{t} + \frac{p_1}{\rho} &= 0\\
+	p_1 &= -\rho\p{\phi}{t}\\
+}
+We then calculate
+\eq{
+	\int_{-\infty}^\eta p_1 u dy &= \int_{-\infty}^{\eta} -\rho\p{\phi}{t} A\omega e^{ky}\sin(kx - \omega t) \; dy\\
+	&= \int_{-\infty}^{\eta} \rho(\frac{A\omega^2}{k}e^{ky}\cos(kx-\omega t)) A\omega e^{ky}\sin(kx - \omega t) \; dy\\
+	&= \rho g A^2\omega\cos^2(kx - \omega t)\int_{-\infty}^\eta e^{2ky}dy
+}
+In which we neglect the contribution from $0$ to $\eta$ and find,
+\eq{
+	\int_{-\infty}^0 e^{2ky}dy &= \frac{1}{2k}
+}
+Thus,
+\eq{
+	\int_{-\infty}^\eta p_1 u dy &= \frac{\rho g A^2\omega}{2k}\cos^2(kx - \omega t)
+}
+To find the average potential, we integrate over one time period $\frac{2\pi}{\omega}$, and divide by it to find the average, and find
+\eq{
+	\bar{F} &= \frac{\omega}{2\pi} \frac{\rho g A^2\omega}{2k}\int_{0}^{\frac{2\pi}{\omega}} \cos^2(kx - \omega t) \; dt\\
+	&= \frac{\rho g A^2\omega^2}{8k\pi}\int_{0}^{\frac{2\pi}{\omega}} (1 + \cos(2(kx - \omega t))) \; dx\\
+	&= \frac{\rho g A^2\omega^2}{8k\pi}(t - \frac{1}{2\omega}\sin(2(kx - \omega t)))\left|_{0}^{\frac{2\pi}{\omega}}\right.\\
+	&= \frac{\rho g A^2\omega}{4k} = \frac{\rho g A^2 c}{4}
+}
+Now,
+\eq{
+	\frac{\bar{F}}{\bar{E}} &= \frac{\frac{\rho g A^2 c}{4}}{\frac{A^2\rho g}{2}}\\
+	&= \frac{\rho g A^2 c}{4}\frac{2}{A^2\rho g}\\
+	&= \frac{c}{2}\\
+}
+And (3.29) says that $c_g = \frac{d\omega}{dk}$, thus
+\eq{
+	\omega^2 = gk\\
+	2\omega\frac{d\omega}{dk} &= g\\
+	\frac{d\omega}{dk} &= \frac{1}{2}\frac{g}{\omega}
+}
+But $\omega^2 = gk \implies \frac{g}{\omega} = \frac{\omega}{k}$ and $c = \frac{\omega}{k}$, so
+\eq{
+	\frac{d\omega}{dk} = \frac{1}{2}\frac{g}{\omega} = \frac{c}{2}
+}
 \end{document}
