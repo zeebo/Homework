@@ -20,7 +20,7 @@
 	\phi &= f(y)\sin(kx - \omega t)\\
 	\eta &= A\cos(kx - \omega t)
 }
-The condition given by finite depth is now $\p{\phi}{y}(-h) = 0$, or
+The condition given by finite depth is now $\p{\phi}{y}(-h) = 0$ (there is no vertical velocity at the bottom), or
 \eq{
 	\p{\phi}{y}(-h) = f'(-h)\sin(kx - \omega t) &= 0\\
 	f'(-h) &= 0\\
@@ -98,5 +98,26 @@ Using the conditions from the surface kinematic equations,
 	\frac{\omega^2 A}{|k|}(\rho_2 + \rho_1) &= (\rho_1 - \rho_2)gA\\
 	\frac{\omega^2}{k^2} &= \frac{g}{|k|}\frac{\rho_1 - \rho_2}{\rho_1 + \rho_2}\\
 	c^2 &= \frac{g}{|k|}\frac{\rho_1 - \rho_2}{\rho_1 + \rho_2}
+}
+\section*{Problem 3}
+We begin by considering the disturbance at $t = 0$
+\eq{
+	\eta(x,0) &= \int_{-\infty}^\infty a(k)e^{ikx}dk\\
+	a(k) &= a_0 e^{-\sigma(k - k_0)^2}
+}
+So with $k_1 = k - k_0$, so $k = k_+1 + k_0$ and $dk = dk_1$,
+\eq{
+	\eta(x, 0) &= \int_{-\infty}^\infty a_0 e^{-\sigma(k - k_0)^2}e^{ikx}dk\\
+	&= \int_{-\infty}^\infty a_0 e^{-\sigma k_1^2}e^{i(k_1 + k_0)x}dk_1\\
+	&= a_0 e^{ik_0x}\int_{-\infty}^\infty e^{ik_1 x - \sigma k_1^2} dk_1
+}
+Notice that
+\eq{
+	-\sigma k_1^2 + ik_1x &= -\sigma(k_1^2 - \frac{ix}{\sigma}k_1 + \left(\frac{ix}{2\sigma}\right)^2) - \frac{x^2}{4\sigma}\\
+	&= -\sigma(k_1 - \frac{ix}{2\sigma})^2 - \frac{x^2}{4\sigma}
+}
+Thus, letting $z = k_1 - \frac{ix}{2\sigma}$,
+\eq{
+	a_0 e^{ik_0x}\int_{-\infty}^\infty e^{ik_1 x - \sigma k_1^2} dk_1 &= a_0e^{ik_0 x}e^{-\frac{x^2}{4\sigma}}\int_{-\infty - \frac{ix}{2\sigma}}^{\infty - \frac{ix}{2\sigma}} e^{-\sigma z^2}dz
 }
 \end{document}
