@@ -9,6 +9,7 @@
 \newcommand{\tc}[3]{#1\times(#2\times#3)}
 \newcommand{\mat}[2]{\left[\begin{tabular}{#1}#2\end{tabular}\right]}
 \newcommand{\dete}[2]{\left|\begin{tabular}{#1}#2\end{tabular}\right|}
+\newcommand{\on}[1]{\operatorname{#1}}
 \title{Homework 3}
 \author{Jeff Wendling}
 \date{November 3rd, 2011}
@@ -99,7 +100,7 @@ Using the conditions from the surface kinematic equations,
 	\frac{\omega^2}{k^2} &= \frac{g}{|k|}\frac{\rho_1 - \rho_2}{\rho_1 + \rho_2}\\
 	c^2 &= \frac{g}{|k|}\frac{\rho_1 - \rho_2}{\rho_1 + \rho_2}
 }
-\section*{Problem 3}
+\section*{Problem 3.11}
 We begin by considering the disturbance at $t = 0$
 \eq{
 	\eta(x,0) &= \int_{-\infty}^\infty a(k)e^{ikx}dk\\
@@ -120,4 +121,28 @@ Thus, letting $z = k_1 - \frac{ix}{2\sigma}$,
 \eq{
 	a_0 e^{ik_0x}\int_{-\infty}^\infty e^{ik_1 x - \sigma k_1^2} dk_1 &= a_0e^{ik_0 x}e^{-\frac{x^2}{4\sigma}}\int_{-\infty - \frac{ix}{2\sigma}}^{\infty - \frac{ix}{2\sigma}} e^{-\sigma z^2}dz
 }
+So we evaluate
+\eq{
+	\int_{-\infty - \frac{ix}{2\sigma}}^{\infty - \frac{ix}{2\sigma}} e^{-\sigma z^2}dz
+}
+by letting $y = -\frac{x}{2\sigma}$, and considering the closed rectangle in the first two quadrents with corners $(R, R+iy, -R+iy, -R)$ for real $R$. Call $C_1$ the contour from $R$ to $-R$, $C_2$ from $-R$ to $-R+iy$, $C_3$ from $-R+iy$ to $R+iy$, and $C_4$ from $R+iy$ to $R$. 
+We attempt to bound the integral over $C_2$ and $C_4$, and find that on $C_2$, $z = -R+it$ for $0 \leq t \leq y$,
+\eq{
+	|\int_{C_2} e^{-\sigma z^2}| dz &= |i\int_0^y e^{-\sigma (R^2 - t^2 - 2iRt)} dt|\\
+	&\leq \int_0^y |e^{-\sigma (R^2 - t^2 - 2iRt)}| dt\\
+	&\leq \int_0^y |e^{-\sigma (R^2 - t^2)}| dt\\
+	&\leq y|e^{-\sigma R^2}| \rightarrow 0\;\;\on{as}\;\;R\rightarrow\infty
+}
+A similar result holds for $C_4$, so as $R \rightarrow \infty$, we have that $C_1 = -C_3$ by Cauchy Residue theorem. Thus,
+\eq{
+	\int_{-\infty - \frac{ix}{2\sigma}}^{\infty - \frac{ix}{2\sigma}} e^{-\sigma z^2}dz &= -\int_{\infty}^{-\infty} e^{-\sigma z^2}dz \\
+	&= \int_{-\infty}^{\infty} e^{-\sigma z^2}dz\\
+	&= \sqrt{\frac{\pi}{\sigma}}
+}
+Thus
+\eq{
+	a_0e^{ik_0 x}e^{-\frac{x^2}{4\sigma}}\int_{-\infty - \frac{ix}{2\sigma}}^{\infty - \frac{ix}{2\sigma}} e^{-\sigma z^2}dz &= a_0e^{ik_0 x}e^{-\frac{x^2}{4\sigma}}\sqrt{\frac{\pi}{\sigma}}
+}
+as required. Notice that if there are a very large number of crests then $k_0$ is big. If $k_0$ is big then $e^{-\sigma(k - k_0)^2}$ is small unless $k$ is close to $k_0$.
+\section*{Problem 3.12}
 \end{document}
