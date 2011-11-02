@@ -1,0 +1,102 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsmath}
+\usepackage{bm}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\p}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\de}[2]{\frac{d#1}{d#2}}
+\newcommand{\n}{\bm{\nabla}}
+\newcommand{\cross}{\times}
+\newcommand{\tc}[3]{#1\times(#2\times#3)}
+\newcommand{\mat}[2]{\left[\begin{tabular}{#1}#2\end{tabular}\right]}
+\newcommand{\dete}[2]{\left|\begin{tabular}{#1}#2\end{tabular}\right|}
+\title{Homework 3}
+\author{Jeff Wendling}
+\date{November 3rd, 2011}
+\begin{document}
+\maketitle
+\section*{Problem 3.1} Starting with the analysis in section 3.2, and following up to the application of the boundary condition to $f$, we have these equations:
+\eq{
+	f &= Ce^{ky} + De^{-ky}\\
+	\phi &= f(y)\sin(kx - \omega t)\\
+	\eta &= A\cos(kx - \omega t)
+}
+The condition given by finite depth is now $\p{\phi}{y}(-h) = 0$, or
+\eq{
+	\p{\phi}{y}(-h) = f'(-h)\sin(kx - \omega t) &= 0\\
+	f'(-h) &= 0\\
+	Ce^{-kh} &= De^{kh}
+}
+Thus,
+\eq{
+	f &= D(e^{2kh}e^{ky} + e^{-ky})\\
+	&= d\cosh(ky)
+}
+So substituting we have
+\eq{
+	\phi &= d\cosh(ky)\sin(kx - \omega t)\\
+	\eta &= A\cos(kx - \omega t)
+}
+We apply the surface pressure and surface kinematic equations, yielding
+\eq{
+	\p{\phi}{y} = \p{\eta}{t} &\implies dk\sinh(ky)\sin(kx - \omega t) = A\omega\sin(kx - \omega t)\\
+	&\implies dk\sinh(ky) = A\omega\\
+	\p{\phi}{t} = -g\eta &\implies -\omega d\cosh(ky)\cos(kx - \omega t) = -gA\cos(kx - \omega t)\\
+	&\implies \omega d\cosh(ky) = Ag
+}
+Multiplying the first equation by $g$, the second by $\omega$, and equating, we obtain
+\eq{
+	dkg\sinh(ky) &= \omega^2 d \cosh(ky)\\
+	\omega^2 &= kg\tanh(ky)\\
+	c^2 &= \frac{g}{k}\tanh(ky)
+}
+which is the desired result.
+\section*{Problem 3.2} We begin by considering the pressure condition at the interface where $y = \eta$. Noticing that the pressures are equal at this interface gives the equations (from 3.19)
+\eq{
+	\rho_1\p{\phi_1}{t} + p + \rho_1\chi &= \rho_1G_1(t)\\
+	\rho_2\p{\phi_2}{t} + p + \rho_2\chi &= \rho_2G_2(t)
+}
+Because $\rho_1$ and $\rho_2$ are constant, we can choose the arbitrary constants to give the pressure condition,
+\eq{
+	\rho_1\p{\phi_1}{t} + \rho_1g\eta = \rho_2\p{\phi_2}{t} + \rho_2g\eta
+}
+Continuing as before, we assume
+\eq{
+	\eta &= A\cos(kx - \omega t)\\
+	\phi_1 &= f_1(y)\sin(kx - \omega t)\\
+	\phi_2 &= f_2(y)\sin(kx - \omega t)\\
+}
+but this time we allow for $k < 0$, and thus
+\eq{
+	f_1 &= Ce^{|k|y} + De^{-|k|y}\\
+	f_2 &= Ee^{|k|y} + Fe^{-|k|y}
+}
+But we require that $f_1 \rightarrow 0$ as $y \rightarrow -\infty$, and $f_2 \rightarrow 0$ as $y \rightarrow \infty$, thus
+\eq{
+	\phi_1 &= Ce^{|k|y}\sin(kx - \omega t)\\
+	\phi_2 &= Fe^{-|k|y}\sin(kx - \omega t)
+}
+First we plug these into the surface kinematic condition and obtain
+\eq{
+	\p{\phi_1}{y} = \p{\eta}{t} &\implies |k|Ce^{|k|y}\sin(kx - \omega t) = \omega A\sin(kx - \omega t)\\
+	&\implies |k|Ce^{|k|y} = \omega A\\
+	&\implies Ce^{|k|y} = \frac{\omega A}{|k|}\\
+	\\
+	\p{\phi_2}{y} = \p{\eta}{t} &\implies -|k|Fe^{-|k|y}\sin(kx - \omega t) = \omega A\sin(kx - \omega t)\\
+	&\implies -|k|Fe^{-|k|y} = \omega A\\
+	&\implies -Fe^{-|k|y} = \frac{\omega A}{|k|}
+}
+Next we plug into the pressure condition,
+\eq{
+	\rho_2\p{\phi_2}{t} - \rho_1\p{\phi_1}{t} &= (\rho_1 - \rho_2)g\eta\\
+	(-\rho_2 Fe^{-|k|y} + \rho_1Ce^{|k|y})\omega \cos(kx - \omega t) &= (\rho_1 - \rho_2)gA\cos(kx - \omega t)\\
+	\omega(-\rho_2 Fe^{-|k|y} + \rho_1Ce^{|k|y}) &= (\rho_1 - \rho_2)gA
+}
+Using the conditions from the surface kinematic equations,
+\eq{
+	\omega(-\rho_2 Fe^{-|k|y} + \rho_1Ce^{|k|y}) &= (\rho_1 - \rho_2)gA\\
+	\omega(\rho_2 \frac{\omega A}{|k|} + \rho_1 \frac{\omega A}{|k|}) &= (\rho_1 - \rho_2)gA\\
+	\frac{\omega^2 A}{|k|}(\rho_2 + \rho_1) &= (\rho_1 - \rho_2)gA\\
+	\frac{\omega^2}{k^2} &= \frac{g}{|k|}\frac{\rho_1 - \rho_2}{\rho_1 + \rho_2}\\
+	c^2 &= \frac{g}{|k|}\frac{\rho_1 - \rho_2}{\rho_1 + \rho_2}
+}
+\end{document}
