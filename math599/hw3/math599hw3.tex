@@ -30,27 +30,34 @@ The condition given by finite depth is now $\p{\phi}{y}(-h) = 0$ (there is no ve
 Thus,
 \eq{
 	f &= D(e^{2kh}e^{ky} + e^{-ky})\\
-	&= d\cosh(ky)
+	&= d\cosh(k(y + h))
 }
 So substituting we have
 \eq{
-	\phi &= d\cosh(ky)\sin(kx - \omega t)\\
+	\phi &= d\cosh(k(y + h))\sin(kx - \omega t)\\
 	\eta &= A\cos(kx - \omega t)
 }
 We apply the surface pressure and surface kinematic equations, yielding
 \eq{
-	\p{\phi}{y} = \p{\eta}{t} &\implies dk\sinh(ky)\sin(kx - \omega t) = A\omega\sin(kx - \omega t)\\
-	&\implies dk\sinh(ky) = A\omega\\
+	\p{\phi}{y} = \p{\eta}{t} &\implies dk\sinh(k(y + h))\sin(kx - \omega t) = A\omega\sin(kx - \omega t)\\
+	&\implies dk\sinh(k(y + h)) = A\omega\\
+	\\
 	\p{\phi}{t} = -g\eta &\implies -\omega d\cosh(ky)\cos(kx - \omega t) = -gA\cos(kx - \omega t)\\
-	&\implies \omega d\cosh(ky) = Ag
+	&\implies \omega d\cosh(k(y + h)) = Ag
 }
 Multiplying the first equation by $g$, the second by $\omega$, and equating, we obtain
 \eq{
-	dkg\sinh(ky) &= \omega^2 d \cosh(ky)\\
-	\omega^2 &= kg\tanh(ky)\\
-	c^2 &= \frac{g}{k}\tanh(ky)
+	dkg\sinh(k(y + h)) &= \omega^2 d \cosh(k(y + h))\\
+	\omega^2 &= kg\tanh(ky + kh)\\
+	c^2 &= \frac{g}{k}\tanh(kh)
 }
-which is the desired result.
+for $y = \eta$ and $\eta << h$, which is the desired result. We must have $\eta << \lambda$ as before, and $\eta << h$ so that we can ignore the $y$ term in the $\tanh$.
+For the particle paths, we find the velocity components,
+\eq{
+	u &= dk\cosh(k(y + h))\cos(kx - \omega t)\\
+	v &= dk\sinh(k(y + h))\sin(kx - \omega t)
+}
+And so the paths follow ellipses that flatten out as $y$ approaches $-h$ ($\sinh(k(y + h)) \rightarrow 0$ as $y \rightarrow -h$).
 \section*{Problem 3.2} We begin by considering the pressure condition at the interface where $y = \eta$. Noticing that the pressures are equal at this interface gives the equations (from 3.19)
 \eq{
 	\rho_1\p{\phi_1}{t} + p + \rho_1\chi &= \rho_1G_1(t)\\
@@ -64,7 +71,7 @@ Continuing as before, we assume
 \eq{
 	\eta &= A\cos(kx - \omega t)\\
 	\phi_1 &= f_1(y)\sin(kx - \omega t)\\
-	\phi_2 &= f_2(y)\sin(kx - \omega t)\\
+	\phi_2 &= f_2(y)\sin(kx - \omega t)
 }
 but this time we allow for $k < 0$, and thus
 \eq{
