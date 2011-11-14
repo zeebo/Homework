@@ -4,3 +4,7 @@
 *.log
 *.fdb_latexmk
 *.DS_Store
+*.6
+_obj
+bin
+master/src/src
