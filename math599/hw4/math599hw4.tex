@@ -4,6 +4,7 @@
 \newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
 \newcommand{\p}[2]{\frac{\partial#1}{\partial#2}}
 \newcommand{\de}[2]{\frac{d#1}{d#2}}
+\newcommand{\De}[2]{\frac{D#1}{D#2}}
 \newcommand{\n}{\bm{\nabla}}
 \newcommand{\cross}{\times}
 \newcommand{\tc}[3]{#1\times(#2\times#3)}
@@ -50,6 +51,156 @@ But consider that $p = f(\rho)$, then $\nabla p = f'(\rho)\nabla\rho$ and thus $
 }
 The unnecessary assumtion was caused by the usage of Stoke's theorem, requiring the contour be simple. We can avoid this by considering
 \eq{
-	
+	\de{\Gamma}{t} &= \int_{C(t)} -\frac{1}{\rho} \p{p}{s}\;ds\\
+	&= \int_{C(t)} -\frac{1}{\rho}f'(\rho)\p{\rho}{s}\;ds\\
+	&= \int_{C(t)} -\frac{1}{\rho}f'(\rho)\nabla\rho\cdot d\bm{x}\\
+	&= \int_{C(t)} \nabla h \cdot d\bm{x}
 }
+where
+\eq{
+	\nabla h &= -\frac{1}{\rho}f'(\rho)\nabla\rho\\
+	h &= -\int_0^\rho \frac{1}{s}f'(s)\;ds
+}
+Thus $h$ is a single valued function, so for a closed contour $C$ we have
+\eq{
+	\de{\Gamma}{t} &= \int_{C(t)} \nabla h \cdot d\bm{x} = [h] = 0
+}
+From exercise 1.5 we have
+\eq{
+	\De{}{t}\left(\frac{\bm{\omega}}{\rho}\right) &= \left(\frac{\bm{\omega}}{\rho} \cdot \nabla\right)\bm{u} + \frac{1}{\rho}\nabla\left(\frac{1}{\rho}\right)\times\nabla p
+}
+But just as previously, for a barotropic fluid
+\eq{
+	\frac{1}{\rho}\nabla\left(\frac{1}{\rho}\right)\times\nabla p = 0
+}
+and so
+\eq{
+	\De{}{t}\left(\frac{\bm{\omega}}{\rho}\right) &= \left(\frac{\bm{\omega}}{\rho} \cdot \nabla\right)\bm{u}
+}
+To modify the thin vortex tube argument, we start with a thin vortex
+tube in which $\bm{\omega}$ is virtually constant across any
+particular cross section. In this case, $\Gamma$ is essentially the
+product $\bm{\omega}\delta S$ where $\delta S$ is the normal
+cross-section of the tube. But $\delta S$ is also the normal
+cross-section of the fluid occupying the tube, and as the fluid must
+conserve its mass, $\rho\delta S$ will vary inversely proportional
+to the length $l$ of a small section of the tube. Thus, 
+$\frac{\bm{\omega}}{\rho}$ varies proportionally to $l$.
+So for some constant $c$,
+\eq{
+	\bm{\omega}\delta S &\approx c\\
+	p\delta S &\approx l^{-1}\\
+	\frac{\bm{\omega}}{\rho l} &\approx c\\
+	\frac{\omega}{\rho} &\approx l
+}
+\section*{Problem 5.6}
+For this problem we start by deriving the identity,
+\eq{
+	(\nabla\times\bm{a})\times\bm{u} = (\bm{u}\cdot\nabla)\bm{a} - \nabla(\bm{a}\cdot\bm{u})
+}
+Using tensor notation,
+\eq{
+	(\nabla\times\bm{a})\times\bm{u} &= e_{nim}(e_{ijk}\p{}{x^j}a_k)u_m\\
+	&= -e_{inm}e_{ijjk}\p{}{x^j}a_ku_m\\
+	&= -(\delta_{nj}\delta_{mk} - \delta_{nk}\delta_{mj}) \p{}{x^j}a_ku_m\\
+	&= \p{}{x^j}a_nu_j - \p{}{x^n}a_ku_k\\
+	&= (\bm{u}\cdot\nabla)\bm{a} - \nabla(\bm{a}\cdot\bm{u})
+}
+Note that because $\bm{a}\cdot\bm{u}$ is single valued for nice enough $\bm{a}$, for any closed contour $C(t)$,
+\eq{
+	\int_{C(t)} \nabla(\bm{a}\cdot\bm{u})\cdot d\bm{x} = 0
+}
+Then
+\eq{
+	\de{\mathcal{C}}{t} &= \de{}{t} \int_{C(t)} \bm{a}\cdot d\bm{x}\\
+	&= \de{}{t} \int_0^1 \bm{a}\cdot \p{\bm{x}}{s}\;ds\\
+	&= \int_0^1 \p{}{t}\left(\bm{a}\cdot\p{\bm{x}}{s}\right)ds\\
+	&= \int_0^1 \left(\p{\bm{a}}{t}\right)_s\cdot\p{\bm{x}}{s} + \bm{a}\cdot\p{\bm{u}}{s}ds
+}
+Now we have
+\eq{
+	\left(\p{\bm{a}}{t}\right)_s = \left(\p{\bm{a}}{t}\right)_x + (\bm{u}\cdot\nabla)\bm{a}
+}
+Continuing,
+\eq{
+	\de{\mathcal{C}}{t} &= \int_0^1 \left( \left(\p{\bm{a}}{t}\right)_x + (\bm{u}\cdot\nabla)\bm{a})_s\right)\cdot\p{\bm{x}}{s}ds\\
+	&= \int_{C(t)} \left(\p{\bm{a}}{t} + (\bm{u}\cdot\nabla)\bm{a}\right)\cdot d\bm{x}\\
+	&= \int_{C(t)} \left(\p{\bm{a}}{t} + (\bm{u}\cdot\nabla)\bm{a} - \nabla(\bm{a}\cdot\bm{x})\right)\cdot d\bm{x}\\
+	&= \int_{C(t)} \left(\p{\bm{a}}{t} + (\nabla\times\bm{a})\times\bm{u}\right)\cdot d\bm{x}
+}
+\section*{Problem 5.10}
+We consider a line vortex centered at $z_0 = d + iy_0$. The condition that there is no velocity in the x direction on the line $x = 0$ because of a wall leads to placing another line vortex at $z_1 = -d + iy_0$ spinning in the opposite direction. Thus by section 4.4 in the text book, we have
+\eq{
+	w &= -\frac{i\Gamma}{2\pi}\log(z - z_0) + \frac{i\Gamma}{2\pi}\log(z - z_1)\\
+	&= -\frac{i\Gamma}{2\pi}\log(z - d - iy_0) + \frac{i\Gamma}{2\pi}\log(z + d - iy_0)\\
+	&= \frac{i\Gamma}{2\pi}\log(\frac{z + d - iy_0}{z - d - iy_0})\\
+	&= \frac{i\Gamma}{2\pi}\log(\frac{z + \bar{z_0}}{z - z_0})
+}
+And we can see that $\p{y_0}{t} = -\frac{\Gamma}{4\pi d}$ by section 5.6 in the textbook (they induce a downward motion on each other, and so they both move down by symmetry).
+At the instant $y_0 = 0$, we have on $x = 0$
+\eq{
+	w &= \frac{i\Gamma}{2\pi}\left( \log(z + \bar{z_0}) - \log(z - z_0)\right)\\
+	&= \frac{i\Gamma}{2\pi}\left( \ln(x + d) + i\tan^{-1}\left(\frac{y - y_0}{x + d}\right) - \ln(x - d) - i\tan^{-1}\left(\frac{y - y_0}{x - d}\right) \right)\\
+	\\
+	v &= \p{\phi}{y} = \frac{\Gamma}{2\pi}\p{}{y}\left( \tan^{-1}\left(\frac{y - y_0}{x - d}\right) - \tan^{-1}\left(\frac{y - y_0}{x + d} \right) \right)\\
+	&= \frac{\Gamma}{2\pi}\left( \frac{\frac{1}{x-d}}{1 + \left( \frac{y - y_0}{x -d}\right)^2} - \frac{\frac{1}{x+d}}{1 + \left( \frac{y - y_0}{x + d}\right)^2} \right)\\
+	&= \frac{\Gamma}{2\pi}\left( \frac{x-d}{(x-d)^2 + (y-y_0)^2} - \frac{x+d}{(x+d)^2 + (y-y_0)^2} \right)\\
+	&= \frac{\Gamma}{2\pi}\left( \frac{-d}{d^2 + y^2} - \frac{d}{d^2 + y^2}\right)\\
+	&= \frac{-\Gamma d}{\pi(d^2 + y^2)}
+}
+And to find $\p{w}{t}$, we define
+\eq{
+	z + \bar{z_0} &= x + iy + d - iy_0 = r - iy_0\\
+	z - z_0 &= x + iy - d - iy_0 = s - iy_0\\
+	\\
+	r &= x + iy + d\\
+	s &= x + iy - d\\
+	\\
+	m + in &= \frac{z + \bar{z_0}}{z - z_0} = \frac{r - iy_0}{s - iy_0}\\
+	\\
+	m &= \frac{rs + y_0^2}{s^2 + y_0^2}\\
+	n &= \frac{(r-s)y_0}{s^2 + y_0^2}\\
+}
+Now notice that
+\eq{
+	w &= \frac{i\Gamma}{2\pi}\log(m + in)\\
+	\p{r}{t} &= 0\\
+	\p{s}{t} &= 0\\
+}
+and calculate that when $y_0 \rightarrow 0$,
+\eq{
+	\p{m}{t} &= \left(\frac{2y_0(s^2 + y_0^2) - (rs + y_0^2)(2y_0)}{(s^2 + y_0^2)^2}\right)y_0' \rightarrow 0\\
+	\p{n}{t} &= \left( \frac{(r-s)(s^2 + y_0^2) - ((r-s)y_0)(2y_0)}{(s^2 + y_0^2)^2} \right)y_0' \rightarrow \frac{(r-s)s^2}{s^4}y_0' = \frac{r-s}{s^2}y_0'\\
+	m &\rightarrow \frac{r}{s}\\
+	n &\rightarrow 0
+}
+Thus,
+\eq{
+	\p{w}{t} &= \p{}{t}\frac{-\Gamma}{2\pi}\tan^{-1}\frac{m}{n}\\
+	&= -\frac{\Gamma}{2\pi}\left( \frac{\frac{n'm - m'n}{m^2}}{1 + (\frac{n}{m})^2}\right)\\
+	&= -\frac{\Gamma}{2\pi}\left( \frac{n'm - m'n}{m^2 + n^2}\right)\\
+	&= -\frac{\Gamma}{2\pi}\left( \frac{\left(\frac{r-s}{s^2}y_0'\right)(\frac{r}{s})}{(\frac{r}{s})^2}\right)\\
+	&= -\frac{\Gamma(r-s)y_0'}{2\pi rs}\\
+	&= -\frac{\Gamma((iy + d) - (iy - d)) \left(\frac{-\Gamma}{4\pi d}\right) }{2\pi (iy + d)(iy - d)}\\
+	&= \frac{\Gamma^2(2d)}{8\pi^2 d(-y^2 - d^2)}\\
+	&= -\frac{\Gamma^2}{4\pi^2(y^2 + d^2)}
+}
+So now with those results, we can find the pressure on the wall by starting with
+\eq{
+	\p{\phi}{t} + \frac{p}{\rho} + \frac{1}{2}\bm{u}^2 + \chi = g(t)\\
+}
+Choosing $g(t) = \chi$ and noticing that on $x = 0$, the x component of velocity $u = 0$, we have
+\eq{
+	\p{\phi}{t} + \frac{p}{\rho} + \frac{1}{2}v^2 = 0\\
+	p = -\rho\left(\p{\phi}{t} + \frac{1}{2}v^2\right)
+}
+The pressure is given by
+\eq{
+	\int_{-\infty}^\infty p dy &= -\rho\int_{-\infty}^\infty\left(\p{\phi}{t} + \frac{1}{2}v^2\right)dy\\
+	&= -\rho\int_{-\infty}^\infty\left(-\frac{\Gamma^2}{4\pi^2(y^2 + d^2)} + \frac{-\Gamma^2 d^2}{2\pi^2(d^2 + y^2)^2}\right)dy\\
+	&= \rho\frac{\Gamma^2}{\pi^2}\int_{-\infty}^\infty\left(\frac{1}{4(y^2 + d^2)} + \frac{d^2}{2(d^2 + y^2)^2}\right)dy\\
+	&= \rho\frac{\Gamma^2}{\pi^2}\frac{\pi}{4d} + \rho\frac{\Gamma^2}{\pi^2}\frac{\pi}{4d}\\
+	&= \rho\frac{\Gamma^2}{2\pi d}
+}
+If the vortex were somehow fixed there would be no pressure change due to the change in the flow potential, thus it's contribution would be gone leaving half the pressure.
 \end{document}
