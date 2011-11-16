@@ -9,9 +9,47 @@
 \newcommand{\tc}[3]{#1\times(#2\times#3)}
 \newcommand{\mat}[2]{\left[\begin{tabular}{#1}#2\end{tabular}\right]}
 \newcommand{\dete}[2]{\left|\begin{tabular}{#1}#2\end{tabular}\right|}
-\title{}
+\title{Homework 4}
 \author{Jeff Wendling}
-\date{}
+\date{November 17th, 2011}
 \begin{document}
 \maketitle
+\section*{Problem 5.1}
+If
+\eq{
+	\bm{x} = (a\cos s + a\alpha t\sin s, a \sin s, 0)
+}
+Then
+\eq{
+	\p{}{t}\bm{x} = \bm{u} &= (a\alpha\sin s, 0, 0)\\
+	&= (\alpha y, 0, 0)
+}
+And so at $s = 0$ or $s = \pi$, $\bm{u} = (0, 0, 0)$ and so the particles remain at rest.
+Now we calculate
+\eq{
+	\Gamma &= \int_0^{2\pi} \bm{u}\cdot \p{\bm{x}}{s} ds\\
+	&= a^2\alpha \int_0^{2\pi} \sin s(-\sin s + at\cos s)ds\\
+	&= f(s)
+}
+because $\int_0^{2\pi} \sin s \cos s ds = 0$.
+\section*{Problem 5.3}
+That point of view requires the region to be simply connected because it appeals to Green's theorem.
+\section*{Problem 5.4}
+We calculate
+\eq{
+	\de{\Gamma}{t} &= \int_{C(t)} -\frac{1}{\rho}\nabla p \cdot\;d\bm{x}\\
+	&= \iint_{D(t)} \nabla \times (-\frac{1}{\rho}\nabla p)\cdot \bm{n}\;d\sigma\\
+	&= \iint_{D(t)} -\left[\nabla(\frac{1}{\rho}) \times \nabla p\right]\cdot \bm{n}\;d\sigma\\
+	&= \iint_{D(t)} -\left[\frac{\nabla \rho}{\rho^2} \times \nabla p\right]\cdot \bm{n}\;d\sigma\\
+	&= \iint_{D(t)} -\left[\frac{1}{\rho^2}(\nabla \rho \times \nabla p)\right]\cdot \bm{n}\;d\sigma
+}
+But consider that $p = f(\rho)$, then $\nabla p = f'(\rho)\nabla\rho$ and thus $\nabla p$ is in the same direction as $\nabla \rho$, and so $(\nabla \rho \times \nabla p) = 0$, giving
+\eq{
+	\de{\Gamma}{t} &= \iint_{D(t)} -\left[\frac{1}{\rho^2}(\nabla \rho \times \nabla p)\right]\cdot \bm{n}\;d\sigma\\
+	&= \iint_{D(t)} 0 \; d\sigma = 0
+}
+The unnecessary assumtion was caused by the usage of Stoke's theorem, requiring the contour be simple. We can avoid this by considering
+\eq{
+	
+}
 \end{document}
