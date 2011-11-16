@@ -21,3 +21,10 @@ func (t Team) Home() bool {
 func (t Team) Away() bool {
 	return t >= teams
 }
+
+func (t Team) BaseTeam() Team {
+	if t.Away() {
+		return Team(t - teams)
+	}
+	return t
+}

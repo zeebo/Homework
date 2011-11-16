@@ -7,7 +7,7 @@ import (
 )
 
 type priority struct {
-	i, j  int
+	i, j  Team
 	value float64
 }
 
@@ -35,7 +35,7 @@ func (g *Gene) Randomize() {
 	}
 }
 
-func (g *Gene) Generate(t *Tournament) {
+func (g *Gene) Generate(t *Tournament) bool {
 	t.Zero()
 	//now we stick values in for the teams based on priorities
 	//make a copy of priorities
@@ -44,7 +44,7 @@ func (g *Gene) Generate(t *Tournament) {
 	for i := range g.Priorities {
 		for j, val := range g.Priorities[i] {
 			if val >= 0 {
-				s[idx] = priority{i, j, val}
+				s[idx] = priority{Team(i), Team(j), val}
 				idx++
 			}
 		}
@@ -52,7 +52,26 @@ func (g *Gene) Generate(t *Tournament) {
 
 	sort.Sort(s)
 	//now we go through the list and assign games, hoping it works!
-	for _, v := range s {
-		fmt.Println(v)
+	var (
+		placed     bool
+		considered bool
+	)
+	for {
+		placed = false
+		considered = false
+		for i := range s {
+			if s[i].value < 0 { //game has been placed
+				continue
+			}
+			considered = true
+			if t.Place(s[i].i, s[i].j) {
+				placed = true
+				break
+			}
+		}
+		if !placed {
+			break
+		}
 	}
+	return !considered
 }

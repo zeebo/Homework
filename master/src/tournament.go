@@ -13,3 +13,11 @@ func (t *Tournament) Zero() {
 func (t *Tournament) Valid() bool {
 	return false
 }
+
+func (t *Tournament) Place(home, away Team) bool {
+	//attempt to place the game Home plays vs Away
+	// home is [0, teams)
+	// away is [0, 2*teams)
+
+	return true
+}
