@@ -94,23 +94,19 @@ So for some constant $c$,
 	\frac{\omega}{\rho} &\approx l
 }
 \section*{Problem 5.6}
-For this problem we start by deriving the identity,
-\eq{
-	(\nabla\times\bm{a})\times\bm{u} = (\bm{u}\cdot\nabla)\bm{a} - \nabla(\bm{a}\cdot\bm{u})
-}
-Using tensor notation,
+For this problem we start by expanding in tensor notation,
 \eq{
 	(\nabla\times\bm{a})\times\bm{u} &= e_{nim}(e_{ijk}\p{}{x^j}a_k)u_m\\
 	&= -e_{inm}e_{ijjk}\p{}{x^j}a_ku_m\\
 	&= -(\delta_{nj}\delta_{mk} - \delta_{nk}\delta_{mj}) \p{}{x^j}a_ku_m\\
 	&= \p{}{x^j}a_nu_j - \p{}{x^n}a_ku_k\\
-	&= (\bm{u}\cdot\nabla)\bm{a} - \nabla(\bm{a}\cdot\bm{u})
+	&= (\bm{u}\cdot\nabla)\bm{a} - \p{a_k}{x^j}u_k
 }
-Note that because $\bm{a}\cdot\bm{u}$ is single valued for nice enough $\bm{a}$, for any closed contour $C(t)$,
+Then noticing that because $\nabla \bm{a}\cdot\bm{u}$ being single valued, we have
 \eq{
-	\int_{C(t)} \nabla(\bm{a}\cdot\bm{u})\cdot d\bm{x} = 0
+	0 = \int_{C(t)} \nabla \bm{a}\cdot\bm{u}\cdot d\bm{x} = \int_0^1 \p{}{s}(\bm{a}\cdot\bm{u})ds
 }
-Then
+Then,
 \eq{
 	\de{\mathcal{C}}{t} &= \de{}{t} \int_{C(t)} \bm{a}\cdot d\bm{x}\\
 	&= \de{}{t} \int_0^1 \bm{a}\cdot \p{\bm{x}}{s}\;ds\\
@@ -123,9 +119,12 @@ Now we have
 }
 Continuing,
 \eq{
-	\de{\mathcal{C}}{t} &= \int_0^1 \left( \left(\p{\bm{a}}{t}\right)_x + (\bm{u}\cdot\nabla)\bm{a})_s\right)\cdot\p{\bm{x}}{s}ds\\
-	&= \int_{C(t)} \left(\p{\bm{a}}{t} + (\bm{u}\cdot\nabla)\bm{a}\right)\cdot d\bm{x}\\
-	&= \int_{C(t)} \left(\p{\bm{a}}{t} + (\bm{u}\cdot\nabla)\bm{a} - \nabla(\bm{a}\cdot\bm{x})\right)\cdot d\bm{x}\\
+	\de{\mathcal{C}}{t} &= \int_0^1 \left( \left(\p{\bm{a}}{t}\right)_x + (\bm{u}\cdot\nabla)\bm{a}\right)\cdot\p{\bm{x}}{s} + \bm{a}\cdot\p{\bm{u}}{s}\;ds\\
+	&= \int_0^1 \left( \left(\p{\bm{a}}{t}\right)_x + (\bm{u}\cdot\nabla)\bm{a}\right)\cdot\p{\bm{x}}{s} + \bm{a}\cdot\p{\bm{u}}{s} - \p{}{s}(\bm{a}\cdot\bm{u})\;ds\\
+	&= \int_0^1 \left( \left(\p{\bm{a}}{t}\right)_x + (\bm{u}\cdot\nabla)\bm{a}\right)\cdot\p{\bm{x}}{s} - \p{\bm{a}}{s}\cdot\bm{u}\;ds\\
+	&= \int_0^1 \left( \left(\p{\bm{a}}{t}\right)_x + (\bm{u}\cdot\nabla)\bm{a}\right)\cdot\p{\bm{x}}{s} - \p{a_i}{x^j}u_i\p{x_j}{s}\;ds\\
+	&= \int_0^1 \left( \left(\p{\bm{a}}{t}\right)_x + (\bm{u}\cdot\nabla)\bm{a} - \p{a_i}{x^j}u_i\right)\cdot\p{\bm{x}}{s}\;ds\\
+	&= \int_0^1 \left( \left(\p{\bm{a}}{t}\right)_x + (\nabla\times\bm{a})\times\bm{u}\right)\cdot\p{\bm{x}}{s}\;ds\\
 	&= \int_{C(t)} \left(\p{\bm{a}}{t} + (\nabla\times\bm{a})\times\bm{u}\right)\cdot d\bm{x}
 }
 \section*{Problem 5.10}
