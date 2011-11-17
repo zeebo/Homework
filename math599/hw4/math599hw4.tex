@@ -196,10 +196,10 @@ Choosing $g(t) = \chi$ and noticing that on $x = 0$, the x component of velocity
 The pressure is given by
 \eq{
 	\int_{-\infty}^\infty p dy &= -\rho\int_{-\infty}^\infty\left(\p{\phi}{t} + \frac{1}{2}v^2\right)dy\\
-	&= -\rho\int_{-\infty}^\infty\left(-\frac{\Gamma^2}{4\pi^2(y^2 + d^2)} + \frac{-\Gamma^2 d^2}{2\pi^2(d^2 + y^2)^2}\right)dy\\
-	&= \rho\frac{\Gamma^2}{\pi^2}\int_{-\infty}^\infty\left(\frac{1}{4(y^2 + d^2)} + \frac{d^2}{2(d^2 + y^2)^2}\right)dy\\
-	&= \rho\frac{\Gamma^2}{\pi^2}\frac{\pi}{4d} + \rho\frac{\Gamma^2}{\pi^2}\frac{\pi}{4d}\\
-	&= \rho\frac{\Gamma^2}{2\pi d}
+	&= -\rho\int_{-\infty}^\infty\left(-\frac{\Gamma^2}{4\pi^2(y^2 + d^2)} + \frac{\Gamma^2 d^2}{2\pi^2(d^2 + y^2)^2}\right)dy\\
+	&= \rho\frac{\Gamma^2}{\pi^2}\int_{-\infty}^\infty\left(\frac{1}{4(y^2 + d^2)} - \frac{d^2}{2(d^2 + y^2)^2}\right)dy\\
+	&= \rho\frac{\Gamma^2}{\pi^2}\frac{\pi}{4d} - \rho\frac{\Gamma^2}{\pi^2}\frac{\pi}{4d}\\
+	&= 0
 }
-If the vortex were somehow fixed there would be no pressure change due to the change in the flow potential, thus it's contribution would be gone leaving half the pressure.
+If the vortex were somehow fixed there would be no pressure change due to the change in the flow potential, thus it's contribution would be gone leaving a net pressure of $\rho\frac{\Gamma^2}{\pi^2}\frac{\pi}{4d}$.
 \end{document}
