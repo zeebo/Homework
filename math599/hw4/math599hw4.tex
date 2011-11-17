@@ -139,7 +139,7 @@ And we can see that $\p{y_0}{t} = -\frac{\Gamma}{4\pi d}$ by section 5.6 in the 
 At the instant $y_0 = 0$, we have on $x = 0$
 \eq{
 	w &= \frac{i\Gamma}{2\pi}\left( \log(z + \bar{z_0}) - \log(z - z_0)\right)\\
-	&= \frac{i\Gamma}{2\pi}\left( \ln(x + d) + i\tan^{-1}\left(\frac{y - y_0}{x + d}\right) - \ln(x - d) - i\tan^{-1}\left(\frac{y - y_0}{x - d}\right) \right)\\
+	&= \frac{i\Gamma}{2\pi}\left( \ln(|z + \bar{z_0}|) + i\tan^{-1}\left(\frac{y - y_0}{x + d}\right) - \ln(|z - z_0|) - i\tan^{-1}\left(\frac{y - y_0}{x - d}\right) \right)\\
 	\\
 	v &= \p{\phi}{y} = \frac{\Gamma}{2\pi}\p{}{y}\left( \tan^{-1}\left(\frac{y - y_0}{x - d}\right) - \tan^{-1}\left(\frac{y - y_0}{x + d} \right) \right)\\
 	&= \frac{\Gamma}{2\pi}\left( \frac{\frac{1}{x-d}}{1 + \left( \frac{y - y_0}{x -d}\right)^2} - \frac{\frac{1}{x+d}}{1 + \left( \frac{y - y_0}{x + d}\right)^2} \right)\\
@@ -147,7 +147,7 @@ At the instant $y_0 = 0$, we have on $x = 0$
 	&= \frac{\Gamma}{2\pi}\left( \frac{-d}{d^2 + y^2} - \frac{d}{d^2 + y^2}\right)\\
 	&= \frac{-\Gamma d}{\pi(d^2 + y^2)}
 }
-And to find $\p{w}{t}$, we define
+And to find $\p{\phi}{t}$, we define
 \eq{
 	z + \bar{z_0} &= x + iy + d - iy_0 = r - iy_0\\
 	z - z_0 &= x + iy - d - iy_0 = s - iy_0\\
@@ -175,7 +175,7 @@ and calculate that when $y_0 \rightarrow 0$,
 }
 Thus,
 \eq{
-	\p{w}{t} &= \p{}{t}\frac{-\Gamma}{2\pi}\tan^{-1}\frac{m}{n}\\
+	\p{\phi}{t} &= \p{}{t}\frac{-\Gamma}{2\pi}\tan^{-1}\frac{m}{n}\\
 	&= -\frac{\Gamma}{2\pi}\left( \frac{\frac{n'm - m'n}{m^2}}{1 + (\frac{n}{m})^2}\right)\\
 	&= -\frac{\Gamma}{2\pi}\left( \frac{n'm - m'n}{m^2 + n^2}\right)\\
 	&= -\frac{\Gamma}{2\pi}\left( \frac{\left(\frac{r-s}{s^2}y_0'\right)(\frac{r}{s})}{(\frac{r}{s})^2}\right)\\
