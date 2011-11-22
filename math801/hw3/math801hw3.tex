@@ -1,0 +1,211 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsmath}
+\usepackage{bm}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\p}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\de}[2]{\frac{d#1}{d#2}}
+\newcommand{\n}{\bm{\nabla}}
+\newcommand{\cross}{\times}
+\newcommand{\tc}[3]{#1\times(#2\times#3)}
+\newcommand{\mat}[2]{\left[\begin{tabular}{#1}#2\end{tabular}\right]}
+\newcommand{\dete}[2]{\left|\begin{tabular}{#1}#2\end{tabular}\right|}
+\newcommand{\ve}[2]{\left(\begin{tabular}{c}#1 \\ #2\end{tabular}\right)}
+\newcommand{\Ai}{\operatorname{Ai}}
+\newcommand{\Bi}{\operatorname{Bi}}
+\title{Homework 3}
+\author{Jeff Wendling}
+\date{November 22nd, 2011}
+\begin{document}
+\maketitle
+\section*{Problem 1}
+\subsection*{Multiple Scale Perturbation Theory} We start with $y'' + y - \epsilon(1 - y^2)y' = 0$ and assume that to a first order approximation
+\eq{
+	y &= f(t,\tau) + \epsilon g(t,\tau)\\
+	y' &= f_t + \epsilon(f_\tau + g_t)\\
+	y'' &= f_{tt} + \epsilon(2f_{t\tau} + g_{tt})
+}
+Substituing into the ODE and collecting terms with the same order $\epsilon$,
+\subsubsection*{O(1)}
+\eq{
+	f_{tt} + f &= 0\\
+	f &= A(\tau)e^{it} + \bar{A}(\tau)e^{-it}
+}
+\subsubsection*{O($\epsilon$)}
+\eq{
+	2f_{t\tau} + g_{tt} + g - (1-f^2)f_t &= 0\\
+	g_{tt} + g &= (1-f^2)f_t - 2f_{t\tau}
+}
+Substituting $f$ into this equation and collecting terms that will be secular ($e^{it}$, $e^{-it}$), we find that to avoid these terms, we require
+\eq{
+	A - \bar{A}A^2 - 2A' = 0
+}
+Assuming $A = R(\tau)e^{i\theta(\tau)}$, we find after collecting real and imaginary parts,
+\eq{
+	2R\theta' = 0 &\implies \theta = c\\
+	R - R^3 - 2R' = 0 &\implies R = \frac{e^{\tau/2}}{\sqrt{c + e^\tau}}
+}
+Thus
+\eq{
+	A = e^{ic}\frac{e^{\tau / 2}}{\sqrt{c + e^\tau}} \rightarrow e^{ic}
+}
+as $t = \epsilon\tau \rightarrow \infty$, thus
+\eq{
+	y \rightarrow 2\cos(t+c)
+}
+as $t \rightarrow \infty$.
+\subsection*{Method of Averaging}
+To apply the method of averaging, we let $s = \sin t$ and $c = \cos t$ and calculate
+\eq{
+	h &= (1-y^2)y'\\
+	\ve{x}{y}' &= \epsilon h(x c + y s, -x s + y c)\ve{-s}{c}\\
+	&= \epsilon(1 -(xc + ys)^2)(-xs + yc)\ve{-s}{c}\\
+	&= \epsilon\ve{
+		$xs^2 - x^3c^2s^2 - 2 x^2ycs^3 - xy^2s^4 - ycs + x^2yc^3s + 2xy^2c^2s^2 + y^3cs^3$
+	}{
+		$yc^2-x^2yc^4 - 2xy^2c^3s - y^3c^2s^2 - xcs + x^3c^3s + 2x^2yc^2s^2 + xy^2cs^3$
+	}
+}
+We then find the average value,
+\eq{
+	\ve{x}{y}' &= -\frac{1}{8}(x^2 + y^2 - 4)\ve{x}{y}
+}
+and make the substituiton, $x = r\cos\theta$ and $y = r\sin\theta$ to get the equations
+\eq{
+	r'c - rs\theta' &= -\frac{1}{8}(r^2 - 4)rc\\
+	r's + rc\theta' &= -\frac{1}{8}(r^2 - r)rs
+}
+Which we cross multiply with $s$ and $c$ and add and subtract to get the two equations
+\eq{
+	r\theta' = 0 &\implies \theta = c\\
+	r' + \frac{1}{2}r + \frac{r^3}{8} = 0 &\implies r = 2\frac{e^{\epsilon t/2}}{\sqrt{d + e^{\epsilon t}}}
+}
+Thus,
+\eq{
+	y = xc + ys &= 2\frac{e^{\epsilon t/2}}{\sqrt{d + e^{\epsilon t}}}(\cos t \cos c + \sin t \sin c)\\
+	&\rightarrow 2\cos(t+d)
+}
+as $t\rightarrow\infty$
+\section*{Problem 3}
+We start with $y'' + y + \epsilon y'y^2 = 0$ and assume that to a first order approximation
+\eq{
+	y &= f(t,\tau) + \epsilon g(t,\tau)\\
+	y' &= f_t + \epsilon(f_\tau + g_t)\\
+	y'' &= f_{tt} + \epsilon(2f_{t\tau} + g_{tt})\\
+}
+Substituting into the ODE and collecting terms with the same $\epsilon$,
+\subsubsection*{O(1)}
+\eq{
+	f_{tt} + f &= 0\\
+	f &= A(\tau)e^{it} + \bar{A}(\tau)e^{-it}
+}
+\subsubsection*{O($\epsilon$)}
+\eq{
+	2f_{t\tau} + g_{tt} + g + f_tf^2 &= 0\\
+	g_{tt} + g &= -2f_{t\tau} - f_tf^2
+}
+Substituting $f$ into this equation and collecting terms that will be secular ($e^{it}$, $e^{-it}$), we find that to avoid these terms,
+\eq{
+	2A'+ A^2A' = 0
+}
+Assuming $A = R(\tau)e^{i\theta(\tau)}$, we find after collecting real and imaginary parts,
+\eq{
+	2R\theta' = 0 &\implies \theta = c\\
+	2R' + R^3 = 0 &\implies R = \frac{1}{\sqrt{\tau - d}}
+}
+So,
+\eq{
+	A = \frac{e^{ic}}{\sqrt{\tau - d}}
+}
+On application of the boundary conditions, $y(0) = 1$, and $y'(0) = 0$, we find that
+\eq{
+	A &= \frac{\frac{1}{2}}{\sqrt{\frac{\tau}{4} + 1}}\\
+	y &\sim \frac{2\cos(t)}{\sqrt{\epsilon t + 4}}
+}
+\section*{Problem 4} We start by splitting the domain into three regions, region I corresponding to $x < -\epsilon^{2/3}$, region II for $|x| < \epsilon^{2/3}$ and region III for $x > \epsilon^{2/3}$. Performing WKB expansions and using the Airy function in region II, we find
+\eq{
+	\text{I}\quad& y \sim A q^{-1/4} e^{-\frac{1}{\epsilon}\int_x^0 \sqrt{q} dt}\\
+	\text{II}\quad& y \sim B \Ai(\epsilon^{-2/3} a^{1/3} |x|) + C \Bi(\epsilon^{-2/3} a^{1/3} |x|)\\
+	\text{III}\quad& y \sim D q^{-1/4} e^{-\frac{1}{\epsilon}\int_0^x \sqrt{q} dt}
+}
+Now because $q$ is even and the solution in region II is even, we can say that $A = D$ by matching. Also we used the fact that the solution must approach 0 as $x \rightarrow \infty$ to remove the positive exponential terms. We can also say that $C = 0$ because of the asymptotic expansion of $\Bi$. Thus we use the asymptotic expansions
+\eq{
+	\int_0^x \sqrt{q} dt &\sim \frac{2}{3}a^{1/2}x^{3/2}\\
+	q^{-1/4} &\sim a^{-1/4}x^{-1/4}\\
+	\Ai(x) &\sim \frac{1}{2\sqrt{\pi}} x^{-1/4}e^{-\frac{2}{3}x^{3/2}}
+}
+And match region II to region III,
+\eq{
+	Da^{-1/4}x^{-1/4}e^{-\frac{1}{\epsilon} \frac{2}{3} a^{1/2} x^{3/2}} &\approx B\frac{1}{2\sqrt{\pi}} \epsilon^{1/6}a^{-1/12}x^{-1/4}e^{-\frac{2}{3} \epsilon^{-1} a^{1/2} x^{3/2}}\\
+	Da^{-1/4}&\approx B\frac{1}{2\sqrt{\pi}} \epsilon^{1/6}a^{-1/12}\\
+	D &\approx B\frac{1}{2\sqrt{\pi}} (\epsilon a)^{1/6}
+}
+So we get the expansion for $|x| > \epsilon^{2/3}$
+\eq{
+	y \sim B\frac{1}{2\sqrt{\pi}} (\epsilon a)^{1/6} q^{-1/4} e^{-\frac{1}{\epsilon}\int_0^|x| \sqrt{q} dt}
+}
+and for $|x| < \epsilon^{2/3}$,
+\eq{
+	y \sim B \Ai(\epsilon^{-2/3} a^{1/3} |x|)
+}
+\section*{Problem 5}
+\subsection*{1.}Given that $\epsilon^2 y'' - qy = 0$ and $q \sim q_0 + \epsilon q_1$, we assume that
+\eq{
+	y \sim \exp{\frac{1}{\epsilon}\sum_{n=0}^\infty \epsilon^n S_n}
+}
+Unrolling the first few terms, we find
+\eq{
+	(S_0')^2 + 2 \epsilon S_0'S_1' + \epsilon S_0'' = q_0 + \epsilon q_1
+}
+Grouping by $\epsilon$, we get the system of ODE's,
+\eq{
+	(S_0')^2 &= q_0\\
+	2 S_0'S_1' + S_0'' &= q_1
+}
+Solving these yields
+\eq{
+	S_0 &= \pm \int^x \sqrt{q_0} dt\\
+	S_1 &= \pm \int^x \frac{q_1}{2\sqrt{q_0}} dt \pm \ln q_0^{-\frac{1}{4}}
+}
+Substituting gives
+\eq{
+	y &\sim q_0^{-\frac{1}{4}}\left(a_0 \exp\left({-\frac{1}{\epsilon} \left(\int^x \sqrt{q_0} dt + \epsilon\int^x \frac{q_1}{2\sqrt{q_0}} dt\right)}\right)\right.\\
+	 &\quad+ \left.b_0\exp\left({\frac{1}{\epsilon} \left(\int^x \sqrt{q_0} dt + \epsilon\int^x \frac{q_1}{2\sqrt{q_0}} dt\right)}\right)\right)\\
+	&\sim q_0^{-\frac{1}{4}}\left(a_0 \exp\left({-\frac{1}{\epsilon} \kappa}\right) + b_0\exp\left({\frac{1}{\epsilon} \kappa}\right)\right)
+}
+where
+\eq{
+	\kappa &= \int^x \sqrt{q_0} dt + \epsilon\int^x \frac{q_1}{2\sqrt{q_0}} dt\\
+	&= \int^x \sqrt{q_0} + \frac{\epsilon q_1}{2\sqrt{q_0}} dt\\
+	&= \int^x \sqrt{q_0}\left(1 + \frac{\epsilon}{2}\frac{q_1}{q_0}\right) dt
+}
+\subsection*{2.} Given $\epsilon^2y'' + py' + qy = 0$, we insert the approximation (with $\delta$ to be determined),
+\eq{
+	y &\sim \exp{\frac{1}{\delta}\sum_{n=0}^\infty \delta^n S_n}
+}
+Substituting this gives the equation
+\eq{
+	\frac{\epsilon^2}{\delta^2}(\sum_{n=0}^\infty \delta^n S_n')^2 + \frac{\epsilon^2}{\delta}\sum_{n=0}^\infty\delta^n S_n'' + \frac{p}{\delta}\sum_{n=0}^\infty\delta^n S_n' + q = 0
+}
+Unwinding some of the sums and collecting terms we find that we must choose $\delta = \epsilon^2$ and get the equations
+\eq{
+	(S_0')^2 + pS_0' &= 0\\
+	2S_0'S_1' + S_0'' + q + pS_1' &= 0\\
+}
+The first equation has two solutions, and we concentrate on the first,
+\eq{
+	S_0' = 0 &\implies S_0 = c\\
+	q + pS_1' = 0 &\implies S_1 = -\int^x \frac{q}{p} dt
+}
+And now the second, $S_0' = -p \implies S_0 = -\int^x p dt$, so
+\eq{
+	2S_0'S_1' + S_0'' + q + pS_1' = 0 &= -2pS_1' - p' + q + pS_1'\\
+	0 &= -pS_1' - p' + q\\
+	S_1' &= \frac{q}{p} - \frac{p'}{p}\\
+	S_1 &= \int_x \frac{q}{p} - \ln p
+}
+Substituing these two solutions back yields
+\eq{
+	y &\sim a_0\exp\left({\frac{1}{\epsilon^2}\left(c - \epsilon^2 \int^x \frac{q}{p} dt\right)}\right) + b_0\exp\left({\frac{1}{\epsilon^2}\left(-\int^x p dt + \epsilon^2 \int^x \frac{q}{p} - \epsilon^2 \ln p\right)}\right)\\
+	&\sim a_0\exp\left({-\int^x \frac{q}{p}}\right) + \frac{b_0}{p}\exp\left({\int^x\frac{q}{p} dt - \frac{1}{\epsilon^2}\int^x p dt}\right)
+}
+\end{document}
