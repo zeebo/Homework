@@ -42,15 +42,15 @@ Substituting $f$ into this equation and collecting terms that will be secular ($
 Assuming $A = R(\tau)e^{i\theta(\tau)}$, we find after collecting real and imaginary parts,
 \eq{
 	2R\theta' = 0 &\implies \theta = c\\
-	R - R^3 - 2R' = 0 &\implies R = \frac{e^{\tau/2}}{\sqrt{c + e^\tau}}
+	R - R^3 - 2R' = 0 &\implies R = \frac{e^{\tau/2}}{\sqrt{d + e^\tau}}
 }
 Thus
 \eq{
-	A = e^{ic}\frac{e^{\tau / 2}}{\sqrt{c + e^\tau}} \rightarrow e^{ic}
+	A = e^{ic}\frac{e^{\tau / 2}}{\sqrt{d + e^\tau}} \rightarrow e^{ic}
 }
 as $t = \epsilon\tau \rightarrow \infty$, thus
 \eq{
-	y \rightarrow 2\cos(t+c)
+	y \rightarrow 2\cos(t+d)
 }
 as $t \rightarrow \infty$.
 \subsection*{Method of Averaging}
@@ -141,7 +141,7 @@ And match region II to region III,
 }
 So we get the expansion for $|x| > \epsilon^{2/3}$
 \eq{
-	y \sim B\frac{1}{2\sqrt{\pi}} (\epsilon a)^{1/6} q^{-1/4} e^{-\frac{1}{\epsilon}\int_0^|x| \sqrt{q} dt}
+	y \sim B\frac{1}{2\sqrt{\pi}} (\epsilon a)^{1/6} q^{-1/4} e^{-\frac{1}{\epsilon}\int_0^{|x|} \sqrt{q} dt}
 }
 and for $|x| < \epsilon^{2/3}$,
 \eq{
