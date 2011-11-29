@@ -8,19 +8,116 @@
 \newcommand{\n}{\bm{\nabla}}
 \newcommand{\cross}{\times}
 \newcommand{\tc}[3]{#1\times(#2\times#3)}
-\newcommand{\mat}[2]{\left[\begin{tabular}{#1}#2\end{tabular}\right]}
-\newcommand{\dete}[2]{\left|\begin{tabular}{#1}#2\end{tabular}\right|}
+\newcommand{\mat}[2]{\left[\begin{array}{#1}#2\end{array}\right]}
+\newcommand{\dete}[2]{\left|\begin{array}{#1}#2\end{array}\right|}
 \newcommand{\co}[2]{\p{x^#1}{\bar{x}^#2}}
 \newcommand{\con}[2]{\p{\bar{x}^#1}{x^#2}}
 \newcommand{\coy}[2]{\p{y^#1}{\bar{x}^#2}}
 \newcommand{\cony}[2]{\p{y^#1}{x^#2}}
 \newcommand{\crsf}[3]{\left[#1\;#2,\;#3\right]}
 \newcommand{\crss}[3]{\left\{\begin{array}{c}#1\\#2\;#3\end{array}\right\}}
+\newcommand{\on}[1]{\operatorname{#1}}
 \title{Homework 4}
 \author{Jeff Wendling}
 \date{October 20, 2011}
 \begin{document}
 \maketitle
+\section*{Problem 1}
+\subsection*{(a)}
+\eq{
+	\bar{\epsilon}_{ijk,m} &= \co{a}{i}\co{b}{j}\co{c}{k}\co{d}{m}\epsilon_{abc,d}
+}
+\subsection*{(b)}
+For this problem, I use the convention that greek indicies hold no special significance. We start with the law of covariant differentiation (see problem 2 for an explanation of the second term)
+\eq{
+	\epsilon_{ijk,m} &= \p{\epsilon_{ijk}}{x^m} - \crss{\alpha}{\alpha}{m}\epsilon_{ijk}
+}
+Now we calculate
+\eq{
+	\crss{\alpha}{\alpha}{d}\epsilon_{abp} &= g^{\alpha c}\crsf{\alpha}{d}{c}\epsilon_{abp}\\
+	&= g^{\alpha c}\left(\frac{1}{2}( \p{g_{\alpha c}}{x^d} + \p{g_{dc}}{x^\alpha} - \p{g_{\alpha d}}{x^c})\right)\sqrt{g}e_{abp}\\
+	\p{\epsilon_{abc}}{x^d} &= \p{}{x^d}\sqrt{g}e_{abc}\\
+	&= \frac{1}{2\sqrt{g}} \p{g}{x^d}e_{abc}
+}
+And so we must show
+\eq{
+	\p{g}{x^d} = g^{\alpha c}g \p{g_{\alpha c}}{x^d}
+}
+We begin by considering
+\eq{
+	g &= e_{ijk}g_{1i}g_{2j}g_{3k}\\
+	\p{g}{x^d} &= \p{}{x^d}e_{ijk}g_{1i}g_{2j}g_{3k}\\
+	&= e_{ijk}\p{g_{1i}}{x^d}g_{2j}g_{3k} + e_{ijk}g_{1i}\p{g_{2j}}{x^d}g_{3k} + e_{ijk}g_{1i}g_{2j}\p{g_{3k}}{x^d}\\
+	&= \p{g_{1c}}{x^d}\on{cof}(g_{1c}) + \p{g_{2c}}{x^d}\on{cof}(g_{2c}) + \p{g_{3c}}{x^d}\on{cof}(g_{3c})\\
+	&= \p{g_{\alpha c}}{x^d}\on{cof}(g_{\alpha c})\\
+	&= \p{g_{\alpha c}}{x^d} g g^{\alpha c}
+}
+because $g^{\alpha c} = \frac{1}{g}\on{cof}(g_{\alpha c})$. Thus $\epsilon_{ijk,m} = 0$ as was to be shown.
+\subsection*{(c)}
+We have
+\eq{
+	0 &= \epsilon_{ijk,m}\\
+	&= (\sqrt{g}e_{ijk})_{,m}\\
+	&= (\sqrt{g})_{,m}e_{ijk} + 0
+}
+Thus we must have $(\sqrt{g})_{,m} = 0$
+\section*{Problem 2}
+By the law of covariant differentiation and the previous problem,
+\eq{
+	\epsilon_{ijk,m} = 0 = \p{\epsilon_{ijk}}{x^m} - \crss{\alpha}{i}{m}\epsilon_{\alpha jk} - \crss{\alpha}{j}{m}\epsilon_{i\alpha k} - \crss{\alpha}{k}{m}\epsilon_{ij\alpha}\\
+}
+First notice
+\eq{
+	\p{\epsilon_{ijk}}{x^m} &= \p{}{x^m}(\sqrt{g} e_{ijk})\\
+	&= e_{ijk}\frac{1}{2\sqrt{g}}\p{g}{x^m}\\
+	&= \epsilon_{ijk} \frac{1}{2g} \p{g}{x^m}
+}
+Then,
+\eq{
+	\crss{\alpha}{i}{m}\epsilon_{\alpha jk} + \crss{\alpha}{j}{m}\epsilon_{i\alpha k} + \crss{\alpha}{k}{m}\epsilon_{ij\alpha} &= \crss{\alpha}{\alpha}{m}\epsilon_{ijk}
+}
+Because the first term is only nonzero when $\alpha = i$, and similarly for the other two terms.
+So,
+\eq{
+	0 &= \epsilon_{ijk} \frac{1}{2g} \p{g}{x^m} - \epsilon_{ijk}\crss{\alpha}{\alpha}{m}\\
+	&= \epsilon_{ijk}\left( \frac{1}{2g} \p{g}{x^m} - \crss{\alpha}{\alpha}{m} \right)\\
+	&\implies \frac{1}{2g} \p{g}{x^m} = \crss{\alpha}{\alpha}{m}
+}
+\section*{Problem 3}
+By the law of covariant differentiation and the result of the previous problem,
+\eq{
+	A^i_{,i} &= \p{A^i}{x^i} + \crss{i}{i}{k}A^k\\
+	&= \p{A^i}{x^i} + \frac{1}{2g}\p{g}{x^k}A^k\\
+	&= \frac{1}{\sqrt{g}}\left(\sqrt{g}\p{A^i}{x^i} + \frac{1}{2\sqrt{g}}\p{g}{x^k}A^k\right)\\
+	&= \frac{1}{\sqrt{g}}\p{}{x^k}\left(\sqrt{g}A^k\right)
+}
+\section*{Problem 4}
+\subsection*{(a)}
+In cylindrical coordinates, the metric tensor is given by
+\eq{
+	g_{ij} = \mat{ccc}{
+		1 & 0 & 0\\
+		0 & r^2 & 0\\
+		0 & 0 & 1
+	}
+}
+So $\sqrt{g} = r$, and by the previous problem
+\eq{
+	A^i_{,i} = \frac{1}{r}\p{}{x^i}\left(r A^i\right)
+}
+\subsection*{(b)}
+In spherical coordinates, the metric tensor is given by
+\eq{
+	g_{ij} = \mat{ccc}{
+		1 & 0 & 0\\
+		0 & r^2\sin^2\phi & 0\\
+		0 & 0 & r^2
+	}
+}
+So $\sqrt{g} = r^2\sin\phi$, and by the previous problem
+\eq{
+	A^i_{,i} = \frac{1}{r^2}\csc\phi \p{}{x^i}\left(r^2\sin^2\phi A^i\right)
+}
 \section*{Problem 5}
 Starting from
 \eq{
@@ -69,6 +166,132 @@ Also,
 Using these two identities in the results from the previous problem, we immediately obtain
 \eq{
 	R_{ijkl} &= \p{}{x^k}\crsf{j}{l}{i} - \p{}{x^l}\crsf{j}{k}{i} + \crsf{i}{l}{p}\crss{p}{j}{k} - \crsf{i}{k}{p}\crss{p}{j}{l}\\
-	&= \frac{1}{2}\left(\pp{g_{il}}{x^j}{x^k} - \pp{g_{jl}}{x^j}{x^k} - \pp{g_{ik}}{x^j}{x^l} + \pp{g_{jk}}{x^i}{x^l}\right) + g^{pq}(\crsf{j}{k}{p}\crsf{i}{l}{q} - \crsf{j}{l}{p}\crsf{i}{k}{q})
+	&= \frac{1}{2}\left(\pp{g_{il}}{x^j}{x^k} - \pp{g_{jl}}{x^j}{x^k} - \pp{g_{ik}}{x^j}{x^l} + \pp{g_{jk}}{x^i}{x^l}\right)\\
+	&\quad + g^{pq}(\crsf{j}{k}{p}\crsf{i}{l}{q} - \crsf{j}{l}{p}\crsf{i}{k}{q})
 }
+\section*{Problem 7}
+If
+\eq{
+	F(x) &= \frac{(a + bx) + x(b + dx)}{(A + Bx) + x(B + Dx)}\\
+	F'(c) &= 0
+}
+We calculate
+\eq{
+	F'(c) &= \frac{((A + Bc) + c(B + Dc))(b + dc) - ((a + bc) + c(b + dc))(B + Dc)}{((A + Bc) + c(B + Dc))^2} = 0
+}
+Then we have
+\eq{
+	((A + Bc) + c(B + Dc))(b + dc) &= ((a + bc) + c(b + dc))(B + Dc)\\
+	\frac{b + dc}{B + Dc} &= \frac{(a + bc) + c(b + dc)}{(A + Bc) + c(B + Dc)} = F(c)
+}
+Now consider if for some $w$, $x$, $y$, and $z$,
+\eq{
+	\frac{w + x}{y + z} &= \frac{x}{z}\\
+	zw + zx &= xy + zx\\
+	zw &= xy\\
+	\frac{w}{y} &= \frac{x}{z}
+}
+Thus if we let
+\eq{
+	w &= a + bc\\
+	x &= b + dc\\
+	y &= A + Bc\\
+	z &= B + Dc
+}
+We have
+\eq{
+	F(c) = \frac{b + dc}{B + Dc} = \frac{a + bc}{A + Bc}
+}
+\section*{Problem 8}
+From pages 135-136 in the text, this reduces to showing that
+\eq{
+	G\lambda_1\lambda_2 - F(\lambda_1 + \lambda_2) + E = 0
+}
+Where
+\eq{
+	\lambda_1\lambda_2 &= \frac{Ef - Fe}{Fg - Gf}\\
+	\lambda_1 + \lambda_2 &= \frac{Eg - Ge}{Fg - Gf}
+}
+Substituting,
+\eq{
+	G\lambda_1\lambda_2 - F(\lambda_1 &+ \lambda_2) + E = \\
+	&\quad\; G\left(\frac{Ef - Fe}{Fg - Gf}\right) - F\left(\frac{Eg - Ge}{Fg - Gf}\right) + E\\
+	&= \frac{1}{Fg - Gf}\left(G(Ef - Fe) - F(Eg - Ge) + E(Fg - Gf)\right)\\
+	&= \frac{1}{Fg - Gf}\left(GEf - FGe - FEg + FGe + FEg - GEf\right)\\
+	&= 0
+}
+\section*{Problem 9}
+Starting from
+\eq{
+	\crsf{\alpha}{\beta}{\gamma} &= \frac{1}{2}\left(\p{a_{\alpha\gamma}}{u^\beta} + \p{a_{\beta\gamma}}{u^\alpha} - \p{a_{\alpha\beta}}{u^\gamma} \right)\\
+	\p{\alpha_{\alpha\beta}}{u^\gamma} &= \p{}{u^\gamma}\left(\p{\bm{r}}{u^\alpha}\cdot\p{\bm{r}}{u^\beta}\right)\\
+	&= \pp{\bm{r}}{u^\alpha}{u^\gamma}\cdot\p{\bm{r}}{u^\beta} + \pp{\bm{r}}{u^\beta}{u^\gamma}\cdot\p{\bm{r}}{u^\alpha}
+}
+We calculate
+\eq{
+	\crsf{\alpha}{\alpha}{\gamma} &= \p{a_{\alpha\gamma}}{u^\alpha} - \frac{1}{2}\p{a_{\alpha\alpha}}{u^\gamma}\\
+	&= \pp{\bm{r}}{u^\alpha}{u^\alpha}\cdot\p{\bm{r}}{u^\gamma} + \pp{\bm{r}}{u^\gamma}{u^\alpha}\cdot\p{\bm{r}}{u^\alpha} - \frac{1}{2}\left(2\pp{\bm{r}}{u^\alpha}{u^\gamma}\cdot\p{\bm{r}}{u^\alpha}\right)\\
+	&= \pp{\bm{r}}{u^\alpha}{u^\alpha}\cdot\p{\bm{r}}{u^\gamma}
+}
+And
+\eq{
+	\crsf{\alpha}{\beta}{\alpha} &= \frac{1}{2}\p{a_{\alpha\alpha}}{u^\beta}\\
+	&= \frac{1}{2}\left(\pp{\bm{r}}{u^\alpha}{u^\beta}\cdot\p{\bm{r}}{u^\alpha} + \pp{\bm{r}}{u^\alpha}{u^\beta}\cdot\p{\bm{r}}{u^\alpha} \right)\\
+	&= \pp{\bm{r}}{u^\alpha}{u^\beta}\cdot\p{\bm{r}}{u^\alpha}
+}
+Now notice that both of these satisify
+\eq{
+	\crsf{\alpha}{\beta}{\gamma} = \pp{\bm{r}}{u^\alpha}{u^\beta}\cdot\p{\bm{r}}{u^\gamma}
+}
+And that because $\crsf{\alpha}{\beta}{\gamma} = \crsf{\beta}{\alpha}{\gamma}$, every possible case for 2d is covered.
+\section*{Problem 10}
+Given that
+\eq{
+	x &= (a + b\cos u)\cos v\\
+	y &= (a + b\cos u)\sin v\\
+	z &= b\sin u
+}
+We calculate
+\eq{
+	\p{\bm{r}}{u} &= \left<-b\sin u \cos v, -b\sin u \sin v, b\cos u \right>\\
+	\p{\bm{r}}{v} &= \left<-(a + b\cos u)\sin v, (a + b\cos u)\cos v, 0 \right>\\
+	\pp{\bm{r}}{u}{v} &= \left<b\sin u\sin v, -b\sin u \cos v, 0 \right>\\
+	\pp{\bm{r}}{u}{u} &= \left<-b \cos u \cos v, - b\cos u\sin v, -b\sin u \right>\\
+	\pp{\bm{r}}{v}{v} &= \left<-(a + b\cos u)\cos v, -(a + b\cos u)\sin v, 0 \right>\\
+	g_{\alpha\beta} &= \mat{cc}{
+		b^2 & 0 \\
+		0 & (a + b\cos u)^2
+	}\\
+	g^{\alpha\beta} &= \mat{cc}{
+		\dfrac{1}{b^2} & 0 \\
+		0 & \dfrac{1}{(a + b\cos u)^2}
+	}
+}
+Now because the coordinates are orthogonal,
+\eq{
+	\crss{1}{\alpha}{\beta} &= a^{1\delta}\crsf{\alpha}{\beta}{\delta}\\
+	&= a^{1 1}\crsf{\alpha}{\beta}{1} + a^{1 2}\crsf{\alpha}{\beta}{2}\\
+	&= a^{1 1}\pp{\bm{r}}{u^\alpha}{u^\beta}\cdot\p{r}{u}\\
+	\crss{2}{\alpha}{\beta} &= a^{22}\pp{\bm{r}}{u^\alpha}{u^\beta}\cdot\p{r}{v}
+}
+Now, the geodesic differential equations are given by
+\eq{
+	\p{^2u}{t^2} + \crss{1}{1}{1}\p{u}{t}\p{u}{t} + 2\crss{1}{1}{2}\p{u}{t}\p{v}{t} + \crss{1}{2}{2}\p{v}{t}\p{v}{t} = 0\\
+	\p{^2v}{t^2} + \crss{2}{1}{1}\p{u}{t}\p{u}{t} + 2\crss{2}{1}{2}\p{u}{t}\p{v}{t} + \crss{2}{2}{2}\p{v}{t}\p{v}{t} = 0
+}
+Where
+\eq{
+	\crss{1}{1}{1} &= 0\\
+	\crss{1}{2}{2} &= \frac{\sin u}{b}(a + b\cos u)\\
+	\crss{2}{1}{1} &= 0\\
+	\crss{2}{1}{2} &= -b\sin u \frac{1}{a + b\cos u}\\
+	\crss{1}{1}{2} &= 0\\
+	\crss{2}{2}{2} &= 0
+}
+Thus it simplifies to
+\eq{
+	\p{^2u}{t^2} + \frac{\sin u}{b}(a + b\cos u)\p{v}{t}\p{v}{t} = 0\\
+	\p{^2v}{t^2} - \frac{2b\sin u}{a + b\cos u}\p{u}{t}\p{v}{t} = 0
+}
+
 \end{document}
