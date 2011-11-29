@@ -1,0 +1,74 @@
+\documentclass[12pt]{article}
+\usepackage{amssymb,amsmath}
+\usepackage{bm}
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\p}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\pp}[3]{\frac{\partial^2#1}{\partial#2\partial#3}}
+\newcommand{\de}[2]{\frac{d#1}{d#2}}
+\newcommand{\n}{\bm{\nabla}}
+\newcommand{\cross}{\times}
+\newcommand{\tc}[3]{#1\times(#2\times#3)}
+\newcommand{\mat}[2]{\left[\begin{tabular}{#1}#2\end{tabular}\right]}
+\newcommand{\dete}[2]{\left|\begin{tabular}{#1}#2\end{tabular}\right|}
+\newcommand{\co}[2]{\p{x^#1}{\bar{x}^#2}}
+\newcommand{\con}[2]{\p{\bar{x}^#1}{x^#2}}
+\newcommand{\coy}[2]{\p{y^#1}{\bar{x}^#2}}
+\newcommand{\cony}[2]{\p{y^#1}{x^#2}}
+\newcommand{\crsf}[3]{\left[#1\;#2,\;#3\right]}
+\newcommand{\crss}[3]{\left\{\begin{array}{c}#1\\#2\;#3\end{array}\right\}}
+\title{Homework 4}
+\author{Jeff Wendling}
+\date{October 20, 2011}
+\begin{document}
+\maketitle
+\section*{Problem 5}
+Starting from
+\eq{
+	R_{ijk}^m &= \p{}{x^j}\crss{m}{i}{k} - \p{}{x^k}\crss{m}{i}{j} + \crss{p}{i}{k}\crss{m}{p}{j} - \crss{p}{i}{j}\crss{m}{p}{k}
+}
+or, upon renaming the letters,
+\eq{
+	R_{jkl}^m &= \p{}{x^k}\crss{m}{j}{l} - \p{}{x^l}\crss{m}{j}{k} + \crss{p}{j}{l}\crss{m}{p}{k} - \crss{p}{j}{k}\crss{m}{p}{l}
+}
+and noting that
+\eq{
+	\p{}{x^k}g_{mi}\crss{m}{j}{l} &= g_{mi}\p{}{x^k}\crss{m}{j}{l} + \p{g_{mi}}{x^k}\crss{m}{j}{l}\\
+	\p{}{x^k}\crsf{j}{l}{i} - \p{g_{mi}}{x^k}\crss{m}{j}{l} &= g_{mi}\p{}{x^k}\crss{m}{j}{l}
+}
+and
+\eq{
+	\crsf{p}{k}{i} - \p{g_{pi}}{x^k} &= \frac{1}{2}\left(\p{g_{pi}}{x^k} + \p{g_{ki}}{x^p} - \p{g_{pk}}{x^i}\right) - \p{g_{pi}}{x^k}\\
+	&= -\frac{1}{2}\left(\p{g_{pi}}{x^k} + \p{g_{pk}}{x^i} - \p{g_{ki}}{x^p}\right)\\
+	&= -\crsf{k}{i}{p}
+}
+We calculate from the identity
+\eq{
+	R_{ijkl} = g_{mi} R_{jkl}^m &= \p{}{x^k}\crsf{j}{l}{i} - \p{}{x^l}\crsf{j}{k}{i} + \crss{p}{j}{l}\crsf{p}{k}{i} - \crss{p}{j}{k}\crsf{p}{l}{i}\\
+	&\quad - \p{g_{pi}}{x^k}\crss{p}{j}{l} + \p{g_{pi}}{x^l}\crss{p}{j}{k}\\
+	&= \p{}{x^k}\crsf{j}{l}{i} - \p{}{x^l}\crsf{j}{k}{i} + \crss{p}{j}{l}\left(\crsf{p}{k}{i} - \p{g_{pi}}{x^k}\right)\\
+	&\quad - \crss{p}{j}{k}\left(\crsf{p}{l}{i} - \p{g_{pi}}{x^l}\right) \\
+	&= \p{}{x^k}\crsf{j}{l}{i} - \p{}{x^l}\crsf{j}{k}{i} - \crss{p}{j}{l}\crsf{i}{k}{p} + \crss{p}{j}{k}\crsf{i}{l}{p}
+}
+
+\section*{Problem 6}
+Notice that because
+\eq{
+	\p{}{x^k}\crsf{j}{l}{i} &= \frac{1}{2}\left(\pp{g_{ji}}{x^l}{x^k} + \pp{g_{li}}{x^j}{x^k} - \pp{g_{jl}}{x^k}{x^i}\right)
+}
+we have
+\eq{
+	\p{}{x^k}\crsf{j}{l}{i} - \p{}{x^l}\crsf{j}{k}{i} &= \frac{1}{2}\left(\pp{g_{ji}}{x^l}{x^k} + \pp{g_{li}}{x^j}{x^k} - \pp{g_{jl}}{x^k}{x^i}\right)\\
+	&- \frac{1}{2}\left(\pp{g_{ji}}{x^k}{x^l} + \pp{g_{ki}}{x^j}{x^l} - \pp{g_{jk}}{x^i}{x^l}\right)\\
+	&= \frac{1}{2}\left(\pp{g_{il}}{x^j}{x^k} - \pp{g_{jl}}{x^k}{x^i} - \pp{g_{ik}}{x^j}{x^l} + \pp{g_{jk}}{x^i}{x^l}\right)
+}
+Also,
+\eq{
+	\crsf{i}{l}{q}\crss{q}{j}{k} - \crsf{i}{k}{q}\crss{q}{j}{l} &= \crsf{i}{l}{q}g^{pq}\crsf{j}{k}{p} - \crsf{i}{k}{q}g^{pq}\crsf{j}{l}{p}\\
+	&= g^{pq}(\crsf{i}{l}{q}\crsf{j}{k}{p} - \crsf{j}{l}{p}\crsf{i}{k}{q})
+}
+Using these two identities in the results from the previous problem, we immediately obtain
+\eq{
+	R_{ijkl} &= \p{}{x^k}\crsf{j}{l}{i} - \p{}{x^l}\crsf{j}{k}{i} + \crsf{i}{l}{p}\crss{p}{j}{k} - \crsf{i}{k}{p}\crss{p}{j}{l}\\
+	&= \frac{1}{2}\left(\pp{g_{il}}{x^j}{x^k} - \pp{g_{jl}}{x^j}{x^k} - \pp{g_{ik}}{x^j}{x^l} + \pp{g_{jk}}{x^i}{x^l}\right) + g^{pq}(\crsf{j}{k}{p}\crsf{i}{l}{q} - \crsf{j}{l}{p}\crsf{i}{k}{q})
+}
+\end{document}
