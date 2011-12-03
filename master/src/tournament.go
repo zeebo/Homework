@@ -18,6 +18,8 @@ func (t *Tournament) Place(home, away Team) bool {
 	//attempt to place the game Home plays vs Away
 	// home is [0, teams)
 	// away is [0, 2*teams)
+	//if there is no area to place it, break out!
+
 
 	return true
 }

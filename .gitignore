@@ -1,3 +1,7 @@
+*.lot
+*.lof
+*.lol
+*.toc
 *.pdf
 *.gz
 *.aux

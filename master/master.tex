@@ -1,0 +1,47 @@
+\title{Investigation into some numeric solutions to Volterra Integral equations of the first kind}
+\author{
+\textsc{Jeff Wendling}
+}
+\date{\today}
+\documentclass[11pt]{article}
+\usepackage{amsfonts,amsmath,amssymb,amsbsy}
+\usepackage{latexsym,bm}
+\usepackage{upgreek}
+\usepackage{graphics,graphicx}
+\usepackage{subfigure}
+\usepackage{subfigmat}
+\usepackage{psfrag}
+\usepackage{url}
+\usepackage[square,numbers,comma,sort&compress]{natbib}
+\usepackage{listings}
+\usepackage{lstlang0}
+\lstset{language=Go, numbers=left, showspaces=false}
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{example}[theorem]{Example}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+I present a simple numerical scheme for evaluation volterra integral
+equations of the first kind. I prove some simple results about
+convergence and verify the results numerically. These results are
+compared to a method by Lubich in cases where the domain is large.
+\end{abstract}
+\setcounter{tocdepth}{1}
+\tableofcontents
+\lstlistoflistings
+%\listoffigures
+%\listoftables
+\section{Examples}
+\lstset{caption=Basic Scheme}
+\lstinputlisting{/Users/zeebo/Code/volterra/conv/conv.go}
+\lstset{caption=Lubich Scheme}
+\lstinputlisting{/Users/zeebo/Code/volterra/lubich/lubich.go}
+\section{Results}
+some tables of results
+\end{document}
