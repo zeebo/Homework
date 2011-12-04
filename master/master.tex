@@ -1,6 +1,8 @@
-\title{Investigation into some numeric solutions to Volterra Integral equations of the first kind}
+\title{
+	\textsc{Investigation Into Some Numeric Solutions to Volterra Integral Equations of the First Kind}
+}
 \author{
-\textsc{Jeff Wendling}
+	\textsc{Jeff Wendling}
 }
 \date{\today}
 \documentclass[11pt]{article}
@@ -15,6 +17,10 @@
 \usepackage[square,numbers,comma,sort&compress]{natbib}
 \usepackage{listings}
 \usepackage{lstlang0}
+\usepackage{float}
+
+%dont reposition tables
+\restylefloat{table}
 \lstset{language=Go, numbers=left, showspaces=false}
 \numberwithin{equation}{section}
 \newtheorem{theorem}{Theorem}[section]
@@ -23,6 +29,22 @@
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{fact}[theorem]{Fact}
 \newtheorem{example}[theorem]{Example}
+
+%% some macros
+
+%macro for unnumbered aligned environments
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+
+%macro for numbered equations
+\newcommand{\eqn}[2]{
+	\begin{equation}
+		\label{#1}
+		#2
+	\end{equation}
+}
+
+%macro for referencing equations
+\newcommand{\eqr}[1]{Equation (\ref{#1})}
 
 \begin{document}
 \maketitle
@@ -36,12 +58,117 @@ compared to a method by Lubich in cases where the domain is large.
 \tableofcontents
 \lstlistoflistings
 %\listoffigures
-%\listoftables
-\section{Examples}
+\listoftables
+\section{Description of Method}
+We start with a convolution type equation
+\eqn{base_convolution}{
+	K \star x = f
+}
+and pick some upper time $T$ and discritize the interval $[0, T]$ with $N$
+equally spaced points, $t_0 = 0, ..., t_N = T$. We approximate the solution $x$
+as a linear combination of indicator functions $\chi_i$ where
+\eqn{indicator_defn}{
+	\chi_i(t)
+	=
+	\left\{
+	\begin{array}{ll}
+		1 &
+		t_{i} \leq t < t_{i+1} ,
+		\\
+		0 &
+		\text{otherwise}
+	\end{array}
+	\right.
+}
+giving
+\eqn{solution_approx}{
+	x(t) = \sum_{i=0}^{N-1} c_i \chi_i(t)
+}
+Substituting \eqr{solution_approx} into \eqr{base_convolution} and cosidering
+the value of the new convolution at time $t_n$, we find that
+\begin{align}
+\nonumber            	(K \star x)(t_n)
+                     		&= \int_0^{t_n} K(t_n - s)x(s)\; ds \\
+\nonumber            		&= \int_0^{t_n} K(t_n - s) \sum_{i=0}^{N-1} c_i \chi_i(s)\; ds \\
+\nonumber            		&= \int_0^{t_n} K(t_n - s) \sum_{i=0}^{n-1} c_i \chi_i(s)\; ds \\
+\label{scheme_before}		&= \sum_{i=0}^{n-1} c_i \int_{t_i}^{t_{i+1}} K(t_n - s)\; ds
+\end{align}
+Now notice that with a simple substitution $u = t_n - s$
+\eqn{kernel_substitution}{
+	\int_{t_i}^{t_{i+1}}K(t_n - s)\; ds = \int_{t_{n-i-1}}^{t_{n-i}} K(u) du
+}
+which leads to the definition
+\eqn{kernel_integral}{
+	K_i = \int_{t_i}^{t_{i+1}} K(s)\; ds
+}
+Using \eqr{kernel_substitution} and \eqr{kernel_integral} into \eqr{scheme_before}
+gives
+\begin{align}
+\nonumber     	\sum_{i=0}^{n-1} c_i \int_{t_i}^{t_{i+1}} K(t_n - s)\; ds
+              		&= \sum_{i=0}^{n-1} c_i \int_{t_{n-i-1}}^{t_{n-i}} K(u)\; du\\
+\label{scheme}		&= \sum_{i=0}^{n-1} c_i K_{n-i-1} = f(t_n)
+\end{align}
+\eqr{scheme} leads us to a numerical scheme for solving the convolution. It is
+an iterative scheme in that given the values $c_0, ..., c_{n-1}$ we can find
+the value $c_n$ by
+\eqn{specific_term}{
+	c_nK_0 = f(t_{n+1}) - \sum_{i=0}^{n-1} c_i K_{n-i}
+}
+\section{Proof of Convergence}
+\section{Sample Code}
 \lstset{caption=Basic Scheme}
 \lstinputlisting{conv/conv.go}
 \lstset{caption=Lubich Scheme}
 \lstinputlisting{lubich/lubich.go}
-\section{Results}
-some tables of results
+Please refer to table \ref{some_table} for some results.
+\section{Numerical Results}
+Some results are listed below.
+\begin{table}[H]
+	\caption{Error in $L^2$ vs stepsize}
+	\label{some_table}
+	\begin{center}
+	\begin{tabular}{|c|c|}
+	\hline
+	Stepsize & Error \\ \hline
+	.1 & $6e^{-7}$ \\ \hline
+	.01 & $6e^{-8}$ \\ \hline
+	.001 & $6e^{-9}$ \\ \hline
+	.0001 & $6e^{-10}$ \\
+	\hline
+	\end{tabular}
+	\end{center}
+\end{table}
+foo bar
+\begin{table}[H]
+	\caption{Error in $L^2$ vs stepsize}
+	\label{some_table_2}
+	\begin{center}
+	\begin{tabular}{|c|c|}
+	\hline
+	Stepsize & Error \\ \hline
+	.1 & $6e^{-7}$ \\ \hline
+	.01 & $6e^{-8}$ \\ \hline
+	.001 & $6e^{-9}$ \\ \hline
+	.0001 & $6e^{-10}$ \\
+	\hline
+	\end{tabular}
+	\end{center}
+\end{table}
+:()
+\begin{table}[H]
+	\caption{Error in $L^2$ vs stepsize}
+	\label{some_table_3}
+	\begin{center}
+	\begin{tabular}{|c|c|}
+	\hline
+	Stepsize & Error \\ \hline
+	.1 & $6e^{-7}$ \\ \hline
+	.01 & $6e^{-8}$ \\ \hline
+	.001 & $6e^{-9}$ \\ \hline
+	.0001 & $6e^{-10}$ \\
+	\hline
+	\end{tabular}
+	\end{center}
+\end{table}
+Always put a blank space after a table.
 \end{document}
