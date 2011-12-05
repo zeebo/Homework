@@ -80,12 +80,12 @@ as a linear combination of indicator functions $\chi_i$ where
 }
 giving
 \eqn{solution_approx}{
-	x(t) = \sum_{i=0}^{N-1} c_i \chi_i(t)
+	x_N(t) = \sum_{i=0}^{N-1} c_i \chi_i(t)
 }
 Substituting \eqr{solution_approx} into \eqr{base_convolution} and cosidering
 the value of the new convolution at time $t_n$, we find that
 \begin{align}
-\nonumber            	(K \star x)(t_n)
+\nonumber            	(K \star x_N)(t_n)
                      		&= \int_0^{t_n} K(t_n - s)x(s)\; ds \\
 \nonumber            		&= \int_0^{t_n} K(t_n - s) \sum_{i=0}^{N-1} c_i \chi_i(s)\; ds \\
 \nonumber            		&= \int_0^{t_n} K(t_n - s) \sum_{i=0}^{n-1} c_i \chi_i(s)\; ds \\
@@ -104,8 +104,13 @@ gives
 \begin{align}
 \nonumber     	\sum_{i=0}^{n-1} c_i \int_{t_i}^{t_{i+1}} K(t_n - s)\; ds
               		&= \sum_{i=0}^{n-1} c_i \int_{t_{n-i-1}}^{t_{n-i}} K(u)\; du\\
-\label{scheme}		&= \sum_{i=0}^{n-1} c_i K_{n-i-1} = f(t_n)
+\label{scheme}		&= \sum_{i=0}^{n-1} c_i K_{n-i-1} = f_N(t_n)
 \end{align}
+where we define $f_N$ to agree with $f$ at every point $t_i$ for $i \in 1, ..., N$.
+The inner points depend on the kernel $K$ so that we have the relation
+\eqn{approx_relation}{
+	K \star x_N = f_N
+}
 \eqr{scheme} leads us to a numerical scheme for solving the convolution. It is
 an iterative scheme in that given the values $c_0, ..., c_{n-1}$ we can find
 the value $c_n$ by
@@ -131,7 +136,7 @@ The proof is given by Theorem 1.3 in \cite{stein71}
 This is a special case of the Titchmarsh convolution theorem given in \cite{titchmarsh}
 \end{proof}
 
-
+With those under our belt, we now discuss convergence. From 
 \section{Sample Code}
 \lstset{caption=Basic Scheme}
 \lstinputlisting{conv/conv.go}
