@@ -104,11 +104,17 @@ we obtain
   + v' \fp{u'}{y'}
   &=
   - \fp{p'}{x'}
-  + \frac{\nu}{U_0 L} \fpp{u'}{(x')}
-  + \frac{\nu R}{U_0 L} \fpp{u'}{(y')}
+  + \underbrace{
+    \frac{\nu}{U_0 L}
+  }_{=R^{-1}}
+  \fpp{u'}{(x')}
+  + \underbrace{
+    \frac{\nu R}{U_0 L}
+  }_{=1}
+  \fpp{u'}{(y')}
   \bigg)
 }
-But because $R^{-1} = \frac{\nu}{U_0 L}$, we have that as $R \rightarrow \infty$
+Now we have that as $R \rightarrow \infty$
 $$
   u' \fp{u'}{x'}
   + v' \fp{u'}{y'}
@@ -168,7 +174,7 @@ $$
   \qquad
   \text{where} \; \eta = y / g(x)
 $$
-and deduce that g(x) must be a constant. By choosing that constant as
+and deduce that $g(x)$ must be a constant. By choosing that constant as
 $(\nu/\alpha)^{\frac{1}{2}}$ show that the problem can be reduced to
 $$
   f''' + ff'' + 1 - f'^2 = 0
@@ -213,7 +219,7 @@ yielding the equation
   \alpha^2 x g^2
   + \nu \alpha x f'''
 \end{align}
-which we notice that the only way for this to become and ODE in $f$ is if
+which we notice that the only way for this to become an ODE in $f$ is if
 $g' = 0$ so that the second term drops out. Thus, $g$ is a constant. This reduces
 \eqr{similarity} to
 \eqn{similarity_reduce}{
@@ -279,11 +285,11 @@ $$
 where a prime denotes differentiation with respect to the appropriate single 
 variable in each case. Deduce that a similarity solution is only possible if
 $$
-  \text{\emph{either}}
+  \mbox{either}
   \qquad
   U(x) \propto (x - x_0)^m
   \qquad
-  \text{\emph{or}}
+  \mbox{or}
   \qquad
   U(x) \propto e^{\alpha x}
 $$
@@ -295,7 +301,7 @@ $$
   \qquad
   A > 0,
 $$
-show that g(x) is proportional to $x^{\frac{1}{2}(1-m)}$, and show that choosing
+show that $g(x)$ is proportional to $x^{\frac{1}{2}(1-m)}$, and show that choosing
 $$
   g(x)
   =
@@ -459,7 +465,7 @@ To this end, we calculate
   \nonumber
   g^2 U'
   &=
-  \frac{mAx^{m-1} 2\nu}{m+1 A x^{m-1}}
+  \frac{mAx^{m-1} 2\nu}{(m+1) A x^{m-1}}
   \\
 %
 %
@@ -517,7 +523,7 @@ $$
   + f'''
 $$
 \eqn{result}{
-  ff'' 
+  f''' 
   + \frac{2m}{1 + m}
   \bigg(1 - f'^2 \bigg)
   + ff''
