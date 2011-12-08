@@ -1,0 +1,544 @@
+\title{}
+\author{
+  \textsc{Jeff Wendling}
+}
+\date{\today}
+\documentclass[11pt]{article}
+\usepackage{amsfonts,amsmath,amssymb,amsbsy,amsthm}
+\usepackage{latexsym,bm}
+\usepackage{upgreek}
+\usepackage{graphics,graphicx}
+\usepackage{subfigure}
+\usepackage{subfigmat}
+\usepackage{psfrag}
+\usepackage{url}
+\usepackage[square,numbers,comma,sort&compress]{natbib}
+\usepackage{float}
+
+%macro for unnumbered aligned environments
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+
+%macro for numbered equations
+\newcommand{\eqn}[2]{
+  \begin{equation}
+    \label{#1}
+    #2
+  \end{equation}
+}
+
+%macro for referencing equations
+\newcommand{\eqr}[1]{eqn~(\ref{#1})}
+
+%macro for frac partials
+\newcommand{\fp}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\fpp}[2]{\frac{\partial^2 #1}{\partial#2^2}}
+
+%macro for inline partials
+\newcommand{\p}[1]{\partial_{#1}}
+
+\begin{document}
+\begin{center}
+{\large\bf 
+Jeff Wendling\\
+\today\\
+Math 528: Elementary Fluid Dynamics I\\
+Homework \#5
+}
+\end{center}
+\begin{description}
+\item[8.1] Rewrite the exact 2-D equations of motion in terms of the non-dimensional
+and scaled variables
+$$
+  x' = \frac{x}{L},
+  \qquad
+  y' = \frac{y}{R^{-\frac{1}{2}}L},
+  \qquad
+  u' = \frac{u}{U_0},
+  \qquad
+  v' = \frac{v}{R^{-\frac{1}{2}}L},
+  \qquad
+  p' = \frac{p}{\rho U_0^2},
+$$
+where $R = U_0L/\nu$. By taking the limit $R \rightarrow \infty$
+\emph{with fixed $u'$, $\partial u' / \partial x'$}, etc., derive the boundary
+layer equations in their non-dimensional and scaled form:
+$$
+  u' \fp{u'}{x'} + v'\fp{u'}{y'} = -\fp{p'}{x'} + \fpp{u'}{y'},
+$$
+$$
+  0 = -\fp{p'}{y'},
+  \qquad
+  \fp{u'}{x'} + \fp{v'}{y'} = 0.
+$$
+\item[Solution] We begin by calculating
+\begin{align}
+\label{relations}
+\nonumber  \fp{u'}{x'} &= \frac{L}{U_0} \fp{u}{x} &
+           \fp{v'}{x'} &= \frac{L\sqrt{R}}{U_0} \fp{v}{x} \\
+\nonumber  \fp{u'}{y'} &= \frac{L}{\sqrt{R}U_0} \fp{u}{y} &
+           \fp{v'}{y'} &= \frac{L}{U_0} \fp{v}{y} \\
+\nonumber  \fp{p'}{x'} &= \frac{L}{\rho U_0^2} \fp{p}{x} &
+           \fp{p'}{y'} &= \frac{L}{\rho U_0^2 \sqrt{R}} \fp{p}{y} \\
+\nonumber  \fpp{u'}{(x')} &= \frac{L^2}{U_0} \fpp{u}{x} &
+           \fpp{v'}{(x')} &= \frac{L^2\sqrt{R}}{U_0} \fpp{v}{x} \\
+           \fpp{u'}{(y')} &= \frac{L^2}{RU_0} \fpp{u}{y} &
+           \fpp{v'}{(y')} &= \frac{L^2}{\sqrt{R}U_0} \fpp{v}{y}
+\end{align}
+Substituting \eqr{relations} into the first part of the equations of motion,
+$$
+  u \fp{u}{x} + v \fp{u}{y} = -\frac{1}{\rho} \fp{p}{x} + \nu \fpp{u}{x} + \nu \fpp{u}{y}
+$$
+we obtain
+\eq{
+  u' \frac{U_0^2}{L} \fp{u'}{x'}
+  + v' \frac{U_0^2}{L} \fp{u'}{y'}
+  &= 
+  -\frac{U_0^2}{L} \fp{p'}{x'}
+  + \frac{\nu U_0}{L^2} \fpp{u'}{(x')}
+  + \frac{\nu U_0 R}{L^2} \fpp{u'}{(y')}
+  \\
+%
+%
+  \frac{U_0^2}{L}\bigg(
+  u' \fp{u'}{x'}
+  + v' \fp{u'}{y'}
+  &=
+  - \fp{p'}{x'}
+  + \frac{\nu}{U_0 L} \fpp{u'}{(x')}
+  + \frac{\nu R}{U_0 L} \fpp{u'}{(y')}
+  \bigg)
+}
+But because $R^{-1} = \frac{\nu}{U_0 L}$, we have that as $R \rightarrow \infty$
+$$
+  u' \fp{u'}{x'}
+  + v' \fp{u'}{y'}
+  =
+  - \fp{p'}{x'}
+  + \fpp{u'}{(y')}
+$$
+Substitutiong \eqr{relations} into the second part of the equations of motion,
+$$
+  u \fp{v}{x} + v \fp{v}{y} = -\frac{1}{\rho} \fp{p}{y} + \nu \fpp{v}{x} + \nu \fpp{v}{y}
+$$
+we obtain
+\eq{
+  u' \frac{U_0^2}{L\sqrt{R}} \fp{v'}{x'}
+  + v' \frac{U_0^2}{L\sqrt{R}} \fp{v'}{y'}
+  &=
+  -\frac{U_0^2 \sqrt{R}}{L} \fp{p'}{y'}
+  + \frac{\nu U_0}{L^2 \sqrt{R}} \fpp{v'}{(x')}
+  + \frac{\nu U_0 \sqrt{R}}{L^2} \fpp{v'}{(y')}
+  \\
+%
+%
+  \frac{\sqrt{R}U_0^2}{L}\bigg(
+  u' \frac{1}{R} \fp{v'}{x'}
+  + v' \frac{1}{R} \fp{v'}{y'}
+  &=
+  -\fp{p'}{y'}
+  + \frac{1}{R^2} \fpp{v'}{(x')}
+  + \frac{1}{R} \fpp{v'}{(y')}
+  \bigg)
+}
+which as $R \rightarrow \infty$ yields
+$$
+  0
+  =
+  - \fp{p'}{y'}
+$$
+Substituting \eqr{relations} into the third part of the equations of motion,
+$$
+  \fp{u}{x} + \fp{v}{y} = 0
+$$
+we obtain,
+\eq{
+    \frac{U_0}{L} \fp{u'}{x'} &+ \frac{U_0}{L} \fp{v'}{y'} = 0\\
+    \fp{u'}{x'} &+ \fp{v'}{y'} = 0
+}
+%
+\hfill $\blacksquare$
+\item[8.2] Consider the boundary layer near the forward stagnation point on some
+2-D body, such as a circular cylinder (see Fig.~8.14). The mainstream flow at the
+edge of the boundary layer is $U(x) = \alpha x$, where $x$ denotes the distance
+along the boundary measured from the stagnation point and $\alpha$ is a postive
+constant (see eqn (4.23)). Seek a similarity solution of the boundary layer
+equations in which
+$$
+  u(x, y) = \alpha x f'(\eta),
+  \qquad
+  \text{where} \; \eta = y / g(x)
+$$
+and deduce that g(x) must be a constant. By choosing that constant as
+$(\nu/\alpha)^{\frac{1}{2}}$ show that the problem can be reduced to
+$$
+  f''' + ff'' + 1 - f'^2 = 0
+$$
+subject to
+$$
+  f(0) = f'(0) = 0,
+  \qquad
+  f'(\infty) = 1.
+$$
+\item[Solution]
+Given that $u(x,y) = \alpha x f'(\eta)$ with $\eta = y/g(x)$, and $U = \alpha x$,
+we calculate
+\begin{align}
+\label{relations82}
+\nonumber  \p{x}u &= \alpha f'(\eta) - \alpha xf''(\eta)y g^{-2}(x)g'(x) \\
+\nonumber  \p{y}u &= \alpha x f''(\eta) g^{-1}(x) \\
+           \fpp{u}{y} &= \alpha x f'''(\eta) g^{-2}(x)
+\end{align}
+Substituting the relations in \eqr{relations82} into the equations of motion
+on the boundary,
+$$
+  u \fp{u}{x} + v\fp{u}{y} = UU' + \nu\fpp{u}{y}
+$$
+yielding the equation
+\begin{align}
+\label{similarity}
+\nonumber
+  \alpha x f'
+  \left(\alpha f' - \alpha x f''yg^{-2}g'\right)
+  + v\left(\alpha x f'' g^{-1} \right)
+  &=
+  \alpha^2 x
+  + \nu \left(\alpha x f''' g^{-2} \right)
+  \\
+%
+%
+  \alpha^2 x g^2 f'^2
+  - \alpha^2 x^2 f'f''yg'
+  + vg \alpha x f''
+  &=
+  \alpha^2 x g^2
+  + \nu \alpha x f'''
+\end{align}
+which we notice that the only way for this to become and ODE in $f$ is if
+$g' = 0$ so that the second term drops out. Thus, $g$ is a constant. This reduces
+\eqr{similarity} to
+\eqn{similarity_reduce}{
+  \alpha g^2 f'^2
+  + vg f''
+  =
+  \alpha g^2
+  + \nu f'''
+}
+We choose $g = \sqrt{\dfrac{\nu}{\alpha}}$. Because $g$ is a constant, we can
+write
+$$
+  \p{y}v = -\p{x}u = -\alpha f'(\eta)
+$$
+so
+\eqn{v_solution}{
+  v = -\sqrt{\nu\alpha}f + k(x)
+}
+Plugging \eqr{v_solution} and our choice for $g$ into \eqr{similarity_reduce} yields
+\eqn{almost_soln}{
+  \nu f'^2
+  - \nu f f''
+  + k gf''
+  =
+  \nu
+  + \nu f'''
+}
+Choosing our constant of integration $k(x) = 0$ and dividing through by $\nu$
+in \eqr{almost_soln} gives the ode
+$$
+  f''' + ff'' + 1 - f'^2 = 0
+$$
+We apply the no slip conditions,
+$$
+  f(0) = f'(0) = 0
+$$
+which means that $u(x, 0) = 0$ where $y$ is the normal distance from the boundary.
+We also require the matching condition
+$$
+  f'(\infty) = 1
+$$
+which makes $u = U$ outside the boundary layer.
+%
+\hfill $\blacksquare$
+\item[8.3] Consider a general similarity solution
+$$
+  \psi = F(x)f(\eta),
+  \qquad
+  \eta = y / g(x)
+$$
+to the boundary layer equations (8.1) and (8.2), where $\psi$ denotes the stream
+function. Show that the mainstream condition (8.9) demands that
+$F(x) = cU(x)g(x)$, where $c$ is a constant, and then, for convenience, choose
+$c$ to be 1. Show that substitution in the boundary layer equations leads to
+$$
+  f'^2
+  - \left(1 + \frac{U}{U'}\frac{g'}{g}\right)ff''
+  =
+  1 
+  + \frac{\nu f'''}{g^2 U'}
+  ,
+$$
+where a prime denotes differentiation with respect to the appropriate single 
+variable in each case. Deduce that a similarity solution is only possible if
+$$
+  \text{\emph{either}}
+  \qquad
+  U(x) \propto (x - x_0)^m
+  \qquad
+  \text{\emph{or}}
+  \qquad
+  U(x) \propto e^{\alpha x}
+$$
+where $x_0$, $m$, and $\alpha$ are constants.
+
+In the case
+$$
+  U(x) = Ax^m,
+  \qquad
+  A > 0,
+$$
+show that g(x) is proportional to $x^{\frac{1}{2}(1-m)}$, and show that choosing
+$$
+  g(x)
+  =
+  \bigg[
+  \frac{2\nu}{(m+1)Ax^{m-1}}
+  \bigg]^{\frac{1}{2}}
+$$
+leads to
+$$
+  f''' + ff'' + \frac{2m}{m+1}(1-f'^2) = 0,
+$$
+subject to
+$$
+  f(0) = f'(0) = 0,
+  \qquad
+  f'(\infty) = 1.
+$$
+Verify that flow past a plate (\S 8.3) and flow near a foward stagnation point
+(Exercise 8.2) are special cases of these \emph{Falker-Skan equations}.
+\item[Solution]
+We have from the stream function
+$$
+  u = \fp{\psi}{y} = \frac{F f'}{g}
+$$
+If we have $\eta \rightarrow \infty$, and call $f'(\infty) = \frac{1}{c}$, then
+for the mainstream condition to hold we must have
+$$
+  U = \frac{F\frac{1}{c}}{g}
+  \implies
+  F = cgU
+$$
+To substitute into the boundary layer equations, we begin by calculating
+\eq{
+  u &= \frac{1}{g}\left( Ff' \right) \\
+  v &= \frac{1}{g^2}\left(Ff'g'y - g^2F'f \right) \\
+  \p{x}u &= \frac{1}{g^3}\left( g^2F'f' - yg'Ff'' - Ff'g'g \right) \\
+  \p{y}u &= \frac{1}{g^2}\left( F f'' \right) \\
+  \p{yy}u &= \frac{1}{g^3}\left( F f''' \right) \\
+}
+Now we substitute into the boundary layer equations,
+$$
+  u \fp{u}{x} + v\fp{u}{y} = UU' + \nu\fpp{u}{y}
+$$
+and obtain
+\eq{
+  \frac{FF'f'^2}{g}
+  - \underbrace{
+  \frac{yg'F^2f'f''}{g^3}
+  + \frac{F^2f'g'yf''}{g^3}
+  }_{=0}
+  - \frac{F^2f'^2 g'}{g^2}
+  - \frac{F'Fff''}{g}
+  &=
+  FU'
+  + \frac{\nu Ff'''}{g^2}
+  \\
+%
+%
+  F\bigg(
+  \frac{F'f'^2}{g}
+  - \frac{Ff'^2 g'}{g^2}
+  - \frac{F'ff''}{g}
+  &=
+  U'
+  + \frac{\nu f'''}{g^2}
+  \bigg)
+  \\
+%
+%
+  \frac{U'gf'^2}{g}
+  + \underbrace{
+  \frac{g'Uf'^2}{g}
+  - \frac{Ugf'^2 g'}{g^2}
+  }_{=0}
+  - \frac{U'gff''}{g}
+  - \frac{g'Uff''}{g}
+  &=
+  U'
+  + \frac{\nu f'''}{g^2}
+  \\
+%
+%
+  U'\bigg(
+  f'^2
+  - \big(
+  1
+  + \frac{U}{U'}\frac{g'}{g}
+  \big) ff''
+  &=
+  1
+  + \frac{\nu f'''}{g^2U'}
+  \bigg)
+%
+%
+}
+Thus,
+\eqn{main_equation}{
+  f'^2
+  - \bigg(
+  1
+  + \frac{U}{U'}\frac{g'}{g}
+  \bigg) ff''
+  =
+  1
+  + \frac{\nu f'''}{g^2U'}
+}
+
+The only way \eqr{main_equation} can be an ODE in $f$ is if we have the conditions
+$$
+  \frac{U}{U'}\frac{g'}{g} = c,
+  \qquad
+  g^2 U' = d
+$$
+The first relation leads to
+\begin{align}
+\nonumber  \frac{U}{U'}\frac{g'}{g} &= c_1 \\
+\nonumber  \frac{U'}{U} &= e \frac{g'}{g} \\
+\nonumber  \ln U &= e\ln g + f \\
+\label{u_relation}  U &= f g^e \\
+\label{up_relation}  U' &= h g^{e-1} g'
+\end{align}
+Substituting \eqr{up_relation} into the second condition gives
+\begin{align}
+\nonumber  g^2 h g^{e-1} g' &= d \\
+\label{g_soln} g^{e+1} g' &= i
+\end{align}
+Now, \eqr{g_soln} has two solutions depending on the constant $e+1$ given by,
+\begin{align}
+\label{g_soln_1} g &\propto (x - x_0)^m & e+1 \neq -1 \\
+\label{g_soln_2} g &\propto e^{\alpha x} & e+1 = -1
+\end{align}
+Using \eqr{u_relation} we can see that either (abusing some notation with the consants)
+$$
+  U \propto (x - x_0)^m
+  \qquad
+  \text{\emph{or}}
+  \qquad
+  U \propto e^{\alpha x}
+$$
+If we assume that
+\eqn{u_assump}{
+  U = Ax^m
+}
+then we can easily see using $g^2 U' = d$ that
+\begin{align}
+\nonumber g^2 &\propto \frac{1}{U'} \\
+\nonumber &\propto x^{1-m} \\
+\label{g_propto} g &\propto x^{\frac{1}{2}(1-m)}
+\end{align}
+We choose
+\eqn{g_assump}{
+  g
+  = 
+  \bigg[
+  \frac{2\nu}{(m+1)Ax^{m-1}}
+  \bigg]^\frac{1}{2}
+}
+and attempt to substitute \eqr{u_assump} and \eqr{g_assump} into \eqr{main_equation}.
+To this end, we calculate
+\begin{align}
+  \nonumber
+  g^2 U'
+  &=
+  \frac{mAx^{m-1} 2\nu}{m+1 A x^{m-1}}
+  \\
+%
+%
+  \label{second_term}
+  &=
+  \frac{2m}{m+1}\nu
+\end{align}
+and
+\begin{align}
+  \nonumber
+  1 + \frac{U}{U'}\frac{g'}{g} 
+  &=
+  1
+  + \frac{Ax^m}{mAx^{m-1}}
+  (-\frac{1}{2})
+  \bigg[
+  \frac{2\nu}{(m+1)Ax^{m-1}}
+  \bigg]^{-1}
+  \frac{2\nu(1-m)}{(m+1)A x^m}
+  \\
+%
+%
+  \nonumber
+  &=
+  1
+  + \frac{x}{m}
+  (-\frac{1}{2})
+  \frac{(1-m)}{x}
+  \\
+%
+%
+  \label{first_term}
+  &=
+  1
+  + \frac{m - 1}{2m}
+  =
+  \frac{m + 1}{2m}
+\end{align}
+We plug \eqr{second_term} and \eqr{first_term} into \eqr{main_equation} and
+obtain
+$$
+  f'^2
+  - \bigg(
+  \frac{m + 1}{2m}
+  \bigg) ff''
+  =
+  1
+  + \frac{m + 1}{2m} f'''
+$$
+$$
+  \bigg(\frac{2m}{m+1}\bigg) f'^2
+  - ff''
+  =
+  \frac{2m}{m+1}
+  + f'''
+$$
+\eqn{result}{
+  ff'' 
+  + \frac{2m}{1 + m}
+  \bigg(1 - f'^2 \bigg)
+  + ff''
+  =
+  0
+}
+We have the no-slip condition on the edge of the surface,
+$$
+  f(0) = f'(0) = 0
+$$
+where $x$ denotes the distance along the surface from the stagnation point, and
+$y$ denotes the distance from the surface in the normal direction. We
+also have the matching condition
+$$
+  f'(\infty) = 1
+$$
+to ensure $u = U$ outside the boundary layer.
+
+If we choose $m = 1$ in \eqr{result}, we obtain the equation derived in the
+previous problem for flow past a cylinder. If we choose $m = 0$ we obtain the
+equation for flow past a plate in \S 8.3.
+\hfill $\blacksquare$
+\end{description}
+\end{document}
