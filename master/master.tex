@@ -145,7 +145,14 @@ We begin with a theorem about the magnitude of the derivative of $f_N$.
 
 \begin{theorem}
   \label{f_nderiv}
-  If for some $K$, $|K'(s)| < C$ for all $s \in [0, T]$, there exists some $D$ such that $|f_N'(s)| < D$ for all $s \in [0, T)$.
+  If the kernel $K$ satisfies $|K(0)| < \infty$, $|K'(s)| < \infty$ for all $s \in [0, T]$,
+  then 
+$$
+  |f_N'(s)|
+  <
+  \infty
+$$
+  for all $s \in [0, T)$.
 \end{theorem}
 \begin{proof}
 Let $i$ be an index such that $|c_i| \geq |c_j|$ for all $j \in 0, ..., N-1$. Thus $|x_N| \leq |c_i|$.
@@ -191,7 +198,8 @@ Consider for some $x \in [0, T)$ and some $\epsilon > 0$,
 %
 %
   \nonumber
-  \frac{|f_N(x+\epsilon) - f_N(x)|}{\epsilon}
+  \frac{1}{\epsilon}
+  |f_N(x+\epsilon) - f_N(x)|
   &\leq
   TC|c_i| + 
   |c_i|
