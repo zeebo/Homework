@@ -13,19 +13,19 @@
 \newcommand{\con}[2]{\p{\bar{x}^#1}{x^#2}}
 \newcommand{\coy}[2]{\p{y^#1}{\bar{x}^#2}}
 \newcommand{\cony}[2]{\p{y^#1}{x^#2}}
-\title{Homework 2}
+\title{Homework 3}
 \author{Jeff Wendling}
 \date{October 20, 2011}
 \begin{document}
 \maketitle
 \section*{Problem 1}
 \eq{
-	g^{ij} &= \p{x^i}{y^n}{x^j}{y^n}\\
-	g_{ij} &= \p{y^m}{x_i}{y^m}{x_j}\\
+	g^{ij} &= \p{x^i}{y^n}\p{x^j}{y^n}\\
+	g_{ij} &= \p{y^m}{x_i}\p{y^m}{x_j}\\
 }
 Thus
 \eq{
-	g^{ij}g_{jk} &= \p{x^i}{y^n}{x^j}{y^n}\p{y^m}{x_j}{y^m}{x_k}\\
+	g^{ij}g_{jk} &= \p{x^i}{y^n}\p{x^j}{y^n}\p{y^m}{x_j}\p{y^m}{x_k}\\
 	&= \p{x^i}{y^n}\delta_n^m\p{y^m}{x_k}\\
 	&= \p{x^i}{y_m}\p{y^m}{x_k}\\
 	&= \delta_k^i

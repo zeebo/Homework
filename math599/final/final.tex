@@ -1,0 +1,264 @@
+\title{}
+\author{
+  \textsc{Jeff Wendling}
+}
+\date{\today}
+\documentclass[11pt]{article}
+\usepackage{amsfonts,amsmath,amssymb,amsbsy,amsthm}
+\usepackage{latexsym,bm}
+\usepackage{upgreek}
+\usepackage{graphics,graphicx}
+\usepackage{subfigure}
+\usepackage{subfigmat}
+\usepackage{psfrag}
+\usepackage{url}
+\usepackage[square,numbers,comma,sort&compress]{natbib}
+\usepackage{float}
+
+%macro for unnumbered aligned environments
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+
+%macro for numbered equations
+\newcommand{\eqn}[2]{
+  \begin{equation}
+    \label{#1}
+    #2
+  \end{equation}
+}
+
+%macro for referencing equations
+\newcommand{\eqr}[1]{eqn~(\ref{#1})}
+
+%macro for frac partials
+\newcommand{\fp}[2]{\frac{\partial#1}{\partial#2}}
+\newcommand{\fpp}[2]{\frac{\partial^2 #1}{\partial#2^2}}
+\newcommand{\de}[2]{\frac{d #1}{d #2}}
+\newcommand{\td}[2]{\frac{D #1}{D #2}}
+
+%macro for inline partials
+\newcommand{\p}[1]{\partial_{#1}}
+\newcommand{\pp}[1]{\partial^2_{#1}}
+\newcommand{\eps}{\epsilon}
+
+\newcommand{\nab}[0]{\bm{\nabla}}
+
+\begin{document}
+\begin{center}
+{\large\bf 
+Jeff Wendling\\
+\today\\
+Math 528: Elementary Fluid Dynamics I\\
+Final
+}
+\end{center}
+\begin{description}
+\item[Problem 1] We calculate
+\eq{
+  (\bm{u}^* \cdot \nab)\bm{u}^*
+  &=
+  \sqrt{\frac{\rho}{\rho_0}}
+  (\bm{u} \cdot \nab)\bm{u}^*
+  \\
+%
+%
+  &=
+  \sqrt{\frac{\rho}{\rho_0}}
+  \big(
+  (\bm{u} \cdot \nab)
+  (\sqrt{\frac{\rho}{\rho_0}} \bm{u})
+  \big)
+  \\
+%
+%
+  &=
+  \sqrt{\frac{\rho}{\rho_0}}
+  \bigg(
+  \big(
+    (\bm{u} \cdot \nab) u
+    \sqrt{\frac{\rho}{\rho_0}}
+  \big)
+  +
+  \underbrace{
+  \frac{1}{\sqrt{\rho_0}}
+  u
+  \big(
+    \bm{u} \cdot \nab
+  \big)
+  ( \sqrt{\rho} )
+  }_{=0 \mbox{ (cons of mass)}}
+  \bigg)
+  \\
+%
+%
+  &=
+  \frac{\rho}{\rho_0}
+  (-\frac{1}{\rho} \nab p)
+  \\
+  &=
+  -\frac{1}{\rho_0} \nab p
+}
+\hfill $\blacksquare$
+\item[Problem 2]
+We solve
+$$
+  \de{x}{s}(1 + t) = \de{y}{s}
+$$
+at time $t = 0$, to obtain
+$$
+  y = x + c
+$$
+where $c = 0$ because the point $(1, 1)$ is on the line.
+
+To find the trajectory, we solve
+\eq{
+  \de{x}{t} &= \frac{1}{1+t}
+  &\implies
+  x &= ln(1 + t) + F_1(\bm{x})
+  \\
+  \de{y}{t} &= 1
+  &\implies
+  y &= t + F_2(\bm{x})
+}
+Becuase the point $(1, 1)$ is on the curve we can solve it to find
+$$
+  y = e^{x-1}
+$$
+\hfill $\blacksquare$
+\item[Problem 3]
+We start by calculating from the given identity
+\eq{
+  \rho h
+  &=
+  \rho e + p
+  \\
+%
+%
+  \rho \td{h}{t}
+  + 
+  \underbrace{h}_{= e + \frac{p}{\rho}}
+  \td{\rho}{t}
+  &= 
+  \underbrace{
+    \rho \td{e}{t}
+  }_{= - p(\nab \cdot \bm{u})}
+  + e \td{\rho}{t}
+  + \td{p}{t}
+  \\
+%
+%
+  \rho \td{h}{t}
+  + e \td{\rho}{t}
+  + \frac{p}{\rho} \td{\rho}{t}
+  &=
+  -p(\nab \cdot \bm{u})
+  + e\td{\rho}{t}
+  + \td{p}{t}
+}
+Conservation of mass tells us $\td{\rho}{t} = -\rho(\nab \cdot \bm{u})$, thus
+after canceling we're left with the result.
+$$
+  \rho \td{h}{t} = \td{\rho}{t}
+$$
+\hfill $\blacksquare$
+\item[Problem 4]
+We use the trig identity
+$$
+  \sin(2a) + \sin(2b) = 2\cos(a-b)\sin(a+b)
+$$
+with
+  $a = \frac{\pi}{\lambda_1}(x - c_1 t)$
+and
+  $b = \frac{\pi}{\lambda_2}(x - c_2 t)$
+to get the result.
+
+Now, if $\eps = \lambda_2 - \lambda_1$, then we have to a first order approxmation,
+\eq{
+  \frac{1}{\lambda_1} - \frac{1}{\lambda_2}
+  &=
+  \frac{1}{\lambda_1} - \frac{1}{\lambda_1 + \eps}
+  \\
+  &=
+  \frac{1}{\lambda_1}
+  -
+  \frac{1}{\lambda_1}\bigg(
+    \frac{1}{1 + \frac{\eps}{\lambda_1}}
+  \bigg)
+  \\
+  &\approx
+  \frac{1}{\lambda_1}\bigg(
+  1 - (1 + \frac{\eps}{\lambda_1})
+  \bigg)
+  \\
+  &\approx
+  \frac{\eps}{\lambda_1^2}
+}
+And for $c_2 - c_1 = \delta$, we have
+\eq{
+  \frac{c_1}{\lambda_1} - \frac{c_2}{\lambda_2}
+  &=
+  \frac{c_1}{\lambda_1} + \frac{c_1 + \delta}{\lambda_1 + \eps}
+  \\
+  &=
+  \frac{c_1}{\lambda_1}
+  - \frac{c_1}{\lambda_1 + \eps}
+  - \frac{\delta}{\lambda_1 + \eps}
+  \\
+  &\approx
+  c_1(\frac{\eps}{\lambda_1^2})
+  -
+  \delta(1 + \frac{\eps}{\lambda_1})
+  \\
+  &\approx
+  \frac{c_1\eps}{\lambda_1^2} - \delta
+}
+Which gives the wavelength as $\lambda_1^2 / \eps$
+\hfill $\blacksquare$
+\item[Problem 5]
+First we calculate
+\eq{
+  \p{y} &= u\p{\psi} \\
+  \pp{y} &= u\p{\psi}u \p{\psi} + u^2 \pp{\psi} \\
+  \p{x} &= \p{\eta} - v\p{\psi}
+}
+Transforming the boundary layer equation with these operators yields
+\eq{
+  u(\p{\eta}u - v\p{\psi}u)
+  +
+  v(u\p{\psi} u)
+  &=
+  -\frac{1}{\rho}
+  \p{\eta} p
+  +
+  \overbrace{
+    u\p{\psi} p
+  }^{\mbox{small}}
+  +
+  \nu(
+  u (\p{\psi} u)^2 
+  + u^2
+  \pp{\psi}u
+  )
+  \\
+  \rho u\p{\eta}u
+  + \p{\eta}p
+  &=
+  \rho
+  \nu(
+  u (\p{\psi} u)^2 
+  + u^2
+  \pp{\psi}u
+  )
+  \\
+  \p{\eta} h &= \nu \pp{\psi} h
+}
+where
+\eq{
+  \p{\eta} h &= \p{\eta}p + \rho(u\p{\eta}u) \\
+  \pp{\phi} h &= \rho((\p{\phi} u)^2 + u^2 \pp{\phi}u ) 
+}
+because $\p{\eta}v = \p{\phi} v = \p{\psi} p $ negligable.
+\hfill $\blacksquare$
+\item[Problem 6]
+I forgot the problem statement :(
+\end{description}
+\end{document}
