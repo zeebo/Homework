@@ -109,14 +109,14 @@ Finally we consider the line from $(1,\infty) \rightarrow (1,0)$. We have
   e^{i\lam}
   \int_0^\infty (1+it)^\frac{s}{s-1} e^{-\lam t} \; dt
 \end{align}
-We attempt to use Watson's Lemma on \eqr{1third_contour}. Using the taylor expansion,
+We attempt to use Watson's Lemma on \eqr{1third_contour}. We have the taylor expansion,
 \eqn{1taylor}{
   (1 + it)^\frac{s}{s-1} = 
   \sum_{n=0}^\infty
   \binom{\frac{s}{s-1}}{n}
-  (it)^n
+  (it)^n,
 }
-So using \eqr{1taylor} to expand \eqr{1third_contour} in terms of watsons, we have
+So using \eqr{1taylor} with Watson's lemma to expand \eqr{1third_contour}, we have
 \eqn{1third_approx}{
   \frac{1}{s} \int_{1+i\infty}^{1} u^\frac{s}{s-1} e^{i\lam u} \; du
   \sim
@@ -199,7 +199,8 @@ In this case, we find that $m = 2$ and $f''(z_0) = (-1)^n i$, and so our steepes
 descent curves are on the line with slope $(-1)^n$ through the saddle point.
 
 \item[\;\;$n$ even:]
-In this case, our contour will be $u = (1+i)t + i\frac{\pi}{2}$, and so the approximation is given by
+In this case, our contour will be $u = (1+i)t + i\frac{\pi}{2}$, and so using a two
+term taylor expansion on sinh, the approximation is given by
 \begin{align}
 \notag
   H_s^{(1)}(\lam) &\sim
@@ -248,7 +249,8 @@ In this case, our contour will be $u = (1+i)t + i\frac{\pi}{2}$, and so the appr
   \sqrt{\frac{\pi}{\lam}}
 \end{align}
 \item[\;\;$n$ odd:]
-In this case, our contour will be $u = (1-i)t + i\frac{\pi}{2}$, and so the approximation is given by
+In this case, our contour will be $u = (1-i)t + i\frac{\pi}{2}$, and so similar to the
+even case, we approximate
 \begin{align}
 \notag
   H_s^{(1)}(\lam) &\sim
@@ -453,14 +455,14 @@ Substituting these into \eqr{4ode_expand} yields
 }
 Now to get the form we want, we need $w'$ to disappear, or
 \eqn{4h_cond}{
-  2ph' = p'h
-  \qquad
+  2ph' = -p'h
+  \;\;
   \implies
-  \qquad
-  \frac{h'}{h} = \frac{1}{2}\frac{p'}{p}
-  \qquad
+  \;\;
+  \frac{h'}{h} = -\frac{1}{2}\frac{p'}{p}
+  \;\;
   \implies
-  \qquad
+  \;\;
   h = \frac{c}{\sqrt{p}}
 }
 Substituting \eqr{4h_cond} into \eqr{4ode_subs} and regrouping gives
@@ -495,7 +497,7 @@ We apply a 1-term WKB approximation to \eqr{4ode_wkb} with $Q = -q/p$, and get
   +
   c_2 Q^{-1/4} e^{-\frac{i}{\eps} \int_0^x \sqrt{Q}\; dt}
 }
-Applying the boundary condition $w(0) = 0$ to \eqr{4wkb_approx} gives that $c_1 = -c_2$, so
+Applying the boundary condition $w(0) = 0$ to \eqr{4wkb_approx} gives $c_1 = -c_2$, so
 \eqn{4wkb_approx_bc}{
   w = c_1 Q^{-1/4} \sin
   \big(
@@ -505,13 +507,13 @@ Applying the boundary condition $w(0) = 0$ to \eqr{4wkb_approx} gives that $c_1 
 If we define $\kappa = \int_0^1 \sqrt{Q} \; dt$ and apply the boundary condition $w(1) = 0$, we find
 $$
   0 = c_1 Q^{-1/4}(1) \sin(\frac{\kappa}{\eps})
-  \qquad
+  \;\;
   \implies
-  \qquad
+  \;\;
   \frac{\kappa}{\eps} = n\pi
-  \qquad
+  \;\;
   \implies
-  \qquad
+  \;\;
   \lam_n = \frac{n\pi}{\kappa}
 $$
 So we find our eigenfunctions by plugging into \eqr{4wkb_approx_bc} and get
@@ -609,7 +611,7 @@ Carrying out the linearized stability analysis, we assume
   u(x,t) &\sim& u_s + \delta v_1(x, t) + \ldots \label{linear_approx}\\
   \lambda &\neq& n^2 \notag
 \end{eqnarray}
-Substituting \eqr{linear_approx} into \eqr{pde} and drop higher order terms of $\delta$ to find
+Substituting \eqr{linear_approx} into \eqr{pde} and dropping higher order terms of $\delta$, we find
 \eqn{v1_eqn}{
   \p{t}v_1
   =
