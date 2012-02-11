@@ -3,59 +3,48 @@ package main
 import (
 	"flag"
 	"fmt"
-	"math"
-)
-
-//define some command line arguments
-var (
-	k   = flag.Float64("k", 0.001, "stepsize")
-	top = flag.Float64("top", 1, "top value")
 )
 
 //define some variables for the scheme
 var (
-	mesh, u []float64
-	i, j    int64
-	sum     float64
+	n, r, i     int64
+	sum, top, h float64
+	mesh, u, om []float64
 )
 
-//taylor coeffiencts of laplace transform of kernel
-func beta(n int64) float64 {
-	return math.Pow(1.0/(*k+1), float64(n+1))
-}
-
-//forcing function
-func f(t float64) float64 {
-	return t * math.Exp(-1*t)
-}
-
 func main() {
+	flag.Float64Var(&top, "top", 1, "top value")
+	flag.Int64Var(&n, "n", 10000, "N")
 	flag.Parse()
-
-	//calculate the number of mesh points
-	n := int64(math.Ceil(*top / *k))
 
 	//create the mesh and solution arrays
 	mesh = make([]float64, n)
 	u = make([]float64, n)
+	om = make([]float64, n)
+	h = top / float64(n)
 
 	//calculate the mesh
 	for i = 0; i < n; i++ {
-		mesh[i] = *top * float64(i) / float64(n)
+		mesh[i] = top * float64(i) / float64(n)
+	}
+
+	//memoize the omega coefficients
+	for i = 0; i < n; i++ {
+		om[i] = omega(i)
 	}
 
 	//run the scheme
-	for i = 1; i < n; i++ {
-		sum = f(mesh[i])
-		for j = 1; j < i; j++ {
-			sum -= beta(i-j) * u[j]
+	for r = 0; r < n; r++ {
+		sum = f(mesh[r])
+		for i = 0; i < r; i++ {
+			sum -= om[r-i] * u[i]
 		}
-		u[i] = sum / beta(0)
+		u[r] = sum / om[0]
 	}
 
 	//print the results
-	for i = 1; i < n; i++ {
+	for i = 0; i < n-1; i++ {
 		fmt.Printf("%.08f\t", mesh[i])
-		fmt.Printf("%.08f\n", u[i])
+		fmt.Printf("%.08f\n", u[i+1])
 	}
 }

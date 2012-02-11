@@ -165,8 +165,8 @@ giving
 Substituting \eqr{solution_approx} into \eqr{base_convolution} and cosidering
 the value of the new convolution at time $t_n$, we find that
 \begin{align}
-\nonumber             (K \star x_N)(t_n)
-                        &= \int_0^{t_n} K(t_n - s)x(s)\; ds \\
+\nonumber             f(t_n) = (K \star x_N)(t_n)
+                        &= \int_0^{t_n} K(t_n - s)x_N(s)\; ds \\
 \nonumber               &= \int_0^{t_n} K(t_n - s) \sum_{i=0}^{N-1} c_i \chi_i(s)\; ds \\
 \nonumber               &= \int_0^{t_n} K(t_n - s) \sum_{i=0}^{n-1} c_i \chi_i(s)\; ds \\
 \label{scheme_before}   &= \sum_{i=0}^{n-1} c_i \int_{t_i}^{t_{i+1}} K(t_n - s)\; ds
@@ -221,10 +221,12 @@ Thus we have
 }
 where the right hand side depends only on terms $x_0, ..., x_{n-1}$.
 \section{Sample Code}
-\lstset{caption=Basic Scheme}
-\lstinputlisting{conv/conv.go}
+\subsection{Exact Kernel}
+\lstset{caption=Exact Kernel Scheme}
+\lstinputlisting{src/conv/conv.go}
+\subsection{Lubich}
 \lstset{caption=Lubich Scheme}
-\lstinputlisting{lubich/lubich.go}
+\lstinputlisting{src/lubich/lubich.go}
 Please refer to table \ref{some_table} for some results.
 \section{Numerical Results}
 Some results are listed below.

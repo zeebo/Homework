@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"math"
 )
 
 //declare some variables
@@ -12,16 +11,6 @@ var (
 	top, sum    float64
 	mesh, c, km []float64
 )
-
-//define the integral of the kernel
-func K(t float64) float64 {
-	return -1 * math.Exp(-1*t)
-}
-
-//define the function f
-func f(t float64) float64 {
-	return t * math.Exp(-1*t)
-}
 
 func main() {
 	//parse some command line flags
@@ -45,16 +34,16 @@ func main() {
 	}
 
 	//run the scheme
-	for r = 0; r < n; r++ {
-		sum = f(mesh[r])
-		for i = 1; i < r; i++ {
-			sum -= c[r-i] * km[i]
+	for r = 0; r < n-1; r++ {
+		sum = f(mesh[r+1])
+		for i = 0; i < r; i++ {
+			sum -= c[i] * km[r-i]
 		}
 		c[r] = sum / km[0]
 	}
 
 	//print the results
-	for i = 0; i < n; i++ {
+	for i = 0; i < n-1; i++ {
 		fmt.Printf("%.08f\t", mesh[i])
 		fmt.Printf("%.08f\n", c[i])
 	}
