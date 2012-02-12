@@ -224,17 +224,6 @@ Thus we have
   x_n \omega_0 = f_n - \sum_{i=1}^n \omega_i(h) x_{n-i}
 }
 where the right hand side depends only on terms $x_0, ..., x_{n-1}$.
-\section{Sample Code}
-\subsection{Rectangular}
-\lstset{caption=Rectangular Scheme}
-\lstinputlisting{src/rect/rect.go}
-\subsection{Exact Kernel}
-\lstset{caption=Exact Kernel Scheme}
-\lstinputlisting{src/exact/exact.go}
-\subsection{Lubich}
-\lstset{caption=Lubich Scheme}
-\lstinputlisting{src/lubich/lubich.go}
-Please refer to table \ref{some_table} for some results.
 \section{Numerical Results}
 Some results are listed below.
 \begin{table}[H]
@@ -286,6 +275,25 @@ foo bar
 \end{table}
 Always put a blank space after a table.
 
+
+\newpage
+\section{Sample Code}
+\subsection{Rectangular}
+\lstset{caption=Rectangular Scheme}
+\lstinputlisting{src/rect/rect.go}
+\newpage
+\subsection{Midpoint}
+\lstset{caption=Midpoint Scheme}
+\lstinputlisting{src/mid/mid.go}
+\newpage
+\subsection{Exact Kernel}
+\lstset{caption=Exact Kernel Scheme}
+\lstinputlisting{src/exact/exact.go}
+\newpage
+\subsection{Lubich}
+\lstset{caption=Lubich Scheme}
+\lstinputlisting{src/lubich/lubich.go}
+\newpage0.
 \bibliographystyle{alpha}
 \bibliography{master}
 \end{document}
