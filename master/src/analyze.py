@@ -27,14 +27,14 @@ for kernel in range(2):
 		print "kernel%d\tf%d" % (kernel + 1, fn + 1)
 		for method in ["exact", "lubich", "mid", "rect"]:
 			print "\t%s:" % method
-			print "\t\tStepsize\tTop\tError\t\tRatio"
+			print "\t\tStepsize\tTop\tError\t\t\tRatio"
 			for top in tops:
 				prev = 0
 				for n in ns:
 					err = error(method, n, top, kernel, fn)
-					print "\t\t%f\t%d\t%f" % (float(top) / float(n), top, err),
+					print "\t\t%f\t%d\t%.16f" % (float(top) / float(n), top, err),
 					if prev != 0:
-						print "\t%f" % (prev / err)
+						print "\t%.16f" % (prev / err)
 					else:
 						print
 					prev = err
