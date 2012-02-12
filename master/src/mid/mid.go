@@ -46,7 +46,7 @@ func main() {
 
 	//print the results
 	for i = 0; i < n; i++ {
-		fmt.Printf("%.08f\t", mesh[i])
-		fmt.Printf("%.08f\n", x[i])
+		fmt.Printf("%.16f\t", mesh[i])
+		fmt.Printf("%.16f\n", x[i])
 	}
 }

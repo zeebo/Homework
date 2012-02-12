@@ -30,7 +30,7 @@ func main() {
 
 	//memoize the omega coefficients
 	for i = 0; i < n; i++ {
-		om[i] = omega(i)
+		om[i] = omega(i, h)
 	}
 
 	//run the scheme
@@ -44,7 +44,7 @@ func main() {
 
 	//print the results
 	for i = 0; i < n-1; i++ {
-		fmt.Printf("%.08f\t", mesh[i])
-		fmt.Printf("%.08f\n", u[i+1])
+		fmt.Printf("%.16f\t", mesh[i])
+		fmt.Printf("%.16f\n", u[i+1])
 	}
 }
