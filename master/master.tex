@@ -225,7 +225,32 @@ Thus we have
 }
 where the right hand side depends only on terms $x_0, ..., x_{n-1}$.
 \section{Numerical Results}
-Some results are listed below.
+We will compare these four numerical methods against each other with known solutions.
+A set of two kernels and three functions will be used giving a total of six tests.
+The two kernels are $e^{-t}$ and $\cosh(t)$. The solutions for these kernels given
+that $f(0) = 0$ is given by \cite{handbook} as
+\begin{align}
+\label{kernel1_soln}  e^{-t} &\implies f'(t) + f(t) \\
+\label{kernel2_soln} \cosh(t) &\implies f'(t) - \int_0^t f(s) \; ds
+\end{align}
+The three functions we will use for testing will be $te^{-t}$, $t^3$, and $\sin t$.
+\begin{table}[H]
+  \caption{Exact Solutions}
+  \label{exact_solutions}
+  \begin{center}
+  \begin{tabular}{|c|c|c|}
+  \hline
+  Kernel & Function & Solution \\ \hline
+  $e^{-t}$ & $te^{-t}$ & $e^{-t}$ \\ \hline
+  $e^{-t}$ & $t^3$ & $3t^2 + t^3$ \\ \hline
+  $e^{-t}$ & $\sin t$ & $\sin t + \cos t$  \\ \hline
+  $\cosh t$ & $te^{-t}$ & $2e^{-t} - 1$\\ \hline
+  $\cosh t$ & $t^3$ & $3t^2 - \frac{1}{4}t^4$\\ \hline
+  $\cosh t$ & $\sin t$ & $2\cos t - 1$\\
+  \hline
+  \end{tabular}
+  \end{center}
+\end{table}
 \begin{table}[H]
   \caption{Error in $L^2$ vs stepsize}
   \label{some_table}
