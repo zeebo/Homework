@@ -153,7 +153,7 @@ as a linear combination of indicator functions $\chi_i$ where
   =
   \left\{
   \begin{array}{ll}
-    1 & t_{i} < t \leq t_{i+1} , \\
+    1 & t_{i} \leq t < t_{i+1} , \\
     0 & \text{otherwise}
   \end{array}
   \right.
@@ -192,6 +192,10 @@ the value $c_n$ by
 \eqn{specific_term}{
   c_nK_0 = f(t_{n+1}) - \sum_{i=0}^{n-1} c_i K_{n-i}
 }
+Because this method gives a value of $x$ for the entire interval $[0,T]$ while the
+other methods just give values at a point inside each subinterval, we will
+choose to use the value at a midpoint of each subinterval, $t_{n+1/2}$, for
+purposes of comparing accuracy.
 \subsection{Lubich}
 The Lubich scheme is the one discussed in \cite{lubich}. We will use the simplest
 case of linear multistep method, Backward Euler. If we use a hat to denote Laplace
@@ -221,9 +225,12 @@ Thus we have
 }
 where the right hand side depends only on terms $x_0, ..., x_{n-1}$.
 \section{Sample Code}
+\subsection{Rectangular}
+\lstset{caption=Rectangular Scheme}
+\lstinputlisting{src/rect/rect.go}
 \subsection{Exact Kernel}
 \lstset{caption=Exact Kernel Scheme}
-\lstinputlisting{src/conv/conv.go}
+\lstinputlisting{src/exact/exact.go}
 \subsection{Lubich}
 \lstset{caption=Lubich Scheme}
 \lstinputlisting{src/lubich/lubich.go}
