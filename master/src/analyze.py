@@ -36,7 +36,8 @@ def error(method, n, top, kernel, fn):
 			x, y = [float(z.strip()) for z in line.split("\t")]
 			errs[i] = solns[(kernel, fn)](x) - y
 			i += 1
-	return math.sqrt(sum(errs**2)) * (float(top) / float(n))
+	h = float(top) / float(n)
+	return math.sqrt(h * sum(errs**2))
 
 ns = [10, 100, 1000, 10000]
 tops = [1, 2, 5]
@@ -56,7 +57,7 @@ for kernel in range(3):
 					err = error(method, n, top, kernel, fn)
 					print "\t\t%f\t%d\t%.16f" % (float(top) / float(n), top, err),
 					if prev != 0:
-						print "\t%.16f" % (prev / err)
+						print "\t%.16f" % math.log10(prev / err)
 					else:
 						print
 					prev = err
