@@ -17,6 +17,8 @@ func main() {
 	flag.Int64Var(&n, "n", 10000, "N")
 	flag.Parse()
 
+	load(n)
+
 	//create the mesh and solution arrays
 	mesh = make([]float64, n)
 	u = make([]float64, n)
