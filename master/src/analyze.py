@@ -7,14 +7,6 @@ def fres(t):
 	s, c = fresnel(math.sqrt(2.0 * t / math.pi))
 	return math.cos(t) * c + math.sin(t) * s
 
-def dawson_soln(t):
-	#return the limit to avoid division by zero
-	if t == 0:
-		return 0
-	sq = 1.0 / (2.0 * math.sqrt(t))
-	ds = F(math.sqrt(t))
-	return (1.0 / math.pi) * ((2.0 * ds) - sq + (sq*( (1.0 + 2.0*t) * (1.0 - (2.0 * math.sqrt(t) * ds)) )) )
-
 #taken from paper
 solns = {
 	(0, 0): lambda t: math.exp(-1*t),
@@ -23,7 +15,7 @@ solns = {
 	(1, 0): lambda t: 2.0*math.exp(-1*t) - 1.0,
 	(1, 1): lambda t: 3.0*t**2 - (t**4 / 4.0),
 	(1, 2): lambda t: 2.0*math.cos(t) - 1.0,
-	(2, 0): lambda t: dawson_soln(t),
+	(2, 0): lambda t: (1.0 / math.pi) * (math.sqrt(t) + (1.0 - 2.0 * t) * F(math.sqrt(t))),
 	(2, 1): lambda t: (16.0 / (5.0 * math.pi)) * math.pow(t, 5.0 / 2.0),
 	(2, 2): lambda t: math.sqrt(2.0 / math.pi) * fres(t),
 }
@@ -64,8 +56,7 @@ for kernel in range(3):
 				print
 
 import matplotlib.pyplot as plt
-from itertools import product
-for (method, kernel, fn, n, top) in product(methods, kernels, fns, ns, tops):
+def plot(method, kernel, fn, n, top, save=True):
 	with open("results/%s.%d.%d.%d.%d.log" % (method, kernel, fn, n, top)) as f:
 		if (method == "rect" or method == "lubich"):
 			n -= 1
@@ -88,10 +79,16 @@ for (method, kernel, fn, n, top) in product(methods, kernels, fns, ns, tops):
 
 		err = numpy.sqrt(err**2)
 
+		plt.clf()
 		plt.figure(1)
 		plt.plot(x,y1)
 		plt.plot(x,y2)
 		plt.plot(x,err)
-		plt.savefig("figs/%s.%d.%d.%d.%d.png" % (method, kernel, fn, n, top))
-		plt.clf()
+		if save:
+			plt.savefig("figs/%s.%d.%d.%d.%d.png" % (method, kernel, fn, n, top))
+		else:
+			plt.show()
 
+from itertools import product
+for comb in product(methods, kernels, fns, ns, tops):
+	plot(*comb)

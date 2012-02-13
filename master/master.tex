@@ -226,14 +226,25 @@ Thus we have
 where the right hand side depends only on terms $x_0, ..., x_{n-1}$.
 \section{Numerical Results}
 We will compare these four numerical methods against each other with known solutions.
-A set of two kernels and three functions will be used giving a total of six tests.
-The two kernels are $e^{-t}$ and $\cosh(t)$. The solutions for these kernels given
-that $f(0) = 0$ is given by \cite{handbook} as
+A set of three kernels and three functions will be used giving a total of nine tests.
+The three kernels are $e^{-t}$, $\cosh(t)$ and $t^{-1/2}$. The three functions we
+will use for testing will be $te^{-t}$, $t^3$, and $\sin t$.
+\subsection{Exact Solutions}
+The solutions for these kernels given
+that $f(0) = 0$ is given by \cite{handbook} and \cite{abel} as
 \begin{align}
 \label{kernel1_soln}  e^{-t} &\implies f'(t) + f(t) \\
-\label{kernel2_soln} \cosh(t) &\implies f'(t) - \int_0^t f(s) \; ds
+\label{kernel2_soln} \cosh(t) &\implies f'(t) - \int_0^t f(s) \; ds \\
+\label{kernel3_soln} t^{-1/2} &\implies \frac{1}{\pi}\frac{d}{dt}\int_0^t \frac{f(s) \; ds}{\sqrt{t - s}}
 \end{align}
-The three functions we will use for testing will be $te^{-t}$, $t^3$, and $\sin t$.
+A table of the exact solutions is given below. The functions $F$, $C$, and $S$ are
+the Dawson Function and the Fresnel Integrals given as 
+\begin{align}
+\label{dawson}    F(t) &= e^{-t^2}\int_0^t e^{s^2}\; ds \\
+\label{fresnel_c} C(t) &= \int_0^t \cos(s^2) \; ds \\
+\label{fresnel_s} S(t) &= \int_0^t \sin(t^2) \; ds
+\end{align}
+\renewcommand{\arraystretch}{2.0}
 \begin{table}[H]
   \caption{Exact Solutions}
   \label{exact_solutions}
@@ -246,7 +257,10 @@ The three functions we will use for testing will be $te^{-t}$, $t^3$, and $\sin 
   $e^{-t}$ & $\sin t$ & $\sin t + \cos t$  \\ \hline
   $\cosh t$ & $te^{-t}$ & $2e^{-t} - 1$\\ \hline
   $\cosh t$ & $t^3$ & $3t^2 - \frac{1}{4}t^4$\\ \hline
-  $\cosh t$ & $\sin t$ & $2\cos t - 1$\\
+  $\cosh t$ & $\sin t$ & $2\cos t - 1$\\ \hline
+  $t^{-1/2}$ & $te^{-t}$ & $\sqrt{t} + (1-2t)F(\sqrt{t})$\\ \hline
+  $t^{-1/2}$ & $t^3$ & $\dfrac{16 t^{5/2}}{5\pi}$\\ \hline
+  $t^{-1/2}$ & $\sin t$ & $\sqrt{\frac{2}{\pi}} \bigg(C\big(\sqrt{\frac{2t}{\pi}}\big) \cos t  + S\big(\sqrt{\frac{2t}{\pi}}\big)\sin t  \bigg)$\\
   \hline
   \end{tabular}
   \end{center}
@@ -318,7 +332,7 @@ Always put a blank space after a table.
 \subsection{Lubich}
 \lstset{caption=Lubich Scheme}
 \lstinputlisting{src/lubich/lubich.go}
-\newpage0.
+\newpage
 \bibliographystyle{alpha}
 \bibliography{master}
 \end{document}
